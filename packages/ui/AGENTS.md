@@ -24,5 +24,9 @@ Full guide: [README.md](./README.md). These rules are not optional.
    `packages/ui` with an exact version.
 8. **No `next/*` imports.** Use `asChild` so apps pass `next/link` / `next/image`.
 9. **Every breakpoint and theme:** mobile 390, tablet 768, desktop 1440; light, dark and System.
-10. **Done means:** story with all variants, test passing, exported from the layer index, and
-    `npm run lint -w @repo/ui && npm run check-types -w @repo/ui && npm run test -w @repo/ui` clean.
+10. **Apps use the Rollup build** in `dist/` via the package exports. Never import
+    `@repo/ui/src/...` or add `transpilePackages`; new public entry points need both a Rollup
+    `input` and a package.json `exports` entry. Keep class names as literal strings (Tailwind in
+    the apps scans the unminified `dist/`).
+11. **Done means:** story with all variants, test passing, exported from the layer index, and
+    `npm run lint -w @repo/ui && npm run check-types -w @repo/ui && npm run test -w @repo/ui && npm run build -w @repo/ui` clean.

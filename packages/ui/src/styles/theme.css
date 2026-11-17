@@ -15,7 +15,10 @@
  *   - the OS prefers dark and no ancestor forces data-theme="light" ("System").
  */
 
-/* Scan @repo/ui sources for class names wherever this stylesheet is imported. */
+/*
+ * Scan @repo/ui for class names wherever this stylesheet is imported. It ships as
+ * dist/styles/theme.css, so this points at the built (unminified) dist/ JS.
+ */
 @source "../";
 
 @theme static {

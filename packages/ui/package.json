@@ -7,14 +7,33 @@
     "**/*.css"
   ],
   "exports": {
-    "./styles.css": "./src/styles/index.css",
-    "./lib": "./src/lib/index.ts",
-    "./atoms": "./src/components/atoms/**/*.index.ts",
-    "./molecules": "./src/components/molecules/**/*.index.ts",
-    "./organisms": "./src/components/organisms/**/*.index.ts",
-    "./templates": "./src/components/templates/**/*.index.ts"
+    "./styles.css": "./dist/styles/index.css",
+    "./lib": {
+      "types": "./dist/lib/index.d.ts",
+      "import": "./dist/lib/index.js"
+    },
+    "./atoms": {
+      "types": "./dist/components/atoms/index.d.ts",
+      "import": "./dist/components/atoms/index.js"
+    },
+    "./molecules": {
+      "types": "./dist/components/molecules/index.d.ts",
+      "import": "./dist/components/molecules/index.js"
+    },
+    "./organisms": {
+      "types": "./dist/components/organisms/index.d.ts",
+      "import": "./dist/components/organisms/index.js"
+    },
+    "./templates": {
+      "types": "./dist/components/templates/index.d.ts",
+      "import": "./dist/components/templates/index.js"
+    }
   },
   "scripts": {
+    "clean": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && rollup -c && tsc -p tsconfig.build.json",
+    "dev": "rollup -c -w",
+    "dev:types": "tsc -p tsconfig.build.json -w --preserveWatchOutput",
     "lint": "eslint . --max-warnings 0",
     "check-types": "tsc --noEmit",
     "test": "vitest run",
@@ -35,7 +54,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
-    "@rollup/plugin-typescript": "12.3.1",
+    "@rollup/plugin-node-resolve": "16.0.3",
     "@storybook/react-vite": "10.6.7",
     "@testing-library/dom": "10.4.2",
     "@testing-library/jest-dom": "6.9.1",
@@ -47,11 +66,14 @@
     "@types/react-dom": "19.2.5",
     "@vitejs/plugin-react": "6.3.0",
     "@vitest/coverage-v8": "4.1.12",
+    "esbuild": "0.28.2",
     "eslint": "10.9.1",
     "jsdom": "31.0.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "rollup": "4.68.5",
+    "rollup-plugin-esbuild": "6.2.1",
+    "rollup-plugin-preserve-directives": "0.4.0",
     "tailwindcss": "4.3.5",
     "typescript": "7.0.2",
     "vitest": "4.1.12"

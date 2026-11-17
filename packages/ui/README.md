@@ -147,9 +147,36 @@ import { cn } from "@repo/ui/lib";
 ```
 
 Entry points: `@repo/ui/atoms`, `/molecules`, `/organisms`, `/templates`, `/lib`, `/styles.css`.
-The package ships TypeScript source; Next.js compiles it via `transpilePackages`.
+Apps consume the **built** package in `dist/` (see §7), never `src/`.
 
-## 7. Definition of done
+## 7. Build and dev workflow
+
+`@repo/ui` is a compiled package, bundled with **Rollup** ([rollup.config.mjs](rollup.config.mjs)):
+
+- `src/**` → `dist/**` as unminified ESM, one file per module (`preserveModules`), so apps
+  tree-shake per component and `"use client"` stays on exactly the files that declare it.
+  esbuild compiles TS/JSX; `tsc -p tsconfig.build.json` emits `.d.ts` files (TypeScript 7 has no
+  JS API for Rollup plugins). Stories and tests are not built.
+- All dependencies (React, Radix, cva, clsx, tailwind-merge, lucide-react) stay external.
+- `src/styles/*.css` are copied to `dist/styles/`. They are Tailwind **source**, not compiled CSS:
+  each app's own Tailwind build reads the theme and scans `dist/` for class names (`@source "../"`
+  in `theme.css`), so every app has one Tailwind pipeline and no duplicated utilities.
+
+| Command (repo root)               | What it does                                                         |
+| --------------------------------- | -------------------------------------------------------------------- |
+| `npm run build -w @repo/ui`       | clean `dist/`, bundle with Rollup, emit types                        |
+| `npm run dev`                     | builds ui once, then watches it (JS + types) alongside the apps      |
+| `npm run storybook`               | builds ui once, then runs Storybook with ui in watch mode            |
+| `npx turbo run build`             | ui builds first (`^build`), then the apps                            |
+
+Turbo handles the ordering: `dev`, `storybook`, `build` and `check-types` all depend on `^build`,
+and `packages/ui/turbo.json` runs `dev:types` next to `dev`. If an app reports
+`Cannot find module '@repo/ui/…'`, `dist/` is missing: run `npm run build -w @repo/ui`.
+
+In Storybook, component stories import their component from **source** (fast HMR), while the
+stylesheet comes from `dist/`. Unit tests (`vitest`) also run against source.
+
+## 8. Definition of done
 
 A component is finished when:
 
@@ -160,5 +187,6 @@ A component is finished when:
 - [ ] Works at 390, 768 and 1440, in light, dark and System.
 - [ ] Keyboard and screen-reader friendly (Radix where applicable, labels on icon buttons).
 - [ ] Stories cover all variants/states; tests pass.
-- [ ] `npm run lint -w @repo/ui`, `npm run check-types -w @repo/ui`, `npm run test -w @repo/ui` are clean.
+- [ ] `npm run lint -w @repo/ui`, `npm run check-types -w @repo/ui`, `npm run test -w @repo/ui` and
+      `npm run build -w @repo/ui` are clean.
 - [ ] Exported from its layer `index.ts`.

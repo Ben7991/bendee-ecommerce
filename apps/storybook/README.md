@@ -7,8 +7,8 @@ Storybook 10 (`@storybook/react-vite`) for the components in [`@repo/ui`](../../
 From the repo root:
 
 ```bash
-npx turbo run storybook        # dev server on http://localhost:6006
-npx turbo run build-storybook  # static build in apps/storybook/storybook-static (cached by Turbo)
+npx turbo run storybook        # builds @repo/ui, then Storybook on http://localhost:6006 with ui in watch mode
+npx turbo run build-storybook  # builds @repo/ui, then the static build in apps/storybook/storybook-static
 ```
 
 The root `package.json` also has `npm run storybook` and `npm run build-storybook` shortcuts.
@@ -23,12 +23,13 @@ The root `package.json` also has `npm run storybook` and `npm run build-storyboo
 
 ## Turbo tasks
 
-In the root `turbo.json`:
+The package scripts are named after the root tasks (`storybook`, `build-storybook`), so a plain `turbo run build` or `turbo run dev` does not start Storybook.
 
-- `storybook`: `cache: false`, `persistent: true`.
+- `storybook`: `dependsOn: ["^build"]` (root `turbo.json`), and `with: ["@repo/ui#dev"]` (`apps/storybook/turbo.json`) so ui rebuilds while you work. `cache: false`, `persistent: true`.
 - `build-storybook`: `dependsOn: ["^build"]`, `outputs: ["storybook-static/**"]`. A second run with no changes is a full cache hit.
+
+`@repo/ui` is consumed as its Rollup build (`dist/`) for the stylesheet; component stories import their component from `packages/ui/src` directly, and `src/storybook.css` adds `@source` for that folder so story-only classes are generated.
 
 ## Adding a component
 
-1. Add the component to `packages/ui/src/<name>.tsx`. It is exported as `@repo/ui/<name>`.
-2. Add `src/stories/<Name>.stories.tsx` with `component`, default `args` and one story per variant or state.
+Run `npm run generate:component` and follow [packages/ui/README.md](../../packages/ui/README.md). The generator creates the story next to the component.
