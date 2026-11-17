@@ -1,14 +1,35 @@
 /*
- * Jofak design tokens.
- * Source of truth: Paper file "Jofak" → Design System page (Tailwind v4 namespaces).
+ * Jofak design tokens as a Tailwind v4 theme.
+ * Source of truth: Paper file "Jofak" → Design System page.
  *
- * Theming: semantic tokens (--color-bg, --color-text, --color-primary, …) resolve to the
- * light palette by default and to their --color-dark-* twins when
+ * - Tailwind's default scales are reset (`initial`) for every namespace Jofak defines, so only
+ *   Jofak classes exist: `bg-primary`, `text-text-muted`, `p-6`, `rounded-full`… while
+ *   `bg-red-500` or `p-7` produce no CSS. Change values here, never in components.
+ * - `@theme` (not `@theme inline`) keeps utilities pointing at `var(--token)`, which is what
+ *   lets the dark mapping below re-theme every component at runtime. `static` emits every
+ *   token even when unused, so `var(--token)` always resolves (stories, inline styles).
+ *
+ * Theming: semantic tokens resolve to the light palette by default and to their
+ * --color-dark-* twins when
  *   - an ancestor has data-theme="dark", or
  *   - the OS prefers dark and no ancestor forces data-theme="light" ("System").
  */
 
-:root {
+/* Scan @repo/ui sources for class names wherever this stylesheet is imported. */
+@source "../";
+
+@theme static {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+  --tracking-*: initial;
+  --leading-*: initial;
+  --radius-*: initial;
+  --breakpoint-*: initial;
+  --container-*: initial;
+  --spacing: initial;
+
   /* Palette */
   --color-evergreen-950: #0a2c1e;
   --color-evergreen-900: #0f3d2a;
@@ -24,34 +45,9 @@
   --color-tint-lavender: #eee8f6;
   --color-tint-sun: #fff1d6;
   --color-tint-citrus: #ffe3d3;
-
-  /* Dark palette (twins of the semantic tokens below) */
-  --color-dark-bg: #0d1411;
-  --color-dark-surface: #1a2520;
-  --color-dark-surface-subtle: #141d18;
-  --color-dark-border: #2c3b33;
-  --color-dark-border-subtle: #222e28;
-  --color-dark-text: #e8efea;
-  --color-dark-text-secondary: #bac8c0;
-  --color-dark-text-muted: #8fa197;
-  --color-dark-primary: #237a50;
-  --color-dark-primary-hover: #2a8c5d;
-  --color-dark-brand: #5ccb8f;
-  --color-dark-warning: #e3ae45;
-  --color-dark-warning-text: #ebc077;
-  --color-dark-error: #f2825a;
-  --color-dark-info: #7db3d6;
-  --color-dark-sage-200: #22382c;
-  --color-dark-sage-100: #1c3127;
-  --color-dark-sage-50: #172821;
-  --color-dark-evergreen-300: #3e6b54;
-  --color-dark-tint-amber: #2b261e;
-  --color-dark-tint-lavender: #26223a;
-  --color-dark-tint-sun: #35290f;
-  --color-dark-tint-citrus: #3a2017;
-  --color-dark-tint-info: #1a2a35;
-  --color-dark-lavender-text: #b8a9e3;
-  --color-dark-icon: #9aaba1;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
 
   /* Semantic colours (light) */
   --color-bg: #ffffff;
@@ -78,26 +74,7 @@
   /* Typography */
   --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
-  --text-xs: 12px;
-  --text-sm: 13px;
-  --text-base: 15px;
-  --text-md: 16px;
-  --text-lg: 18px;
-  --text-xl: 20px;
-  --text-2xl: 26px;
-  --text-3xl: 32px;
-  --text-4xl: 44px;
-  --text-5xl: 52px;
-  --text-6xl: 80px;
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --tracking-display: -0.045em;
-  --tracking-tight: -0.04em;
-  --tracking-snug: -0.03em;
-  --tracking-normal: 0em;
-  --tracking-wide: 0.12em;
+
   --leading-xs: 16px;
   --leading-sm: 20px;
   --leading-base: 24px;
@@ -107,6 +84,39 @@
   --leading-4xl: 46px;
   --leading-5xl: 56px;
   --leading-6xl: 80px;
+
+  /* `text-*` sets the size and, where a same-named leading token exists, its line height. */
+  --text-xs: 12px;
+  --text-xs--line-height: var(--leading-xs);
+  --text-sm: 13px;
+  --text-sm--line-height: var(--leading-sm);
+  --text-base: 15px;
+  --text-base--line-height: var(--leading-base);
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-lg--line-height: var(--leading-lg);
+  --text-xl: 20px;
+  --text-2xl: 26px;
+  --text-2xl--line-height: var(--leading-2xl);
+  --text-3xl: 32px;
+  --text-3xl--line-height: var(--leading-3xl);
+  --text-4xl: 44px;
+  --text-4xl--line-height: var(--leading-4xl);
+  --text-5xl: 52px;
+  --text-5xl--line-height: var(--leading-5xl);
+  --text-6xl: 80px;
+  --text-6xl--line-height: var(--leading-6xl);
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.04em;
+  --tracking-snug: -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.12em;
 
   /* Opacity */
   --opacity-faint: 8%;
@@ -120,6 +130,9 @@
   --breakpoint-xl: 1440px;
   --container-prose: 620px;
   --container-content: 1296px;
+
+  --spacing-0: 0px;
+  --spacing-px: 1px;
   --spacing-1: 4px;
   --spacing-2: 8px;
   --spacing-3: 12px;
@@ -132,6 +145,8 @@
   --spacing-14: 56px;
   --spacing-18: 72px;
   --spacing-24: 96px;
+
+  --radius-none: 0px;
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 20px;
@@ -139,6 +154,36 @@
   --radius-2xl: 28px;
   --radius-3xl: 32px;
   --radius-full: 999px;
+}
+
+/* Dark palette: twins of the semantic tokens. Plain vars (no utilities) — use the semantic names. */
+:root {
+  --color-dark-bg: #0d1411;
+  --color-dark-surface: #1a2520;
+  --color-dark-surface-subtle: #141d18;
+  --color-dark-border: #2c3b33;
+  --color-dark-border-subtle: #222e28;
+  --color-dark-text: #e8efea;
+  --color-dark-text-secondary: #bac8c0;
+  --color-dark-text-muted: #8fa197;
+  --color-dark-primary: #237a50;
+  --color-dark-primary-hover: #2a8c5d;
+  --color-dark-brand: #5ccb8f;
+  --color-dark-warning: #e3ae45;
+  --color-dark-warning-text: #ebc077;
+  --color-dark-error: #f2825a;
+  --color-dark-info: #7db3d6;
+  --color-dark-sage-200: #22382c;
+  --color-dark-sage-100: #1c3127;
+  --color-dark-sage-50: #172821;
+  --color-dark-evergreen-300: #3e6b54;
+  --color-dark-tint-amber: #2b261e;
+  --color-dark-tint-lavender: #26223a;
+  --color-dark-tint-sun: #35290f;
+  --color-dark-tint-citrus: #3a2017;
+  --color-dark-tint-info: #1a2a35;
+  --color-dark-lavender-text: #b8a9e3;
+  --color-dark-icon: #9aaba1;
 
   color-scheme: light;
 }
@@ -198,10 +243,4 @@
     --color-tint-citrus: var(--color-dark-tint-citrus);
     color-scheme: dark;
   }
-}
-
-body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
 }

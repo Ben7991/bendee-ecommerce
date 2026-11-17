@@ -1,0 +1,31 @@
+import { render, screen } from "@testing-library/react";
+
+import { {{name}} } from "./{{name}}";
+
+describe("{{name}}", () => {
+  // TODO: query by role (getByRole) once the markup is final — it doubles as an a11y check.
+  it("renders its content", () => {
+    render(<{{name}}>Hello</{{name}}>);
+    expect(screen.getByText("Hello")).toBeInTheDocument();
+  });
+
+  it("applies a consumer className last", () => {
+    render(
+      <{{name}} data-testid="subject" className="mt-4">
+        Hello
+      </{{name}}>,
+    );
+    expect(screen.getByTestId("subject")).toHaveClass("mt-4");
+  });
+{{#if asChild}}
+
+  it("renders the child element when asChild is set", () => {
+    render(
+      <{{name}} asChild>
+        <a href="/shop">Shop</a>
+      </{{name}}>,
+    );
+    expect(screen.getByRole("link", { name: "Shop" })).toHaveAttribute("data-slot", "{{kebabCase name}}");
+  });
+{{/if}}
+});

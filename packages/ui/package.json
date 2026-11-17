@@ -2,26 +2,58 @@
   "name": "@repo/ui",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
-    "./styles.css": "./src/styles/tokens.css",
-    "./*": "./src/*.tsx"
+    "./styles.css": "./src/styles/index.css",
+    "./lib": "./src/lib/index.ts",
+    "./atoms": "./src/components/atoms/**/*.index.ts",
+    "./molecules": "./src/components/molecules/**/*.index.ts",
+    "./organisms": "./src/components/organisms/**/*.index.ts",
+    "./templates": "./src/components/templates/**/*.index.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
-    "generate:component": "turbo gen react-component",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "generate:component": "turbo gen component"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "dependencies": {
+    "@radix-ui/react-slot": "1.5.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "1.74.0",
+    "tailwind-merge": "3.7.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@rollup/plugin-typescript": "12.3.1",
+    "@storybook/react-vite": "10.6.7",
+    "@testing-library/dom": "10.4.2",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.12",
+    "@turbo/gen": "2.11.11",
     "@types/node": "26.4.1",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
+    "@vitejs/plugin-react": "6.3.0",
+    "@vitest/coverage-v8": "4.1.12",
     "eslint": "10.9.1",
-    "typescript": "7.0.2"
-  },
-  "dependencies": {
+    "jsdom": "31.0.1",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "rollup": "4.68.5",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2",
+    "vitest": "4.1.12"
   }
 }

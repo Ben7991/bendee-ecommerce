@@ -1,0 +1,3 @@
+/* Same stylesheet chain the apps use: Tailwind, then the Jofak theme from @repo/ui. */
+@import "tailwindcss";
+@import "@repo/ui/styles.css";

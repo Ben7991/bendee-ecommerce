@@ -1,0 +1,7 @@
+/*
+ * @repo/ui stylesheet. Consumers import it after Tailwind:
+ *   @import "tailwindcss";
+ *   @import "@repo/ui/styles.css";
+ */
+@import "./theme.css";
+@import "./base.css";

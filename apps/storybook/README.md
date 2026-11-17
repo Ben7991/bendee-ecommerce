@@ -16,10 +16,10 @@ The root `package.json` also has `npm run storybook` and `npm run build-storyboo
 ## How it is set up
 
 - **A separate app, not inside `packages/ui`.** `@repo/ui` is a source-only internal package (its `exports` point straight at `src/*.tsx`, there is no build step). Keeping Storybook in `apps/storybook` follows the Turborepo Storybook guide, keeps Storybook and Vite dependencies out of the package the apps consume, and means editing a story never invalidates the `web` build cache. The workspace is named `@repo/storybook` because a workspace named `storybook` would shadow the `storybook` npm package in `node_modules`.
-- **Stories** live in `src/stories/*.stories.tsx`. Each has the `autodocs` tag (set globally in `.storybook/preview.tsx`), so every component gets a Docs page with a props table and controls.
-- **Design tokens** come from `@repo/ui/styles.css` (`packages/ui/src/styles/tokens.css`), copied from the Paper file "Jofak". Fonts (Inter Tight, Instrument Serif) load from Google Fonts in `.storybook/preview-head.html`.
+- **Stories**: component stories live next to their component in `packages/ui/src/components/<layer>/<Name>/<Name>.stories.tsx`; token stories live here in `src/foundations/`. Each has the `autodocs` tag (set globally in `.storybook/preview.tsx`). The sidebar is ordered Foundations → Atoms → Molecules → Organisms → Templates.
+- **Styles**: `src/storybook.css` imports Tailwind and `@repo/ui/styles.css` (`packages/ui/src/styles/theme.css`, the Jofak tokens as a Tailwind theme), compiled by `@tailwindcss/vite` — the same chain the apps use. Fonts (Inter Tight, Instrument Serif) load from Google Fonts in `.storybook/preview-head.html`.
 - **Theme toolbar**: Light / Dark / System. Light and Dark set `data-theme` on `<html>`. System removes it so `prefers-color-scheme` decides. In dark, the semantic tokens (`--color-bg`, `--color-text`, `--color-primary`, …) resolve to their `--color-dark-*` twins. **Foundations → Colors** shows every semantic token.
-- **Example styling**: the current `@repo/ui` components (`Button`, `Card`, `Code`) are unstyled and take a `className`. The stories style them with demo classes in `src/stories/jofak-examples.css`, which are built on the tokens and are not part of `@repo/ui`. Each component also has an `Unstyled` story.
+- **Viewports**: Mobile · 390, Tablet · 768 and Desktop · 1440 (the Paper artboard widths) in the viewport toolbar.
 
 ## Turbo tasks
 

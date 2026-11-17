@@ -1,0 +1,32 @@
+import { cva } from "class-variance-authority";
+
+import type { VariantProps } from "../../../lib";
+
+/**
+ * Visual variants for {{name}}. Classes must be Jofak tokens only (see src/styles/theme.css);
+ * copy values from Paper with get_jsx / get_computed_styles, never from screenshots.
+ * Prop vocabulary: `variant` (visual style), `size` (sm | md | lg), `tone` (semantic colour).
+ */
+export const {{camelCase name}}Variants = cva(
+  // Base classes shared by every variant.
+  "",
+  {
+    variants: {
+      variant: {
+        primary: "",
+        secondary: "",
+      },
+      size: {
+        sm: "",
+        md: "",
+        lg: "",
+      },
+    },
+    defaultVariants: {
+      variant: "primary",
+      size: "md",
+    },
+  },
+);
+
+export type {{name}}VariantProps = VariantProps<typeof {{camelCase name}}Variants>;

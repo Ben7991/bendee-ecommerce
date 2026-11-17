@@ -1,0 +1,6 @@
+export { {{name}} } from "./{{name}}";
+export type { {{name}}Props } from "./{{name}}";
+{{#if variants}}
+export { {{camelCase name}}Variants } from "./{{name}}.variants";
+export type { {{name}}VariantProps } from "./{{name}}.variants";
+{{/if}}

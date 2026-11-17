@@ -24,6 +24,10 @@ The docs describe _what_ we are building and _how_ we intend to build it. They a
 - [Events catalog](./appendix/events-catalog.md) — domain events, producers and consumers
 - [Glossary](./appendix/glossary.md) — terms and abbreviations
 
+## UI components
+
+All UI is built in [`packages/ui`](./packages/ui) with atomic design (atoms → molecules → organisms → templates), Tailwind v4 + cva on the Jofak tokens, and Radix UI primitives. Read [packages/ui/README.md](./packages/ui/README.md) before adding a component, and scaffold new ones with `npm run generate:component`. Browse them with `npm run storybook`.
+
 ## How to read a feature doc
 
 Every feature document (01–06) follows the same structure:

@@ -1,0 +1,44 @@
+{{#if client}}
+"use client";
+
+{{/if}}
+import type { ComponentProps } from "react";
+
+import { cn{{#if asChild}}, Slot, type AsChildProps{{/if}} } from "../../../lib";
+{{#if variants}}
+import { {{camelCase name}}Variants, type {{name}}VariantProps } from "./{{name}}.variants";
+{{/if}}
+
+/**
+ * {{name}} ({{singular layer}}).
+ * Design source: Paper "Jofak" → Design System → 02 — Components → {{name}}.
+ * TODO: describe what it is for and when NOT to use it.
+ */
+export interface {{name}}Props
+  extends ComponentProps<"{{element}}">{{#if variants}},
+    {{name}}VariantProps{{/if}}{{#if asChild}},
+    AsChildProps{{/if}} {}
+
+export function {{name}}({
+  className,
+{{#if variants}}
+  variant,
+  size,
+{{/if}}
+{{#if asChild}}
+  asChild = false,
+{{/if}}
+  ...props
+}: {{name}}Props) {
+{{#if asChild}}
+  const Comp = asChild ? Slot : "{{element}}";
+
+{{/if}}
+  return (
+    <{{#if asChild}}Comp{{else}}{{element}}{{/if}}
+      data-slot="{{kebabCase name}}"
+      className={cn({{#if variants}}{{camelCase name}}Variants({ variant, size }){{else}}""{{/if}}, className)}
+      {...props}
+    />
+  );
+}
