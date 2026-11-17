@@ -1,0 +1,207 @@
+/*
+ * Jofak design tokens.
+ * Source of truth: Paper file "Jofak" → Design System page (Tailwind v4 namespaces).
+ *
+ * Theming: semantic tokens (--color-bg, --color-text, --color-primary, …) resolve to the
+ * light palette by default and to their --color-dark-* twins when
+ *   - an ancestor has data-theme="dark", or
+ *   - the OS prefers dark and no ancestor forces data-theme="light" ("System").
+ */
+
+:root {
+  /* Palette */
+  --color-evergreen-950: #0a2c1e;
+  --color-evergreen-900: #0f3d2a;
+  --color-evergreen-800: #1f5a40;
+  --color-evergreen-600: #1f7a4d;
+  --color-evergreen-500: #2e9a63;
+  --color-evergreen-300: #9fc2ae;
+  --color-sage-200: #cde9c6;
+  --color-sage-100: #eaf4e4;
+  --color-sage-50: #eef7ea;
+  --color-sprout-400: #c7f27a;
+  --color-tint-amber: #f3ece2;
+  --color-tint-lavender: #eee8f6;
+  --color-tint-sun: #fff1d6;
+  --color-tint-citrus: #ffe3d3;
+
+  /* Dark palette (twins of the semantic tokens below) */
+  --color-dark-bg: #0d1411;
+  --color-dark-surface: #1a2520;
+  --color-dark-surface-subtle: #141d18;
+  --color-dark-border: #2c3b33;
+  --color-dark-border-subtle: #222e28;
+  --color-dark-text: #e8efea;
+  --color-dark-text-secondary: #bac8c0;
+  --color-dark-text-muted: #8fa197;
+  --color-dark-primary: #237a50;
+  --color-dark-primary-hover: #2a8c5d;
+  --color-dark-brand: #5ccb8f;
+  --color-dark-warning: #e3ae45;
+  --color-dark-warning-text: #ebc077;
+  --color-dark-error: #f2825a;
+  --color-dark-info: #7db3d6;
+  --color-dark-sage-200: #22382c;
+  --color-dark-sage-100: #1c3127;
+  --color-dark-sage-50: #172821;
+  --color-dark-evergreen-300: #3e6b54;
+  --color-dark-tint-amber: #2b261e;
+  --color-dark-tint-lavender: #26223a;
+  --color-dark-tint-sun: #35290f;
+  --color-dark-tint-citrus: #3a2017;
+  --color-dark-tint-info: #1a2a35;
+  --color-dark-lavender-text: #b8a9e3;
+  --color-dark-icon: #9aaba1;
+
+  /* Semantic colours (light) */
+  --color-bg: #ffffff;
+  --color-surface: #f1f5ef;
+  --color-surface-subtle: #f6f8f4;
+  --color-border: #d5e6d0;
+  --color-border-subtle: #e1e9dd;
+  --color-text: #14201a;
+  --color-text-secondary: #3e4d45;
+  --color-text-muted: #5b6b62;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-muted: #b9d3c4;
+  --color-primary: var(--color-evergreen-900);
+  --color-primary-hover: var(--color-evergreen-800);
+  --color-on-primary: #ffffff;
+  --color-brand: var(--color-evergreen-600);
+  --color-accent: var(--color-sprout-400);
+  --color-on-accent: var(--color-evergreen-900);
+  --color-success: var(--color-evergreen-600);
+  --color-warning: #c98a12;
+  --color-error: #c2410c;
+  --color-info: #3b6e8f;
+
+  /* Typography */
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 26px;
+  --text-3xl: 32px;
+  --text-4xl: 44px;
+  --text-5xl: 52px;
+  --text-6xl: 80px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.04em;
+  --tracking-snug: -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.12em;
+  --leading-xs: 16px;
+  --leading-sm: 20px;
+  --leading-base: 24px;
+  --leading-lg: 28px;
+  --leading-2xl: 30px;
+  --leading-3xl: 34px;
+  --leading-4xl: 46px;
+  --leading-5xl: 56px;
+  --leading-6xl: 80px;
+
+  /* Opacity */
+  --opacity-faint: 8%;
+  --opacity-subtle: 16%;
+  --opacity-muted: 60%;
+
+  /* Layout */
+  --breakpoint-sm: 390px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --container-prose: 620px;
+  --container-content: 1296px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-18: 72px;
+  --spacing-24: 96px;
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
+  --radius-3xl: 32px;
+  --radius-full: 999px;
+
+  color-scheme: light;
+}
+
+/* Dark semantic mapping, shared by the explicit and the System cases. */
+[data-theme="dark"] {
+  --color-bg: var(--color-dark-bg);
+  --color-surface: var(--color-dark-surface);
+  --color-surface-subtle: var(--color-dark-surface-subtle);
+  --color-border: var(--color-dark-border);
+  --color-border-subtle: var(--color-dark-border-subtle);
+  --color-text: var(--color-dark-text);
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-primary: var(--color-dark-primary);
+  --color-primary-hover: var(--color-dark-primary-hover);
+  --color-brand: var(--color-dark-brand);
+  --color-success: var(--color-dark-brand);
+  --color-warning: var(--color-dark-warning);
+  --color-error: var(--color-dark-error);
+  --color-info: var(--color-dark-info);
+  --color-sage-200: var(--color-dark-sage-200);
+  --color-sage-100: var(--color-dark-sage-100);
+  --color-sage-50: var(--color-dark-sage-50);
+  --color-evergreen-300: var(--color-dark-evergreen-300);
+  --color-tint-amber: var(--color-dark-tint-amber);
+  --color-tint-lavender: var(--color-dark-tint-lavender);
+  --color-tint-sun: var(--color-dark-tint-sun);
+  --color-tint-citrus: var(--color-dark-tint-citrus);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: var(--color-dark-bg);
+    --color-surface: var(--color-dark-surface);
+    --color-surface-subtle: var(--color-dark-surface-subtle);
+    --color-border: var(--color-dark-border);
+    --color-border-subtle: var(--color-dark-border-subtle);
+    --color-text: var(--color-dark-text);
+    --color-text-secondary: var(--color-dark-text-secondary);
+    --color-text-muted: var(--color-dark-text-muted);
+    --color-primary: var(--color-dark-primary);
+    --color-primary-hover: var(--color-dark-primary-hover);
+    --color-brand: var(--color-dark-brand);
+    --color-success: var(--color-dark-brand);
+    --color-warning: var(--color-dark-warning);
+    --color-error: var(--color-dark-error);
+    --color-info: var(--color-dark-info);
+    --color-sage-200: var(--color-dark-sage-200);
+    --color-sage-100: var(--color-dark-sage-100);
+    --color-sage-50: var(--color-dark-sage-50);
+    --color-evergreen-300: var(--color-dark-evergreen-300);
+    --color-tint-amber: var(--color-dark-tint-amber);
+    --color-tint-lavender: var(--color-dark-tint-lavender);
+    --color-tint-sun: var(--color-dark-tint-sun);
+    --color-tint-citrus: var(--color-dark-tint-citrus);
+    color-scheme: dark;
+  }
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+}
