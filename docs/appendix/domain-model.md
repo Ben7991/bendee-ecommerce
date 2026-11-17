@@ -12,7 +12,7 @@ Consolidated view of the entities described in the feature docs. Field lists are
 | cart / checkout | Cart, CartItem, Checkout                                                                                           | [02](../02-cart-checkout.md#4-data-entities)                                                                                                          |
 | discounts       | Discount, DiscountRedemption                                                                                       | [02](../02-cart-checkout.md#4-data-entities)                                                                                                          |
 | delivery / tax  | DeliveryZone, DeliveryMethod, PickupLocation, TaxComponent                                                         | [02](../02-cart-checkout.md#4-data-entities)                                                                                                          |
-| orders          | Order, OrderItem, OrderStatusHistory, OrderNote, Fulfilment, Rider, CodRemittance                                  | [02](../02-cart-checkout.md#4-data-entities), [03](../03-customer-account.md#4-data-entities), [04](../04-admin-catalog-inventory.md#4-data-entities) |
+| orders          | Order, OrderItem, OrderStatusHistory, OrderNote, Fulfilment, CodRemittance                                         | [02](../02-cart-checkout.md#4-data-entities), [03](../03-customer-account.md#4-data-entities), [04](../04-admin-catalog-inventory.md#4-data-entities) |
 | payments        | Payment, PaymentEvent, Refund                                                                                      | [02](../02-cart-checkout.md#4-data-entities), [03](../03-customer-account.md#4-data-entities)                                                         |
 | returns         | ReturnRequest                                                                                                      | [03](../03-customer-account.md#4-data-entities)                                                                                                       |
 | customers/auth  | Customer, AuthIdentity, OtpChallenge, RefreshToken, Address, Consent, CookieConsent                                | [03](../03-customer-account.md#4-data-entities), [06](../06-seo-marketing.md#4-data-entities)                                                         |
@@ -55,7 +55,6 @@ erDiagram
   ORDER ||--o{ STOCK_RESERVATION : reserves
   ORDER ||--o{ ORDER_STATUS_HISTORY : tracks
   ORDER ||--o{ FULFILMENT : "fulfilled by"
-  RIDER ||--o{ FULFILMENT : delivers
   ORDER ||--o{ RETURN_REQUEST : "returned via"
   DISCOUNT ||--o{ DISCOUNT_REDEMPTION : "redeemed as"
   ORDER ||--o{ DISCOUNT_REDEMPTION : applies

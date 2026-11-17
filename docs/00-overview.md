@@ -37,7 +37,7 @@ The platform must give the business owner a complete back office — catalog, in
 | **Owner**                  | `owner`           | Dashboards, full control, staff management, settings        |
 | **Store admin**            | `admin`           | Everything except billing/ownership transfer                |
 | **Catalog manager**        | `catalog_manager` | Products, categories, pricing, media, SEO fields            |
-| **Inventory / fulfilment** | `fulfilment`      | Pick/pack lists, stock adjustments, rider assignment        |
+| **Inventory / fulfilment** | `fulfilment`      | Pick/pack lists, stock adjustments, courier hand-over       |
 | **Customer support**       | `support`         | Look up customers and orders, cancellations, returns, notes |
 | **Marketer**               | `marketing`       | Discounts, campaigns, abandoned-cart flows, pixels, reports |
 
@@ -47,7 +47,7 @@ The platform must give the business owner a complete back office — catalog, in
 - **Currency:** Ghana cedi (GHS) only at launch. Prices are **tax-inclusive** on the storefront.
 - **Payments:** Paystack as the primary gateway (MTN MoMo, Telecel Cash, AirtelTigo/AT Money, Visa/Mastercard, bank transfer). Hubtel is the documented alternative. Cash/MoMo on delivery (COD) is configurable per delivery zone.
 - **Tax:** VAT and statutory levies (NHIL, GETFund; COVID-19 levy if still applicable) configured as rates in admin, not hard-coded. Rates and applicability must be confirmed with the business's accountant against current GRA rules.
-- **Delivery:** zone-based fees (e.g. Accra Central, Greater Accra outskirts, Kumasi, other regional capitals, rest of Ghana) plus store pickup. In-house riders and/or third-party couriers.
+- **Delivery:** zone-based fees (e.g. Accra Central, Greater Accra outskirts, Kumasi, other regional capitals, rest of Ghana) plus store pickup. **Delivery is handled outside the application** by an external delivery partner (decided 2026-11-15): the app records hand-over and outcome only, with no rider assignment, rider app or rider tracking.
 - **Identity:** phone number (E.164, `+233…`) is the primary customer identifier; email is optional but encouraged.
 - **Notifications:** SMS (e.g. Hubtel/Arkesel/mNotify), WhatsApp Business API, email (transactional provider).
 - **Language:** English at launch; copy kept in translation files so Twi/French can be added.
@@ -118,6 +118,6 @@ flowchart LR
 
 1. Final list of delivery zones, fees and ETAs; which zones allow COD?
 2. Which levies apply to the business's VAT scheme (standard vs flat rate) — affects tax display and invoices.
-3. In-house riders, third-party couriers, or both? Any courier APIs to integrate?
+3. ~~In-house riders, third-party couriers, or both?~~ Resolved 2026-11-15: delivery is external, so there are no rider features. Still open: do we integrate any courier API for tracking numbers later?
 4. Preferred SMS and WhatsApp providers (cost per message affects recovery-flow design).
 5. Do we need VAT invoices (with TIN) generated per order at launch?

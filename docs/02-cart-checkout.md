@@ -112,7 +112,7 @@ Rates are configuration, never code. Business/accountant confirms the applicable
 
 ### 3.6 Payments — `MVP`
 
-**Supported methods (via Paystack)**: MTN Mobile Money, Telecel Cash, AT Money, Visa/Mastercard, bank transfer (Phase 2), Pay on delivery (cash or MoMo to rider; zone-dependent).
+**Supported methods (via Paystack)**: MTN Mobile Money, Telecel Cash, AT Money, Visa/Mastercard, bank transfer (Phase 2), Pay on delivery (cash or MoMo to the delivery partner, who remits to the store; zone-dependent).
 
 ```mermaid
 sequenceDiagram

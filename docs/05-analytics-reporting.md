@@ -146,7 +146,7 @@ AOV tile and trend; distribution histogram (order value buckets, e.g. < 50, 50â€
 
 - **Product performance** (MVP): views, add-to-cart rate, units, revenue, refunds, return rate per product.
 - **Discount performance** (MVP): uses, revenue, discount cost, AOV with/without code.
-- **Delivery performance** (Phase 2): on-time delivery %, failed deliveries by zone/rider, average delivery time.
+- **Delivery performance** (Phase 2): on-time delivery %, failed deliveries by zone/delivery partner, average delivery time.
 - **Tax report** (MVP): tax collected per component per month â€” for GRA filing.
 - **Payments report** (MVP): settlements vs orders, fees, pending/failed by method; COD collected vs remitted.
 

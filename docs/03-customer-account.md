@@ -63,10 +63,10 @@ Name, phone (verified), email (verified flag), date of birth (optional, for birt
 | ID        | Requirement                                                                                                                                 |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | ACC-FR-18 | Tracking timeline mirrors order status: Placed → Paid/Confirmed → Processing → Shipped / Ready for pickup → Out for delivery → Delivered.   |
-| ACC-FR-19 | When out for delivery, show rider name and phone (masked call-through optional), and courier tracking number/link if a third-party courier. |
+| ACC-FR-19 | When out for delivery, show the delivery partner and, if provided, its tracking number/link. No rider name or phone (delivery is outside the app). |
 | ACC-FR-20 | Public tracking page (`/orders/track`) works with order number + phone, or a signed token link, without login.                              |
 | ACC-FR-21 | Notifications per status change via customer's preferred channel. Templates per event and channel are editable in admin.                    |
-| ACC-FR-22 | Delivery confirmation: rider marks delivered (optionally with customer delivery OTP for high-value orders — `Phase 2`).                     |
+| ACC-FR-22 | Delivery confirmation: staff mark the order delivered once the delivery partner confirms (customer delivery OTP — `Phase 2`).            |
 
 **Default notification matrix**
 
@@ -220,12 +220,12 @@ Modules: `auth`, `customers`, `addresses`, `orders`, `returns`, `reviews`, `noti
 - **Given** 5 OTP requests for one number within an hour, **when** a 6th is requested, **then** the API returns 429 with `retryAfter`.
 - **Given** a guest who placed two orders with `+233241234567`, **when** they create an account with that number, **then** both orders appear in their order history.
 - **Given** a paid order not yet processing, **when** the customer cancels with a reason, **then** the order becomes `cancelled`, a full refund is initiated, stock is restored and an SMS confirms it.
-- **Given** an order moves to `out_for_delivery`, **when** the status changes, **then** an SMS with the rider's contact and tracking link is sent within 1 minute.
+- **Given** an order moves to `out_for_delivery`, **when** the status changes, **then** an SMS saying the order is on its way (with the courier tracking link when available) is sent within 1 minute.
 - **Given** a customer requests account deletion, **when** 30 days pass, **then** PII is anonymised, orders remain with anonymised customer reference, and the customer cannot sign in.
 
 ## 9. Open questions
 
 1. Return window length and non-returnable categories?
-2. Will riders use an app/PWA to update status, or will fulfilment staff update on their behalf?
+2. ~~Will riders use an app/PWA to update status?~~ Resolved 2026-11-15: delivery is outside the app; fulfilment staff update status from the delivery partner's confirmation.
 3. Store credit: needed for returns at launch, or refunds only?
 4. Is a VAT invoice with the business TIN required on every order?

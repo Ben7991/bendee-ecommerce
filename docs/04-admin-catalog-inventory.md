@@ -102,14 +102,14 @@ flowchart LR
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | ADM-FR-25 | Order list with filters (status, payment status, delivery method/zone, date range, COD, flagged), search (number, phone, name, email), saved views ("To pack", "Out for delivery", "COD to collect").                                                                                                                                            |
 | ADM-FR-26 | Order detail: customer, items, payments & refunds, timeline (status history, notifications sent, staff notes), addresses with map link (GhanaPost GPS / coordinates), risk flags.                                                                                                                                                                |
-| ADM-FR-27 | Fulfilment workflow: `paid/confirmed` → **Start processing** → print pick list & packing slip → **Mark packed** → for delivery: assign rider or courier (tracking no.) → **Out for delivery** → **Delivered** / **Delivery failed** (reason, reattempt date). Pickup: **Ready for pickup** (SMS with pickup code) → **Collected** (verify code). |
-| ADM-FR-28 | Bulk actions: print pick lists for selected orders, move to processing, assign rider.                                                                                                                                                                                                                                                            |
+| ADM-FR-27 | Fulfilment workflow: `paid/confirmed` → **Start processing** → print pick list & packing slip → **Mark packed** → for delivery: hand over to the external delivery partner (optional tracking no.) → **Out for delivery** → **Delivered** / **Delivery failed** (reason, reattempt date). Pickup: **Ready for pickup** (SMS with pickup code) → **Collected** (verify code). |
+| ADM-FR-28 | Bulk actions: print pick lists for selected orders, move to processing, mark packed.                                                                                                                                                                                                                                                            |
 | ADM-FR-29 | Partial fulfilment (split shipment) — `Phase 2`.                                                                                                                                                                                                                                                                                                 |
 | ADM-FR-30 | Edit order before processing: change address/delivery method, remove items (with partial refund); add items — `Phase 2`.                                                                                                                                                                                                                         |
 | ADM-FR-31 | Cancel order with reason; refund full or partial amount to original payment method; restock toggle per item.                                                                                                                                                                                                                                     |
-| ADM-FR-32 | COD reconciliation: rider cash/MoMo collected per day per rider, mark as remitted; mismatches flagged.                                                                                                                                                                                                                                           |
+| ADM-FR-32 | COD reconciliation: cash/MoMo collected by the delivery partner per day, mark as remitted; mismatches flagged.                                                                                                                                                                                                                                   |
 | ADM-FR-33 | Manual / phone orders: staff create an order for a customer and send a Paystack payment link via SMS/WhatsApp — `Phase 2`.                                                                                                                                                                                                                       |
-| ADM-FR-34 | Riders: list of riders (name, phone, zone, active); rider view (mobile web) of assigned deliveries with call/navigate buttons and status updates — `Phase 2` (MVP: staff update on behalf).                                                                                                                                                      |
+| ADM-FR-34 | ~~Riders: list of riders and rider view~~ — **out of scope** (2026-11-15): delivery is handled outside the application. Staff update delivery status from the delivery partner's confirmation.                                                                                                                                                  |
 | ADM-FR-35 | Fraud/risk flags: COD order > threshold, many failed payments, mismatched amounts, repeat failed deliveries for the same phone.                                                                                                                                                                                                                  |
 
 ### 3.7 Returns, refunds & disputes — `MVP` (refunds) / `Phase 2` (RMA)
@@ -144,9 +144,8 @@ CRUD for coupon codes and (Phase 2) automatic promotions with all conditions fro
 | `InventoryLevel` | variantId, locationId, onHand, reserved, lowStockThreshold, trackInventory, allowBackorder, avgCost                           |
 | `StockMovement`  | id, variantId, locationId, type, delta, onHandBefore, onHandAfter, referenceType, referenceId, reason, actorId, createdAt     |
 | `Supplier`       | id, name, contact{} (Phase 3)                                                                                                 |
-| `Fulfilment`     | id, orderId, items[], method, riderId?, courier?, trackingNumber?, status, packedAt, dispatchedAt, deliveredAt, failureReason |
-| `Rider`          | id, name, phone, zoneIds[], isActive                                                                                          |
-| `CodRemittance`  | id, riderId, date, expectedAmount, collectedAmount, status                                                                    |
+| `Fulfilment`     | id, orderId, items[], method, courier?, trackingNumber?, status, packedAt, dispatchedAt, deliveredAt, failureReason           |
+| `CodRemittance`  | id, courier, date, expectedAmount, collectedAmount, status                                                                    |
 | `OrderNote`      | id, orderId, staffId, body, isCustomerVisible                                                                                 |
 | `Page`           | id, slug, title, body, seo{}, status                                                                                          |
 | `Menu`           | id, key (`header`/`footer`), items[]                                                                                          |
@@ -186,7 +185,6 @@ All under `/api/admin`, authenticated as staff with the listed permission.
 | `POST /api/admin/orders/:id/refunds`                      | `orders:refund`       | Refund                        |
 | `POST /api/admin/orders/:id/notes`                        | `orders:read`         | Add note                      |
 | `GET /api/admin/orders/pick-list?ids=`                    | `orders:fulfil`       | Pick list / packing slips PDF |
-| `GET/POST/PATCH /api/admin/riders[/:id]`                  | `orders:fulfil`       | Riders                        |
 | `GET/POST /api/admin/cod-remittances`                     | `orders:fulfil`       | COD reconciliation            |
 | `GET /api/admin/returns`, `POST /:id/transition`          | `orders:refund`       | RMA queue (Phase 2)           |
 | `GET /api/admin/customers`, `GET/PATCH /:id`              | `customers:*`         | Customers                     |
@@ -210,7 +208,7 @@ All under `/api/admin`, authenticated as staff with the listed permission.
 | `InventoryChanged`                                        | Any stock movement    | Storefront availability, search index                               |
 | `StockLow` / `StockOut` / `BackInStock`                   | Threshold crossings   | Staff alerts, back-in-stock notifications                           |
 | `OrderStatusChanged`                                      | Fulfilment transition | Customer notifications, analytics                                   |
-| `FulfilmentDispatched`                                    | Out for delivery      | SMS with rider/tracking                                             |
+| `FulfilmentDispatched`                                    | Out for delivery      | SMS "on its way" (+ tracking link if any)                          |
 | `RefundIssued`                                            | Refund succeeded      | Analytics, notifications                                            |
 | `CategoryUpdated`                                         | Tree/slug changes     | Redirects, sitemap, navigation cache                                |
 | `SettingsChanged`                                         | Settings update       | Config cache invalidation                                           |
@@ -227,7 +225,7 @@ The admin may live in `apps/web` under a route group with its own layout, or as 
 - **Given** a product missing images, **when** a catalog manager sets status `active`, **then** activation is blocked with validation errors listing missing fields.
 - **Given** a stock adjustment of −3 with reason `damaged`, **when** saved, **then** `onHand` decreases by 3 and a `StockMovement` records before/after values and the actor.
 - **Given** a variant's available stock drops from 6 to 4 with threshold 5, **when** the movement is committed, **then** `StockLow` is emitted once and the variant appears in the low-stock list.
-- **Given** a paid order, **when** fulfilment marks it `out_for_delivery` with a rider, **then** the customer receives an SMS with rider name/phone and the timeline shows the transition with the staff member.
+- **Given** a paid order, **when** fulfilment marks it `out_for_delivery` (handed to the delivery partner), **then** the customer receives an "on its way" SMS and the timeline shows the transition with the staff member.
 - **Given** a partial refund of GHS 50 on a MoMo-paid order, **when** submitted, **then** a Paystack refund is created, the order shows `partially_refunded` payment status and net revenue reports reflect −GHS 50.
 
 ## 9. Open questions

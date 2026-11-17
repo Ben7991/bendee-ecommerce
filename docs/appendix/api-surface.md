@@ -118,7 +118,6 @@ Source: [04-admin-catalog-inventory.md](../04-admin-catalog-inventory.md#5-api-e
 | `POST /api/admin/orders/:id/refunds`                      | `orders:refund`       | Refund                        |
 | `POST /api/admin/orders/:id/notes`                        | `orders:read`         | Add note                      |
 | `GET /api/admin/orders/pick-list?ids=`                    | `orders:fulfil`       | Pick list / packing slips PDF |
-| `GET/POST/PATCH /api/admin/riders[/:id]`                  | `orders:fulfil`       | Riders                        |
 | `GET/POST /api/admin/cod-remittances`                     | `orders:fulfil`       | COD reconciliation            |
 | `GET /api/admin/returns`, `POST /:id/transition`          | `orders:refund`       | RMA queue (Phase 2)           |
 | `GET /api/admin/customers`, `GET/PATCH /:id`              | `customers:*`         | Customers                     |

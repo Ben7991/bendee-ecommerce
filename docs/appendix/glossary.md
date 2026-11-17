@@ -9,7 +9,7 @@
 | **Canonical URL**     | The preferred URL of a page, declared to search engines with `rel="canonical"`.                                      |
 | **CAPI**              | Meta Conversions API — server-to-server conversion events.                                                           |
 | **CLV**               | Customer Lifetime Value — total (historical) or expected (predictive) value of a customer.                           |
-| **COD**               | Cash (or MoMo) on delivery — customer pays the rider on delivery.                                                    |
+| **COD**               | Cash (or MoMo) on delivery — customer pays the delivery partner on delivery.                                                    |
 | **COGS**              | Cost of goods sold — unit cost × units sold.                                                                         |
 | **Compare-at price**  | Original price shown struck through next to a sale price.                                                            |
 | **DOI**               | Days of inventory — how many days current stock lasts at current sales velocity.                                     |

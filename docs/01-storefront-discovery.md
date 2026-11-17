@@ -53,6 +53,7 @@ Configurable landing page composed of content blocks managed in admin (see `ADM`
 | SF-FR-06 | Category page = category header (name, description, banner) + PLP (3.3) scoped to category and descendants.                                                      |
 | SF-FR-07 | Rule-based collections support conditions on tag, category, price range, `createdAt` within N days, on-sale flag. Manual collections have a staff-defined order. |
 | SF-FR-08 | Breadcrumbs on category and product pages follow the primary category path.                                                                                      |
+| SF-FR-08a | Collections hub at `/collections` ("Offers & collections"): one featured collection as a banner, then cards for every other active, listed collection (image, title, deal label, end date, product count), then "shop by need" links to categories. Ended or unlisted collections are hidden. The collection page breadcrumb links here, and an ended collection's "See current offers" button points here. |
 
 **Edge cases**: deactivated category → 301 to parent; product whose only category is deactivated stays reachable by URL but is excluded from navigation.
 
@@ -144,7 +145,7 @@ Heart icon on cards and PDP. Guests: stored locally, merged into account on logi
 | `ProductOption`  | id, productId, name (Size, Colour), values[]                                                                                                       |
 | `ProductMedia`   | id, productId, variantIds[], url, altText, type (`image`/`video`), position                                                                        |
 | `Category`       | id, parentId, slug, name, description, bannerMediaId, position, isActive, seo{}                                                                    |
-| `Collection`     | id, slug, name, type (`manual`/`rule`), rules{}, sortOrder, isActive, seo{}                                                                        |
+| `Collection`     | id, slug, name, type (`manual`/`rule`), rules{}, sortOrder, isActive, seo{}, description, bannerMediaId, dealLabel, startsAt, endsAt, isFeatured, isListed |
 | `Brand`          | id, slug, name, logoUrl                                                                                                                            |
 | `InventoryLevel` | variantId, locationId, onHand, reserved, available (derived)                                                                                       |
 | `ContentBlock`   | id, page, type, payload{}, position, startsAt, endsAt                                                                                              |
@@ -163,6 +164,7 @@ Module: `catalog`, `search`, `content`, `reviews`, `wishlist`.
 | `GET /api/storefront/home`                             | public   | Active home content blocks (resolved)                                                                   |
 | `GET /api/categories`                                  | public   | Category tree                                                                                           |
 | `GET /api/categories/:slug`                            | public   | Category detail + SEO                                                                                   |
+| `GET /api/collections`                                 | public   | Active, listed collections for the hub (featured first, then `sortOrder`), with product counts          |
 | `GET /api/collections/:slug`                           | public   | Collection detail                                                                                       |
 | `GET /api/products`                                    | public   | PLP query: `category`, `collection`, `q`, facets, `sort`, `page`, `limit`; returns items + facet counts |
 | `GET /api/products/:slug`                              | public   | PDP: product, variants, options, media, stock status, SEO                                               |
@@ -190,6 +192,7 @@ Consumes: `ProductPublished`, `ProductUpdated`, `InventoryChanged`, `CategoryUpd
 | --------------------- | -------------------------------- |
 | `/`                   | Home                             |
 | `/c/[...slugPath]`    | Category (e.g. `/c/women/shoes`) |
+| `/collections`        | Collections hub (Offers & collections) |
 | `/collections/[slug]` | Collection                       |
 | `/p/[slug]`           | Product detail                   |
 | `/search?q=`          | Search results                   |
