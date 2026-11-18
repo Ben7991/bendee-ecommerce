@@ -26,5 +26,6 @@ export * from "./ProgressBar";
 export * from "./Rating";
 export * from "./Stars";
 export * from "./StatusPill";
+export * from "./Switch";
 export * from "./Text";
 export * from "./TextLink";

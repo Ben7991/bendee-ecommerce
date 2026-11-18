@@ -5,5 +5,6 @@
  */
 export * from "./AuthShell";
 export * from "./CartLayout";
+export * from "./CheckoutShell";
 export * from "./MinimalShell";
 export * from "./StorefrontShell";

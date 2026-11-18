@@ -267,6 +267,36 @@ const ICONS = {
       </>
     ),
   },
+  chevronDown: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M6 9l6 6 6-6" />,
+  },
+  locate: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+      </>
+    ),
+  },
+  cash: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <rect x="3" y="6" width="18" height="12" rx="2" />
+        <circle cx="12" cy="12" r="2.5" />
+      </>
+    ),
+  },
+  returns: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: <path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" />,
+  },
   close: {
     viewBox: "0 0 24 24",
     strokeWidth: 2,

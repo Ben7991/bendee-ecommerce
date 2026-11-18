@@ -9,7 +9,7 @@ import { Input } from "../../atoms";
  * `aria-invalid`. Use PasswordField / PhoneField for those inputs.
  */
 export interface TextFieldProps extends Omit<ComponentProps<"input">, "size" | "children"> {
-  label: string;
+  label: ReactNode;
   /** Right side of the label row, e.g. a "Forgot password?" TextLink. */
   labelAction?: ReactNode;
   /** Inside the box after the input, e.g. a show-password toggle. */

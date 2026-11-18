@@ -1,2 +1,2 @@
-export { PaymentBadge } from "./PaymentBadge";
+export { PaymentBadge, PaymentBrandDot } from "./PaymentBadge";
 export type { PaymentBadgeProps, PaymentBrand } from "./PaymentBadge";
