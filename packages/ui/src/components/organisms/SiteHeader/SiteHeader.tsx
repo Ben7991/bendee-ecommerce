@@ -28,6 +28,8 @@ export interface SiteHeaderProps extends ComponentProps<"header"> {
   accountHref?: string;
   favouritesHref?: string;
   bagHref?: string;
+  /** The bag control, usually a <MiniCart> (its trigger is the bag button). Replaces the bag link. */
+  bag?: ReactNode;
   /** The menu below 1440px, usually a <MenuDrawer>. Replaces the plain menu button. */
   menu?: ReactNode;
   menuButtonProps?: ComponentProps<"button">;
@@ -44,6 +46,7 @@ export function SiteHeader({
   accountHref = "/auth/sign-in",
   favouritesHref = "/wishlist",
   bagHref = "/cart",
+  bag,
   menu,
   menuButtonProps,
   linkAs: Link = "a",
@@ -102,12 +105,14 @@ export function SiteHeader({
             <CountBadge count={favouritesCount} />
           </Link>
         </IconButton>
-        <IconButton asChild variant="solid" label={bagCount ? `Bag, ${bagCount} items` : "Bag"}>
-          <Link href={bagHref}>
-            <Icon name="bag" />
-            <CountBadge count={bagCount} />
-          </Link>
-        </IconButton>
+        {bag ?? (
+          <IconButton asChild variant="solid" label={bagCount ? `Bag, ${bagCount} items` : "Bag"}>
+            <Link href={bagHref}>
+              <Icon name="bag" />
+              <CountBadge count={bagCount} />
+            </Link>
+          </IconButton>
+        )}
       </div>
     </header>
   );

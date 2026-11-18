@@ -20,6 +20,7 @@ export * from "./Illustration";
 export * from "./Input";
 export * from "./Logo";
 export * from "./Medallion";
+export * from "./PaymentBadge";
 export * from "./Price";
 export * from "./ProgressBar";
 export * from "./Rating";

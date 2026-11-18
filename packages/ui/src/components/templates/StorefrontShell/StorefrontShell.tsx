@@ -17,10 +17,12 @@ export interface StorefrontShellProps extends ComponentProps<"div"> {
   /** Full-width strip above everything (AnnouncementBar). */
   announcement?: ReactNode;
   /**
-   * Keep the 12/16px frame around the page (Home). Pages whose header sits on the page
-   * background, like the 404, go edge to edge.
+   * The frame around the page:
+   *   true:    12px (tablet) / 16px (desktop) on every side (Home, whose hero is a card)
+   *   "sides": 16px left, right and bottom on desktop only (cart)
+   *   false:   edge to edge (404, empty cart)
    */
-  framed?: boolean;
+  framed?: boolean | "sides";
 }
 
 export function StorefrontShell({ footer, announcement, framed = true, className, children, ...props }: StorefrontShellProps) {
@@ -33,11 +35,17 @@ export function StorefrontShell({ footer, announcement, framed = true, className
         Skip to content
       </a>
       {announcement}
-      <div className={cn("mx-auto flex w-full flex-col", framed ? "max-w-352 md:p-3 xl:p-4" : "max-w-360")}>
+      <div
+        className={cn(
+          "mx-auto flex w-full flex-col",
+          framed === true ? "max-w-352 md:p-3 xl:p-4" : "max-w-360",
+          framed === "sides" && "xl:px-4 xl:pb-4",
+        )}
+      >
         <main id="main" className="flex flex-col">
           {children}
         </main>
-        {footer && <div className={framed ? "md:pt-18 xl:pt-0" : undefined}>{footer}</div>}
+        {footer && <div className={framed === true ? "md:pt-18 xl:pt-0" : undefined}>{footer}</div>}
       </div>
     </div>
   );

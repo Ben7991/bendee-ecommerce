@@ -16,8 +16,8 @@ const twMerge = extendTailwindMerge({
         "xs", "sm", "base", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl",
         "10", "11", "14", "17", "19", "22", "24", "28", "36", "40", "56", "64", "104", "140", "180",
       ],
-      radius: ["none", "2", "5", "sm", "14", "md", "18", "lg", "22", "xl", "26", "2xl", "3xl", "full"],
-      shadow: ["xs", "chip", "card", "brand", "overlay", "drawer", "modal"],
+      radius: ["none", "2", "5", "6", "sm", "14", "md", "18", "lg", "22", "xl", "26", "2xl", "3xl", "full"],
+      shadow: ["xs", "chip", "card", "brand", "overlay", "drawer", "modal", "panel-left", "panel-up", "bar"],
       breakpoint: ["sm", "md", "lg", "xl"],
       container: ["prose", "content"],
     },
@@ -26,6 +26,7 @@ const twMerge = extendTailwindMerge({
     classGroups: {
       // Custom @utility classes from theme.css, so they don't get mistaken for colours.
       "border-w": ["border-field"],
+      "auto-cols": ["auto-cols-quarter"],
     },
   },
 });

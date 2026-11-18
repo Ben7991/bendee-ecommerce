@@ -22,6 +22,7 @@ const files = {
   "energy.png": "products/energy.png",
   "nmnh.png": "products/nmnh.png",
   "probiotic.png": "products/probiotic.png",
+  "magnesium.png": "products/magnesium.png",
 };
 
 if (!fs.existsSync(source)) {

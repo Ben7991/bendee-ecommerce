@@ -3,10 +3,14 @@ import type { ComponentProps } from "react";
 import { cn } from "../../../lib";
 
 const formatter = new Intl.NumberFormat("en-GH", { maximumFractionDigits: 2 });
+const exactFormatter = new Intl.NumberFormat("en-GH", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-/** "GHS 450" — Jofak prices are tax-inclusive Ghana cedis. */
-export function formatPrice(amount: number, currency = "GHS"): string {
-  return `${currency} ${formatter.format(amount)}`;
+/**
+ * "GHS 450" — Jofak prices are tax-inclusive Ghana cedis. Pass `{ exact: true }` for money that
+ * must show pesewas, like order totals: "GHS 1,394.00".
+ */
+export function formatPrice(amount: number, currency = "GHS", options: { exact?: boolean } = {}): string {
+  return `${currency} ${(options.exact ? exactFormatter : formatter).format(amount)}`;
 }
 
 /**

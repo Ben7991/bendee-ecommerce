@@ -4,5 +4,6 @@
  * Keep it sorted; do not hand-write component code here.
  */
 export * from "./AuthShell";
+export * from "./CartLayout";
 export * from "./MinimalShell";
 export * from "./StorefrontShell";

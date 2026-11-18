@@ -195,6 +195,78 @@ const ICONS = {
       </>
     ),
   },
+  minus: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.6,
+    body: <path d="M5 12h14" />,
+  },
+  trash: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M5 7h14M10 7V5h4v2M7 7l1 13h8l1-13" />,
+  },
+  tag: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <path d="M20 12l-8 8-9-9V3h8z" />
+        <circle cx="7.5" cy="7.5" r="1.5" />
+      </>
+    ),
+  },
+  mapPin: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" />
+        <circle cx="12" cy="10" r="2.5" />
+      </>
+    ),
+  },
+  padlock: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <rect x="5" y="11" width="14" height="10" rx="2" />
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+      </>
+    ),
+  },
+  info: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M12 8v5M12 16h.01" />
+      </>
+    ),
+  },
+  stopwatch: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.6,
+    body: (
+      <>
+        <circle cx="12" cy="13" r="8" />
+        <path d="M12 9v4.2l2.6 1.6M9.5 2.8h5" />
+      </>
+    ),
+  },
+  /** Bag with a leaf inside: the empty-cart emblem. */
+  bagLeaf: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.6,
+    body: (
+      <>
+        <path d="M6 7h12l-1 13H7z" />
+        <path d="M9 7a3 3 0 0 1 6 0" />
+        <path d="M12 11c-1.6 1.2-1.6 3.6 0 5 1.6-1.4 1.6-3.8 0-5z" className="fill-brand stroke-none" />
+      </>
+    ),
+  },
   close: {
     viewBox: "0 0 24 24",
     strokeWidth: 2,

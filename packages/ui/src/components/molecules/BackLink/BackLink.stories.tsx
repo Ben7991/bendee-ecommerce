@@ -15,3 +15,4 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 export const Short: Story = { args: { children: "Back" } };
+export const Brand: Story = { args: { tone: "brand", children: "Continue shopping" } };

@@ -201,6 +201,7 @@
   --radius-none: 0px;
   --radius-2: 2px;
   --radius-5: 5px;
+  --radius-6: 6px;
   --radius-sm: 12px;
   --radius-14: 14px;
   --radius-md: 16px;
@@ -223,6 +224,11 @@
   --shadow-drawer: 12px 0 48px var(--shadow-drawer-color);
   /* Centred dialogs (auth success). Re-themes via --shadow-modal-color. */
   --shadow-modal: 0 24px 64px var(--shadow-modal-color);
+  /* Cart panels: the mini-cart drawer (from the right) and sheet (from the bottom). */
+  --shadow-panel-left: -24px 0 60px -20px var(--shadow-panel-color);
+  --shadow-panel-up: 0 -24px 60px -20px var(--shadow-panel-color);
+  /* Sticky bottom bars (mobile checkout). */
+  --shadow-bar: 0 -12px 30px -14px color-mix(in oklab, var(--color-text) 25%, transparent);
 
   /* Drawer motion. base.css cuts these to ~0 for prefers-reduced-motion. */
   --animate-drawer-in: drawer-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -233,6 +239,8 @@
   --animate-sheet-out: sheet-out 200ms cubic-bezier(0.4, 0, 1, 1);
   --animate-dialog-in: dialog-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
   --animate-dialog-out: fade-out 150ms ease-in;
+  --animate-panel-in: panel-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-panel-out: panel-out 200ms cubic-bezier(0.4, 0, 1, 1);
 
   @keyframes drawer-in {
     from {
@@ -242,6 +250,16 @@
   @keyframes drawer-out {
     to {
       transform: translateX(-100%);
+    }
+  }
+  @keyframes panel-in {
+    from {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes panel-out {
+    to {
+      transform: translateX(100%);
     }
   }
   @keyframes sheet-in {
@@ -300,12 +318,17 @@
   --gradient-citrus-to: var(--color-citrus-200);
   --shadow-drawer-color: color-mix(in oklab, var(--color-evergreen-950) 22%, transparent);
   --shadow-modal-color: color-mix(in oklab, var(--color-evergreen-950) 28%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-evergreen-950) 35%, transparent);
 }
 
 /* Paper's 1.5px field and checkbox borders (OTP cells, checkboxes). */
 @utility border-field {
-  border-style: solid;
   border-width: 1.5px;
+}
+
+/* Rails that show four columns on desktop (ProductRail): grid-auto-columns for 4-up with 16px gaps. */
+@utility auto-cols-quarter {
+  grid-auto-columns: calc((100% - 3 * var(--spacing-4)) / 4);
 }
 
 /* Horizontal carousels scroll by touch/trackpad without a visible bar. */
@@ -407,6 +430,7 @@
   --gradient-citrus-to: var(--color-dark-tint-amber);
   --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
   --shadow-modal-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-black) 50%, transparent);
   color-scheme: dark;
 }
 
@@ -447,6 +471,7 @@
     --gradient-citrus-to: var(--color-dark-tint-amber);
     --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
   --shadow-modal-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     color-scheme: dark;
   }
 }

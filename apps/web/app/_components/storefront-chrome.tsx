@@ -1,24 +1,38 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { TextLink } from "@repo/ui/atoms";
 import { SiteFooter, SiteHeader } from "@repo/ui/organisms";
 
 import { subscribeToNewsletter } from "../_actions/newsletter";
 import { footerColumns, navLinks } from "../_content/home";
+import { cartCount, cartLines, miniCartSuggestions, miniCartTotals } from "../_content/cart";
 import { menu } from "../_content/menu";
 import { placeholderSrc } from "../_lib/placeholder";
+import { SiteMiniCart } from "./mini-cart";
 import { SiteMenu } from "./site-menu";
 
-/** The storefront header with the menu drawer, as on Home. */
-export function StorefrontHeader({ activeHref, className }: { activeHref?: string; className?: string }) {
+/**
+ * The storefront header with the menu drawer and the mini-cart. The cart is static sample data
+ * for now; `emptyCart` shows the empty mini-cart (empty cart and expired-link pages).
+ */
+export function StorefrontHeader({
+  activeHref,
+  emptyCart = false,
+  className,
+}: {
+  activeHref?: string;
+  emptyCart?: boolean;
+  className?: string;
+}) {
   return (
     <SiteHeader
       linkAs={Link}
       navLinks={navLinks}
       activeHref={activeHref}
       favouritesCount={6}
-      bagCount={3}
       className={className}
+      bag={<StorefrontMiniCart empty={emptyCart} />}
       menu={
         <SiteMenu
           {...menu}
@@ -26,6 +40,55 @@ export function StorefrontHeader({ activeHref, className }: { activeHref?: strin
           promo={{ ...menu.promo, image: <Packshot id="greens" alt="" sizes="54px" /> }}
         />
       }
+    />
+  );
+}
+
+function StorefrontMiniCart({ empty }: { empty: boolean }) {
+  if (empty) {
+    return (
+      <SiteMiniCart
+        items={[]}
+        empty={{
+          title: (
+            <>
+              Nothing in here <em>yet</em>
+            </>
+          ),
+          description: "Add something you love. Orders over GHS 500 ship free across Accra.",
+          primaryAction: { label: "Shop bestsellers", href: "/collections/bestsellers" },
+          secondaryAction: { label: "Take the wellness quiz", href: "/quiz" },
+          note: (
+            <>
+              Saved a cart before?{" "}
+              <TextLink asChild>
+                <Link href="/auth/sign-in">Sign in</Link>
+              </TextLink>{" "}
+              to bring it back.
+            </>
+          ),
+        }}
+        suggestions={miniCartSuggestions.map(({ id, ...suggestion }) => ({
+          ...suggestion,
+          image: <Packshot id={id} alt="" sizes="40px" />,
+        }))}
+      />
+    );
+  }
+  return (
+    <SiteMiniCart
+      items={cartLines}
+      count={cartCount}
+      totals={miniCartTotals}
+      images={Object.fromEntries(cartLines.map((line) => [line.id, <Packshot key={line.id} id={line.id} alt="" sizes="52px" />]))}
+      freeDelivery={{
+        value: 100,
+        message: (
+          <>
+            <strong>Free delivery unlocked</strong> to Accra · East Legon
+          </>
+        ),
+      }}
     />
   );
 }

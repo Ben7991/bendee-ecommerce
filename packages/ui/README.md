@@ -92,11 +92,11 @@ Rules for the files:
   18px, `left-37.5` = 150px. Use quarter steps for Paper's odd values; never `p-[13px]`.
 - **Core scales use t-shirt names** (`text-sm`, `rounded-xl`). Component values that sit between
   core steps are **named by pixel value**: `text-10 · 11 · 14 · 17 · 19 · 22 · 24 · 28 · 36 · 40 · 56 · 64 · 104 · 140 · 180`,
-  `rounded-2 · 5 · 14 · 18 · 22 · 26`. Set `leading-*` explicitly with those sizes. Extra tracking:
+  `rounded-2 · 5 · 6 · 14 · 18 · 22 · 26`. Set `leading-*` explicitly with those sizes. Extra tracking:
   `tracking-heading · compact · subtle · caps · numeral`.
-- **Elevation and gradients are tokens too:** `shadow-xs · chip · card · brand · overlay · drawer · modal`;
+- **Elevation and gradients are tokens too:** `shadow-xs · chip · card · brand · overlay · drawer · modal · panel-left · panel-up · bar`;
   `bg-gradient-hero · feature · feature-wide · sun · citrus · skin-light · skin-deep`;
-  `scrollbar-none` for touch carousels. Motion: `animate-drawer-in · drawer-out · sheet-in · sheet-out · dialog-in · dialog-out · fade-in · fade-out`. `border-field` is the 1.5px field/checkbox border.
+  `scrollbar-none` for touch carousels. Motion: `animate-drawer-in · drawer-out · panel-in · panel-out · sheet-in · sheet-out · dialog-in · dialog-out · fade-in · fade-out`. `border-field` is the 1.5px field/checkbox border; `auto-cols-quarter` makes 4-up grid rails.
 - A value that is missing is a design-system change: add it to Paper and to `theme.css` (and
   `src/lib/cn.ts` for a new scale step so class merging knows it), never inline in a component.
 - **Variants via cva only**, in `<Name>.variants.ts`. Standard prop vocabulary:
