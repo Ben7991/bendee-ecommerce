@@ -53,3 +53,16 @@ export const Mobile: Story = {
   parameters: { layout: "fullscreen" },
   globals: { viewport: { value: "mobile", isRotated: false } },
 };
+
+/** Search results: no applied filters, "Showing 8 results". */
+export const SearchResults: Story = {
+  args: {
+    chips: undefined,
+    clearAction: undefined,
+    summary: (
+      <>
+        Showing <strong>8</strong> results
+      </>
+    ),
+  },
+};

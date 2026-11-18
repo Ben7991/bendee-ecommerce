@@ -277,6 +277,52 @@ const ICONS = {
     strokeWidth: 2.2,
     body: <path d="M6 15l6-6 6 6" />,
   },
+  /** Recent searches. */
+  clock: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4l3 2" />
+      </>
+    ),
+  },
+  /** "Search tips" on the no-results page. */
+  searchTip: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-4-4M8.5 11h5" />
+      </>
+    ),
+  },
+  /** "Not sure what you need?" (quiz). */
+  heartSoft: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M12 20c-4-2.5-7-5.5-7-9.5C5 7 7.5 5 10 5c1 0 1.6.3 2 .8.4-.5 1-.8 2-.8 2.5 0 5 2 5 5.5 0 4-3 7-7 9.5z" />,
+  },
+  /** "Request a product" (WhatsApp). */
+  chatBubble: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M5 18l1.2-3.6A7.5 7.5 0 1 1 9.6 18z" />,
+  },
+  /** Fill the search box with a suggestion (mobile overlay). */
+  arrowUpLeft: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M17 17L7 7M15 7H7v8" />,
+  },
+  /** Back-in-stock alerts ("Notify me" on compact cards). */
+  bell: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: <path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15L6 16zM10 20.5a2 2 0 0 0 4 0" />,
+  },
   /** Gallery zoom button. */
   zoomIn: {
     viewBox: "0 0 24 24",

@@ -23,6 +23,8 @@ export interface EmptyStateProps extends Omit<ComponentProps<"section">, "title"
   secondaryAction?: EmptyStateAction;
   /** Small line under the buttons; put links in it as TextLinks. */
   note?: ReactNode;
+  /** Puts the note in a soft box with this icon (favourites: "Not signed in?…"). */
+  noteIcon?: IconName;
   size?: "page" | "panel";
   linkAs?: LinkComponent;
 }
@@ -34,6 +36,7 @@ export function EmptyState({
   primaryAction,
   secondaryAction,
   note,
+  noteIcon,
   size = "page",
   linkAs: Link = "a",
   className,
@@ -96,9 +99,15 @@ export function EmptyState({
         )}
       </div>
 
-      {note && (
-        <p className={cn("font-sans text-xs leading-xs text-text-muted", !panel && "md:text-sm md:leading-sm")}>{note}</p>
-      )}
+      {note &&
+        (noteIcon ? (
+          <p className="flex items-start gap-2.5 rounded-md bg-surface-subtle px-4 py-3.5 text-left font-sans text-sm leading-sm text-text-secondary md:items-center md:rounded-full md:px-4.5 md:py-3">
+            <Icon name={noteIcon} size={16} className="mt-0.5 shrink-0 md:mt-0" />
+            <span>{note}</span>
+          </p>
+        ) : (
+          <p className={cn("font-sans text-xs leading-xs text-text-muted", !panel && "md:text-sm md:leading-sm")}>{note}</p>
+        ))}
     </section>
   );
 }

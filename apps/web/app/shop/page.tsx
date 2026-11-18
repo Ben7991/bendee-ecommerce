@@ -11,7 +11,6 @@ import {
   FilterChip,
   LoadMore,
   PillSelect,
-  SearchBar,
 } from "@repo/ui/molecules";
 import {
   AnnouncementBar,
@@ -25,7 +24,7 @@ import {
 } from "@repo/ui/organisms";
 import { ListingLayout, StorefrontShell } from "@repo/ui/templates";
 
-import { Packshot, StorefrontFooter, StorefrontHeader } from "../_components/storefront-chrome";
+import { Packshot, StorefrontFooter, StorefrontHeader, StorefrontSearch } from "../_components/storefront-chrome";
 import { announcements } from "../_content/site";
 import { appliedFilters, facets, goals, listing, perPageOptions, shopProducts, sortChips, sortOptions } from "../_content/shop";
 
@@ -56,7 +55,7 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
     <StorefrontShell framed="page" announcement={<AnnouncementBar items={announcements} />} footer={<StorefrontFooter />}>
       <CategoryHero
         header={<StorefrontHeader activeHref="/shop" className="px-5 pt-1 md:px-8 md:pt-5 md:pb-4 xl:px-10 xl:py-5" />}
-        search={<SearchBar placeholder="Search supplements…" className="h-11 gap-3 px-4" />}
+        search={<StorefrontSearch trigger="bar" />}
         breadcrumbs={
           <Breadcrumbs>
             <BreadcrumbItem asChild>

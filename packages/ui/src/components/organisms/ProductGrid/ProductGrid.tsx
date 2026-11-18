@@ -1,7 +1,7 @@
 import { Fragment, type ComponentProps, type ReactNode } from "react";
 
 import { cn, type LinkComponent } from "../../../lib";
-import { ProductCard, type ProductCardData } from "../ProductCard";
+import { ProductCard, type ProductCardData, type ProductCardProps } from "../ProductCard";
 
 /**
  * ProductGrid (organism): the PLP results: 2 columns on mobile and tablet, 3 on desktop.
@@ -12,10 +12,13 @@ export interface ProductGridProps extends ComponentProps<"ul"> {
   /** Packshots keyed by product id. */
   images?: Record<string, ReactNode>;
   promo?: ReactNode;
+  /** Every card is a saved favourite (the favourites page). */
+  saved?: boolean;
+  compactNotify?: ProductCardProps["compactNotify"];
   linkAs?: LinkComponent;
 }
 
-export function ProductGrid({ products, images = {}, promo, linkAs, className, ...props }: ProductGridProps) {
+export function ProductGrid({ products, images = {}, promo, saved, compactNotify, linkAs, className, ...props }: ProductGridProps) {
   return (
     <ul
       data-slot="product-grid"
@@ -25,7 +28,7 @@ export function ProductGrid({ products, images = {}, promo, linkAs, className, .
       {products.map((product, index) => (
         <Fragment key={product.id}>
           <li className="min-w-0">
-            <ProductCard product={product} image={images[product.id]} linkAs={linkAs} />
+            <ProductCard product={product} image={images[product.id]} saved={saved} compactNotify={compactNotify} linkAs={linkAs} />
           </li>
           {/* The first row is 2 wide on tablet and 3 on desktop. */}
           {promo && index === 1 && <li className="col-span-full hidden md:block xl:hidden">{promo}</li>}

@@ -57,3 +57,20 @@ export const Panel: Story = {
     className: "mx-auto max-w-103 px-6",
   },
 };
+
+/** Favourites, nothing saved yet: the note sits in a soft box with an icon. */
+export const NoFavourites: Story = {
+  args: {
+    icon: "heart",
+    title: "Nothing saved yet",
+    description: "See something you like but not ready to buy? Tap the heart and it'll wait for you here.",
+    primaryAction: { label: "Shop bestsellers", href: "#" },
+    secondaryAction: { label: "Take the wellness quiz", href: "#" },
+    noteIcon: "user",
+    note: (
+      <>
+        Not signed in? Hearts are saved on this device. <a href="#">Sign in</a> to keep them on every device.
+      </>
+    ),
+  },
+};

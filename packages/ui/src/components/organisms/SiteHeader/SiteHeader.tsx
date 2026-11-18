@@ -22,12 +22,16 @@ export interface SiteHeaderProps extends ComponentProps<"header"> {
   /** href of the current section, for the active pill. */
   activeHref?: string;
   favouritesCount?: number;
+  /** On the favourites page: the heart button is highlighted and filled. */
+  favouritesActive?: boolean;
   bagCount?: number;
   homeHref?: string;
   searchHref?: string;
   accountHref?: string;
   favouritesHref?: string;
   bagHref?: string;
+  /** The search control from 768px, usually a <SearchDialog>. Replaces the search link. */
+  search?: ReactNode;
   /** The bag control, usually a <MiniCart> (its trigger is the bag button). Replaces the bag link. */
   bag?: ReactNode;
   /** The menu below 1440px, usually a <MenuDrawer>. Replaces the plain menu button. */
@@ -40,12 +44,14 @@ export function SiteHeader({
   navLinks,
   activeHref,
   favouritesCount = 0,
+  favouritesActive = false,
   bagCount = 0,
   homeHref = "/",
   searchHref = "/search",
   accountHref = "/auth/sign-in",
   favouritesHref = "/wishlist",
   bagHref = "/cart",
+  search,
   bag,
   menu,
   menuButtonProps,
@@ -89,19 +95,27 @@ export function SiteHeader({
       </Logo>
 
       <div className="flex items-center gap-2 xl:gap-2.5">
-        <IconButton asChild label="Search" className="hidden md:inline-flex">
-          <Link href={searchHref}>
-            <Icon name="search" />
-          </Link>
-        </IconButton>
+        {search ? (
+          <span className="hidden md:inline-flex">{search}</span>
+        ) : (
+          <IconButton asChild label="Search" className="hidden md:inline-flex">
+            <Link href={searchHref}>
+              <Icon name="search" />
+            </Link>
+          </IconButton>
+        )}
         <IconButton asChild label="Account" className="hidden md:inline-flex">
           <Link href={accountHref}>
             <Icon name="user" />
           </Link>
         </IconButton>
-        <IconButton asChild label={favouritesCount ? `Favourites, ${favouritesCount} items` : "Favourites"}>
-          <Link href={favouritesHref}>
-            <Icon name="heart" />
+        <IconButton
+          asChild
+          label={favouritesCount ? `Favourites, ${favouritesCount} items` : "Favourites"}
+          className={favouritesActive ? "border-brand bg-sage-100 text-brand hover:bg-sage-100" : undefined}
+        >
+          <Link href={favouritesHref} aria-current={favouritesActive ? "page" : undefined}>
+            <Icon name="heart" fill={favouritesActive && favouritesCount ? "currentColor" : "none"} />
             <CountBadge count={favouritesCount} />
           </Link>
         </IconButton>

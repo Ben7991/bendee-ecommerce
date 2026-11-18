@@ -62,6 +62,26 @@ export const SoldOut: Story = {
     },
   },
 };
+/** On the favourites page: filled heart (on mobile too) and a bell for sold-out items on mobile. */
+export const Saved: Story = {
+  args: {
+    saved: true,
+    compactNotify: "icon",
+    product: {
+      id: "energy",
+      name: "Energy Capsules",
+      details: "Energy & stress support · 30 capsules",
+      shortDetails: "30 capsules",
+      href: "#",
+      price: 320,
+      compareAt: 390,
+      rating: 4.9,
+      reviewCount: 4560,
+      badge: { label: "Price dropped GHS 70", shortLabel: "Price drop", variant: "solid" },
+      tint: "lavender",
+    },
+  },
+};
 export const Mobile: Story = {
   args: { className: "max-w-42.5" },
   globals: { viewport: { value: "mobile", isRotated: false } },

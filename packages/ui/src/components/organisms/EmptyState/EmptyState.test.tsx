@@ -25,4 +25,13 @@ describe("EmptyState", () => {
     render(<EmptyState size="panel" icon="bagLeaf" title="Nothing in here yet" description="Add something." primaryAction={{ label: "Shop", href: "/" }} />);
     expect(screen.getByRole("heading", { level: 2, name: "Nothing in here yet" })).toBeInTheDocument();
   });
+
+  it("boxes the note with an icon", () => {
+    render(
+      <EmptyState icon="heart" title="Nothing saved yet" description="Tap the heart." primaryAction={{ label: "Shop", href: "/" }} noteIcon="user" note="Not signed in?" />,
+    );
+    const note = screen.getByText("Not signed in?").parentElement!;
+    expect(note).toHaveClass("bg-surface-subtle");
+    expect(note.querySelector("svg")).not.toBeNull();
+  });
 });

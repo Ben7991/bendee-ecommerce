@@ -8,9 +8,11 @@ import { subscribeToNewsletter } from "../_actions/newsletter";
 import { footerColumns, navLinks } from "../_content/home";
 import { cartCount, cartLines, miniCartSuggestions, miniCartTotals } from "../_content/cart";
 import { menu } from "../_content/menu";
+import { overlayCategories, overlayProducts, recentSearches, searchSuggestions } from "../_content/search";
 import { placeholderSrc } from "../_lib/placeholder";
 import { SiteMiniCart } from "./mini-cart";
 import { SiteMenu } from "./site-menu";
+import { SiteSearch } from "./site-search";
 
 /**
  * The storefront header with the menu drawer and the mini-cart. The cart is static sample data
@@ -19,10 +21,16 @@ import { SiteMenu } from "./site-menu";
 export function StorefrontHeader({
   activeHref,
   emptyCart = false,
+  favourites = 6,
+  favouritesActive = false,
   className,
 }: {
   activeHref?: string;
   emptyCart?: boolean;
+  /** Saved-items count on the heart (sample data). */
+  favourites?: number;
+  /** On the favourites page. */
+  favouritesActive?: boolean;
   className?: string;
 }) {
   return (
@@ -30,8 +38,10 @@ export function StorefrontHeader({
       linkAs={Link}
       navLinks={navLinks}
       activeHref={activeHref}
-      favouritesCount={6}
+      favouritesCount={favourites}
+      favouritesActive={favouritesActive}
       className={className}
+      search={<StorefrontSearch />}
       bag={<StorefrontMiniCart empty={emptyCart} />}
       menu={
         <SiteMenu
@@ -40,6 +50,21 @@ export function StorefrontHeader({
           promo={{ ...menu.promo, image: <Packshot id="greens" alt="" sizes="54px" /> }}
         />
       }
+    />
+  );
+}
+
+/** The search overlay with the sample suggestions and catalog (Paper: Search overlay). */
+export function StorefrontSearch({ trigger = "icon", className }: { trigger?: "icon" | "bar"; className?: string }) {
+  return (
+    <SiteSearch
+      trigger={trigger}
+      triggerClassName={className}
+      suggestions={searchSuggestions}
+      recent={recentSearches}
+      products={overlayProducts}
+      categories={overlayCategories}
+      images={Object.fromEntries(overlayProducts.map((product) => [product.id, <Packshot key={product.id} id={product.id} alt="" sizes="48px" />]))}
     />
   );
 }

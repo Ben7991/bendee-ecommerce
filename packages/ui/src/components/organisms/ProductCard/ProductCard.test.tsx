@@ -41,4 +41,18 @@ describe("ProductCard", () => {
       "/products/daily-greens#notify",
     );
   });
+
+  it("shows a saved product with a filled heart that removes it", async () => {
+    const onToggleSaved = vi.fn();
+    render(<ProductCard product={product} saved onToggleSaved={onToggleSaved} />);
+    const heart = screen.getByRole("button", { name: "Remove Daily Greens Powder from favourites" });
+    expect(heart).toHaveAttribute("aria-pressed", "true");
+    await userEvent.click(heart);
+    expect(onToggleSaved).toHaveBeenCalledOnce();
+  });
+
+  it("can show the sold-out action as a bell on mobile", () => {
+    render(<ProductCard product={{ ...product, soldOut: true }} compactNotify="icon" />);
+    expect(screen.getAllByRole("link", { name: "Notify me when Daily Greens Powder is back" })).toHaveLength(2);
+  });
 });

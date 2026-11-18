@@ -13,6 +13,8 @@ export interface ListingToolbarProps extends ComponentProps<"div"> {
   /** Range shown, e.g. "1–24". */
   range: string;
   total: number;
+  /** Replaces "Showing 1–24 of 41" from 768px, e.g. "Showing 8 results". */
+  summary?: ReactNode;
   /** FilterDialog (its trigger hides itself on desktop). */
   filters?: ReactNode;
   /** Sort control from 768px (PillSelect inline). */
@@ -25,7 +27,7 @@ export interface ListingToolbarProps extends ComponentProps<"div"> {
   clearAction?: ReactNode;
 }
 
-export function ListingToolbar({ range, total, filters, sort, compactSort, chips, clearAction, className, ...props }: ListingToolbarProps) {
+export function ListingToolbar({ range, total, summary, filters, sort, compactSort, chips, clearAction, className, ...props }: ListingToolbarProps) {
   return (
     <div
       data-slot="listing-toolbar"
@@ -47,9 +49,12 @@ export function ListingToolbar({ range, total, filters, sort, compactSort, chips
           <span className="md:hidden">
             <strong className="font-semibold text-text">{total}</strong> results
           </span>
-          <span className="hidden md:inline">
-            Showing <strong className="font-semibold text-text">{range}</strong> of{" "}
-            <strong className="font-semibold text-text">{total}</strong>
+          <span className="hidden md:inline [&_strong]:font-semibold [&_strong]:text-text">
+            {summary ?? (
+              <>
+                Showing <strong>{range}</strong> of <strong>{total}</strong>
+              </>
+            )}
           </span>
         </p>
         {chips && (

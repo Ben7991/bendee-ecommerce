@@ -24,9 +24,11 @@ export interface CategoryPillProps extends ComponentProps<"a">, AsChildProps {
   active?: boolean;
   /** Product count, shown from 768px. */
   count?: number;
+  /** Show the count on mobile too, in the label's style ("All 6"). */
+  compactCount?: boolean;
 }
 
-export function CategoryPill({ active = false, count, asChild = false, className, children, ...props }: CategoryPillProps) {
+export function CategoryPill({ active = false, count, compactCount = false, asChild = false, className, children, ...props }: CategoryPillProps) {
   const Comp = asChild ? Slot : "a";
   return (
     <li className="shrink-0">
@@ -37,6 +39,7 @@ export function CategoryPill({ active = false, count, asChild = false, className
           "flex items-center gap-2 rounded-full px-3.5 py-2 font-sans text-sm leading-xs font-medium whitespace-nowrap transition-colors",
           "md:px-4 md:py-2.5 md:text-base md:leading-4.5 xl:px-4.5",
           active ? "bg-primary text-text-inverse" : "bg-bg text-text hover:bg-surface-subtle",
+          compactCount && "gap-1 md:gap-2",
           className,
         )}
         {...props}
@@ -44,7 +47,12 @@ export function CategoryPill({ active = false, count, asChild = false, className
         <Slottable>{children}</Slottable>
         {count !== undefined && (
           <span
-            className={cn("hidden text-sm leading-xs md:inline", active ? "font-semibold text-accent" : "font-regular text-text-muted")}
+            className={cn(
+              // Compact: on mobile the count reads as part of the label ("All 6").
+              compactCount ? "md:text-sm md:leading-xs" : "hidden text-sm leading-xs md:inline",
+              active ? "md:font-semibold md:text-accent" : "md:font-regular md:text-text-muted",
+              !compactCount && (active ? "font-semibold text-accent" : "font-regular text-text-muted"),
+            )}
           >
             <span className="sr-only"> (</span>
             {count}

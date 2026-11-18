@@ -34,4 +34,9 @@ describe("SiteHeader", () => {
     render(<SiteHeader navLinks={navLinks} />);
     expect(screen.getByRole("button", { name: "Open menu" })).toHaveAttribute("aria-haspopup", "dialog");
   });
+
+  it("marks the favourites button on the favourites page", () => {
+    render(<SiteHeader navLinks={[]} favouritesCount={6} favouritesActive />);
+    expect(screen.getByRole("link", { name: "Favourites, 6 items" })).toHaveAttribute("aria-current", "page");
+  });
 });

@@ -26,7 +26,12 @@ export interface ProductCardData {
   compareAt?: number;
   rating: number;
   reviewCount: number;
-  badge?: { label: string; variant: "solid" | "light" | "warning" | "inverse" };
+  badge?: {
+    label: string;
+    /** Mobile label if shorter, e.g. "Price drop" for "Price dropped GHS 70". */
+    shortLabel?: string;
+    variant: "solid" | "light" | "warning" | "inverse";
+  };
   tint: ProductTint;
   /** Greys the card out and swaps Add for "Notify me". */
   soldOut?: boolean;
@@ -44,10 +49,25 @@ export interface ProductCardProps extends ComponentProps<"article"> {
   /** Packshot (next/image with `fill` + object-contain, or <img>). */
   image?: ReactNode;
   onAdd?: () => void;
+  /** In the shopper's favourites: filled heart, shown on mobile too (the favourites page). */
+  saved?: boolean;
+  onToggleSaved?: () => void;
+  /** Sold out on mobile: a "Notify me" pill (default) or a bell icon button. */
+  compactNotify?: "label" | "icon";
   linkAs?: LinkComponent;
 }
 
-export function ProductCard({ product, image, onAdd, linkAs: Link = "a", className, ...props }: ProductCardProps) {
+export function ProductCard({
+  product,
+  image,
+  onAdd,
+  saved = false,
+  onToggleSaved,
+  compactNotify = "label",
+  linkAs: Link = "a",
+  className,
+  ...props
+}: ProductCardProps) {
   const name = product.shortName ?? product.name;
   return (
     <article
@@ -72,7 +92,7 @@ export function ProductCard({ product, image, onAdd, linkAs: Link = "a", classNa
         {product.badge && (
           <>
             <Badge variant={product.badge.variant} size="sm" className="absolute top-2.5 left-2.5 md:hidden">
-              {product.badge.label}
+              {product.badge.shortLabel ?? product.badge.label}
             </Badge>
             <Badge variant={product.badge.variant} className="absolute top-4 left-4 hidden md:inline-flex">
               {product.badge.label}
@@ -82,10 +102,15 @@ export function ProductCard({ product, image, onAdd, linkAs: Link = "a", classNa
         <IconButton
           variant="plain"
           size="md"
-          label={`Save ${product.name} to favourites`}
-          className="absolute top-4 right-4 z-20 hidden md:inline-flex"
+          label={saved ? `Remove ${product.name} from favourites` : `Save ${product.name} to favourites`}
+          aria-pressed={saved}
+          onClick={onToggleSaved}
+          className={cn(
+            "absolute z-20 md:top-4 md:right-4 md:inline-flex md:size-9",
+            saved ? "top-2.5 right-2.5 size-7.5 text-error" : "top-4 right-4 hidden",
+          )}
         >
-          <Icon name="heart" size={16} />
+          <Icon name="heart" size={16} fill={saved ? "currentColor" : "none"} className="size-3.5 md:size-4" />
         </IconButton>
       </div>
 
@@ -116,11 +141,28 @@ export function ProductCard({ product, image, onAdd, linkAs: Link = "a", classNa
         <Price amount={product.price} compareAt={product.compareAt} muted={product.soldOut} size="md" className="md:hidden" />
         <Price amount={product.price} compareAt={product.compareAt} muted={product.soldOut} className="hidden md:flex" />
         {product.soldOut ? (
-          <Button asChild variant="outline" size="xs" className="relative z-20 px-3 py-2 text-xs md:px-4 md:py-2.5 md:text-sm">
-            <Link href={product.notifyHref ?? product.href} aria-label={`Notify me when ${product.name} is back`}>
-              Notify me
-            </Link>
-          </Button>
+          <>
+            {compactNotify === "icon" && (
+              <IconButton asChild size="sm" label={`Notify me when ${product.name} is back`} className="z-20 text-primary md:hidden dark:text-text">
+                <Link href={product.notifyHref ?? product.href}>
+                  <Icon name="bell" size={15} />
+                </Link>
+              </IconButton>
+            )}
+            <Button
+              asChild
+              variant="outline"
+              size="xs"
+              className={cn(
+                "relative z-20 px-3 py-2 text-xs md:inline-flex md:px-4 md:py-2.5 md:text-sm",
+                compactNotify === "icon" && "hidden",
+              )}
+            >
+              <Link href={product.notifyHref ?? product.href} aria-label={`Notify me when ${product.name} is back`}>
+                Notify me
+              </Link>
+            </Button>
+          </>
         ) : (
           <>
             <IconButton variant="solid" size="sm" label={`Add ${product.name} to bag`} onClick={onAdd} className="z-20 md:hidden">
