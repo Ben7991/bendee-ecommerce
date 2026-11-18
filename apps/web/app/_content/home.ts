@@ -37,6 +37,8 @@ export const footerColumns: FooterColumn[] = [
       { label: "Track order", href: "/orders/track" },
       { label: "FAQ", href: "/pages/faq" },
       { label: "Contact us", href: "/pages/contact" },
+      // Opens the cookie settings (see _components/cookie-consent.tsx).
+      { label: "Cookie settings", href: "#cookie-settings" },
     ],
   },
 ];

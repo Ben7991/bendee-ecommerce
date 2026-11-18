@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 
 import { ThemeProvider, themeScript } from "@repo/ui/lib";
 
+import { CookieConsent } from "./_components/cookie-consent";
 import { fontVariables } from "./_lib/fonts";
 import "./globals.css";
 
@@ -29,7 +30,10 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {children}
+          <CookieConsent />
+        </ThemeProvider>
       </body>
     </html>
   );

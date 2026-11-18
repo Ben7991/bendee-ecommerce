@@ -16,3 +16,6 @@ type Story = StoryObj<typeof meta>;
 export const Off: Story = {};
 export const On: Story = { args: { defaultChecked: true } };
 export const Disabled: Story = { args: { disabled: true } };
+
+/** Cookie settings. */
+export const Large: Story = { args: { size: "lg", defaultChecked: true } };

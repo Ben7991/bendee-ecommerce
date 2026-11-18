@@ -15,6 +15,8 @@ export * from "./CheckoutBar";
 export * from "./CheckoutHeader";
 export * from "./CheckoutStep";
 export * from "./CheckoutSummary";
+export * from "./CookieBanner";
+export * from "./CookieSettings";
 export * from "./CustomerReview";
 export * from "./DeliveryForm";
 export * from "./EmptyState";

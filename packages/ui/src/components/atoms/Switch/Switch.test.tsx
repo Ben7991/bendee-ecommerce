@@ -13,4 +13,9 @@ describe("Switch", () => {
     await user.click(toggle);
     expect(toggle).toBeChecked();
   });
+
+  it("has a large size", () => {
+    render(<Switch aria-label="Analytics" size="lg" />);
+    expect(screen.getByRole("switch", { name: "Analytics" })).toHaveClass("h-7", "w-12");
+  });
 });
