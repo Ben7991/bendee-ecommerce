@@ -15,6 +15,8 @@ export const logoVariants = cva("inline-flex items-center font-sans font-bold tr
       compact: "gap-2 text-17 leading-5.5",
       /** Menu drawer top bar: 26px mark at every breakpoint. */
       menu: "gap-2 text-22 leading-lg",
+      /** Auth pages: 22px mark on the mobile bar, 26px on the tablet banner, 28px on the desktop panel. */
+      auth: "gap-2 text-19 leading-base md:text-22 md:leading-lg",
     },
   },
   defaultVariants: { tone: "default", size: "header" },
@@ -27,6 +29,7 @@ export const logoMarkVariants = cva("shrink-0", {
       footer: "size-7.5",
       compact: "size-5.5",
       menu: "size-6.5",
+      auth: "size-5.5 md:size-6.5 xl:size-7",
     },
   },
   defaultVariants: { size: "header" },

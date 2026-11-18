@@ -40,4 +40,14 @@ export const Sizes: Story = {
   ),
 };
 
+/** Full-width form actions (auth pages). */
+export const ExtraLarge: Story = {
+  render: (args) => (
+    <div className="flex max-w-105 flex-col gap-3">
+      <Button {...args} size="xl">Sign in</Button>
+      <Button {...args} size="xl" variant="secondary" className="text-base">Continue with email</Button>
+    </div>
+  ),
+};
+
 export const Disabled: Story = { args: { disabled: true } };

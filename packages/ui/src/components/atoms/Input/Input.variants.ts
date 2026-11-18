@@ -17,6 +17,8 @@ export const inputVariants = cva(
       size: {
         sm: "text-14 leading-4.5",
         md: "text-base leading-4.5",
+        /** Form fields (auth, checkout): 16px so iOS doesn't zoom on focus. */
+        lg: "text-md leading-sm",
       },
     },
     defaultVariants: { tone: "default", size: "md" },

@@ -3,6 +3,7 @@
  *   export * from "./<Name>";
  * Keep it sorted; do not hand-write component code here.
  */
+export * from "./AuthIntro";
 export * from "./BestsellerShowcase";
 export * from "./GoalCard";
 export * from "./GoalGrid";
@@ -16,3 +17,4 @@ export * from "./ReviewCard";
 export * from "./ReviewsSection";
 export * from "./SiteFooter";
 export * from "./SiteHeader";
+export * from "./SuccessDialog";

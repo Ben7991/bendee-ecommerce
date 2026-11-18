@@ -18,6 +18,10 @@ export const headingVariants = cva(
         section: "text-3xl leading-3xl tracking-tight md:text-4xl md:leading-4xl xl:text-5xl xl:leading-5xl",
         /** Feature banners (quiz, newsletter): 32/34 → 44/46 → 56/58. */
         feature: "text-3xl leading-3xl tracking-tight md:text-4xl md:leading-4xl xl:text-56 xl:leading-14.5",
+        /** Auth page titles: 36/40 → 44/46. The accent word keeps the title's tracking. */
+        auth: "text-36 leading-10 tracking-tight md:text-4xl md:leading-4xl [&_em]:tracking-tight",
+        /** Dialog and sheet titles: 32/34 at every breakpoint. */
+        dialog: "text-3xl leading-3xl tracking-snug [&_em]:tracking-snug",
       },
       tone: {
         default: "text-text [&_em]:text-brand",

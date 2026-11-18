@@ -41,7 +41,7 @@ export function SiteHeader({
   bagCount = 0,
   homeHref = "/",
   searchHref = "/search",
-  accountHref = "/account",
+  accountHref = "/auth/sign-in",
   favouritesHref = "/wishlist",
   bagHref = "/cart",
   menu,

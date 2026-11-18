@@ -143,6 +143,7 @@
   --text-22: 22px;
   --text-24: 24px;
   --text-28: 28px;
+  --text-36: 36px;
   --text-40: 40px;
   --text-56: 56px;
   --text-64: 64px;
@@ -191,6 +192,8 @@
   --spacing-24: 96px;
 
   --radius-none: 0px;
+  --radius-2: 2px;
+  --radius-5: 5px;
   --radius-sm: 12px;
   --radius-14: 14px;
   --radius-md: 16px;
@@ -211,12 +214,18 @@
   --shadow-overlay: 0 30px 60px -20px color-mix(in oklab, var(--color-black) 40%, transparent);
   /* Side drawers (menu): cast to the right. The colour re-themes via --shadow-drawer-color. */
   --shadow-drawer: 12px 0 48px var(--shadow-drawer-color);
+  /* Centred dialogs (auth success). Re-themes via --shadow-modal-color. */
+  --shadow-modal: 0 24px 64px var(--shadow-modal-color);
 
   /* Drawer motion. base.css cuts these to ~0 for prefers-reduced-motion. */
   --animate-drawer-in: drawer-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
   --animate-drawer-out: drawer-out 200ms cubic-bezier(0.4, 0, 1, 1);
   --animate-fade-in: fade-in 280ms ease-out;
   --animate-fade-out: fade-out 200ms ease-in;
+  --animate-sheet-in: sheet-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-sheet-out: sheet-out 200ms cubic-bezier(0.4, 0, 1, 1);
+  --animate-dialog-in: dialog-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-dialog-out: fade-out 150ms ease-in;
 
   @keyframes drawer-in {
     from {
@@ -226,6 +235,22 @@
   @keyframes drawer-out {
     to {
       transform: translateX(-100%);
+    }
+  }
+  @keyframes sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes sheet-out {
+    to {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
     }
   }
   @keyframes fade-in {
@@ -267,6 +292,13 @@
   --gradient-citrus-from: var(--color-tint-citrus);
   --gradient-citrus-to: var(--color-citrus-200);
   --shadow-drawer-color: color-mix(in oklab, var(--color-evergreen-950) 22%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-evergreen-950) 28%, transparent);
+}
+
+/* Paper's 1.5px field and checkbox borders (OTP cells, checkboxes). */
+@utility border-field {
+  border-style: solid;
+  border-width: 1.5px;
 }
 
 /* Horizontal carousels scroll by touch/trackpad without a visible bar. */
@@ -366,6 +398,7 @@
   --gradient-citrus-from: var(--color-dark-tint-citrus);
   --gradient-citrus-to: var(--color-dark-tint-amber);
   --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-black) 50%, transparent);
   color-scheme: dark;
 }
 
@@ -404,6 +437,7 @@
     --gradient-citrus-from: var(--color-dark-tint-citrus);
     --gradient-citrus-to: var(--color-dark-tint-amber);
     --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     color-scheme: dark;
   }
 }

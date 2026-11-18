@@ -15,6 +15,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
 
+/** Form fields (TextField): 16px. */
+export const Large: Story = { args: { size: "lg" } };
+
 export const Inverse: Story = {
   args: { tone: "inverse" },
   render: (args) => (

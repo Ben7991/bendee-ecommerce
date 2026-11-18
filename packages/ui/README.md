@@ -91,12 +91,12 @@ Rules for the files:
 - **Spacing is a 4px grid** (`--spacing: 4px`): `p-6` = 24px, `size-11.5` = 46px, `leading-4.5` =
   18px, `left-37.5` = 150px. Use quarter steps for Paper's odd values; never `p-[13px]`.
 - **Core scales use t-shirt names** (`text-sm`, `rounded-xl`). Component values that sit between
-  core steps are **named by pixel value**: `text-10 · 11 · 14 · 17 · 19 · 22 · 24 · 28 · 40 · 56 · 64`,
-  `rounded-14 · 18 · 22 · 26`. Set `leading-*` explicitly with those sizes. Extra tracking:
+  core steps are **named by pixel value**: `text-10 · 11 · 14 · 17 · 19 · 22 · 24 · 28 · 36 · 40 · 56 · 64`,
+  `rounded-2 · 5 · 14 · 18 · 22 · 26`. Set `leading-*` explicitly with those sizes. Extra tracking:
   `tracking-heading · compact · subtle · caps`.
-- **Elevation and gradients are tokens too:** `shadow-xs · chip · card · brand · overlay · drawer`;
+- **Elevation and gradients are tokens too:** `shadow-xs · chip · card · brand · overlay · drawer · modal`;
   `bg-gradient-hero · feature · feature-wide · sun · citrus · skin-light · skin-deep`;
-  `scrollbar-none` for touch carousels. Drawer motion: `animate-drawer-in · drawer-out · fade-in · fade-out`.
+  `scrollbar-none` for touch carousels. Motion: `animate-drawer-in · drawer-out · sheet-in · sheet-out · dialog-in · dialog-out · fade-in · fade-out`. `border-field` is the 1.5px field/checkbox border.
 - A value that is missing is a design-system change: add it to Paper and to `theme.css` (and
   `src/lib/cn.ts` for a new scale step so class merging knows it), never inline in a component.
 - **Variants via cva only**, in `<Name>.variants.ts`. Standard prop vocabulary:

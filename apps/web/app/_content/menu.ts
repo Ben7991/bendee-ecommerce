@@ -29,6 +29,8 @@ export const menu = {
     { label: "Track an order", href: "/orders/track", icon: "truck" },
     { label: "Help & FAQ", href: "/pages/faq", icon: "help" },
   ],
+  signInHref: "/auth/sign-in",
+  createAccountHref: "/auth/sign-up",
   // TODO: point at the WhatsApp business chat (https://wa.me/<number>) once the number is known.
   help: { prompt: "Need help?", label: "Chat on WhatsApp", href: "/pages/contact" },
 } satisfies Omit<MenuDrawerProps, "linkAs">;

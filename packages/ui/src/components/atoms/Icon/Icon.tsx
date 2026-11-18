@@ -56,6 +56,95 @@ const ICONS = {
     strokeWidth: 2.2,
     body: <path d="M9 6l6 6-6 6" />,
   },
+  chevronLeft: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M15 6l-6 6 6 6" />,
+  },
+  arrowRight: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M5 12h14M13 6l6 6-6 6" />,
+  },
+  eye: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+        <circle cx="12" cy="12" r="3" />
+      </>
+    ),
+  },
+  eyeOff: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+        <circle cx="12" cy="12" r="3" />
+        <path d="M4 4l16 16" />
+      </>
+    ),
+  },
+  key: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <circle cx="8" cy="15" r="4" />
+        <path d="M11 12l8-8M16 7l2.5 2.5M18.5 4.5L21 7" />
+      </>
+    ),
+  },
+  lock: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <rect x="5" y="10.5" width="14" height="10" rx="2.5" />
+        <path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" />
+        <circle cx="12" cy="15.5" r="1.5" className="fill-brand stroke-none" />
+      </>
+    ),
+  },
+  mail: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
+        <path d="M4 7.5l8 5.5 8-5.5" />
+      </>
+    ),
+  },
+  mailCheck: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <path d="M20 12V8a2.5 2.5 0 0 0-2.5-2.5h-11A2.5 2.5 0 0 0 4 8v8a2.5 2.5 0 0 0 2.5 2.5H12" />
+        <path d="M5 7.5l7 5 7-5" />
+        <circle cx="18" cy="17.5" r="4" className="fill-accent stroke-none" />
+        <path d="M16.3 17.6l1.2 1.2 2.2-2.4" strokeWidth="1.6" className="stroke-primary" />
+      </>
+    ),
+  },
+  phone: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <rect x="7" y="2.5" width="10" height="19" rx="2.5" />
+        <path d="M11 18h2" />
+      </>
+    ),
+  },
+  shield: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z" />,
+  },
   close: {
     viewBox: "0 0 24 24",
     strokeWidth: 2,

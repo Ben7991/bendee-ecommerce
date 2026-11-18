@@ -51,3 +51,26 @@ export const Feature: Story = {
     </div>
   ),
 };
+
+export const Auth: Story = {
+  args: {
+    as: "h1",
+    size: "auth",
+    children: (
+      <>
+        Sign in or <em>join</em>
+      </>
+    ),
+  },
+};
+
+export const Dialog: Story = {
+  args: {
+    size: "dialog",
+    children: (
+      <>
+        Password <em>updated</em>
+      </>
+    ),
+  },
+};

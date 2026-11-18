@@ -3,10 +3,18 @@
  *   export * from "./<Name>";
  * Keep it sorted; do not hand-write component code here.
  */
+export * from "./BackLink";
+export * from "./Callout";
+export * from "./CheckboxField";
 export * from "./CheckList";
 export * from "./ChoiceGroup";
 export * from "./FilterTabs";
 export * from "./NewsletterForm";
+export * from "./OtpField";
+export * from "./PasswordField";
+export * from "./PasswordStrength";
+export * from "./PhoneField";
 export * from "./PillNav";
 export * from "./SectionHeader";
+export * from "./TextField";
 export * from "./ThemeSwitch";

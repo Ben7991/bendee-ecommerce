@@ -21,6 +21,8 @@ export const buttonVariants = cva(
         sm: "gap-2 px-4.5 py-3 text-14 leading-4.5 font-semibold",
         md: "gap-2 px-5.5 py-3.5 text-base leading-4.5 font-semibold",
         lg: "gap-3.5 px-6.5 py-3 text-md leading-sm",
+        /** Full-width form actions (auth): 54px tall. */
+        xl: "h-13.5 gap-2 px-6 text-md leading-sm font-semibold",
       },
       arrow: {
         true: "",
@@ -50,11 +52,12 @@ export const buttonArrowVariants = cva("flex shrink-0 items-center justify-cente
       sm: "size-8",
       md: "size-8.5",
       lg: "size-10",
+      xl: "size-10",
     },
   },
   defaultVariants: { variant: "primary", size: "lg" },
 });
 
-export const BUTTON_ARROW_ICON_SIZE = { xs: 12, sm: 13, md: 14, lg: 16 } as const;
+export const BUTTON_ARROW_ICON_SIZE = { xs: 12, sm: 13, md: 14, lg: 16, xl: 16 } as const;
 
 export type ButtonVariantProps = VariantProps<typeof buttonVariants>;
