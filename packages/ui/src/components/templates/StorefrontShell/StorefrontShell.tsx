@@ -20,9 +20,10 @@ export interface StorefrontShellProps extends ComponentProps<"div"> {
    * The frame around the page:
    *   true:    12px (tablet) / 16px (desktop) on every side (Home, whose hero is a card)
    *   "sides": 16px left, right and bottom on desktop only (cart)
+   *   "page":  12px (tablet) / 16px (desktop) left, right and bottom (shop)
    *   false:   edge to edge (404, empty cart)
    */
-  framed?: boolean | "sides";
+  framed?: boolean | "sides" | "page";
 }
 
 export function StorefrontShell({ footer, announcement, framed = true, className, children, ...props }: StorefrontShellProps) {
@@ -40,6 +41,7 @@ export function StorefrontShell({ footer, announcement, framed = true, className
           "mx-auto flex w-full flex-col",
           framed === true ? "max-w-352 md:p-3 xl:p-4" : "max-w-360",
           framed === "sides" && "xl:px-4 xl:pb-4",
+          framed === "page" && "md:px-3 md:pb-3 xl:px-4 xl:pb-4",
         )}
       >
         <main id="main" className="flex flex-col">

@@ -44,7 +44,8 @@ export function StorefrontHeader({
   );
 }
 
-function StorefrontMiniCart({ empty }: { empty: boolean }) {
+/** The bag button and mini-cart on their own (the PDP's mobile toolbar). */
+export function StorefrontMiniCart({ empty = false }: { empty?: boolean }) {
   if (empty) {
     return (
       <SiteMiniCart
@@ -112,6 +113,12 @@ export function StorefrontFooter() {
       disclaimer="*These statements have not been evaluated by the FDA."
     />
   );
+}
+
+/** A dev-only photo that fills its frame (see _lib/placeholder.ts); nothing when it's missing. */
+export function Photo({ file, alt, sizes }: { file: string; alt: string; sizes: string }) {
+  const src = placeholderSrc(file);
+  return src ? <Image src={src} alt={alt} fill sizes={sizes} className="object-cover" /> : null;
 }
 
 /** A dev-only product packshot (see _lib/placeholder.ts); nothing when it's missing. */

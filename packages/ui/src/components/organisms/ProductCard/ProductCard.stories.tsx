@@ -45,6 +45,23 @@ export const StaffPick: Story = {
     },
   },
 };
+export const SoldOut: Story = {
+  args: {
+    product: {
+      id: "magnesium",
+      name: "Magnesium Bisglycinate",
+      details: "Rest · relax · reset · 90 capsules",
+      shortDetails: "90 capsules",
+      href: "#",
+      price: 340,
+      rating: 4.8,
+      reviewCount: 1876,
+      badge: { label: "Sold out", variant: "inverse" },
+      tint: "sage",
+      soldOut: true,
+    },
+  },
+};
 export const Mobile: Story = {
   args: { className: "max-w-42.5" },
   globals: { viewport: { value: "mobile", isRotated: false } },

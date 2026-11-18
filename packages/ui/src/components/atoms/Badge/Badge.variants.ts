@@ -18,6 +18,8 @@ export const badgeVariants = cva(
         accent: "bg-accent font-semibold text-on-accent",
         /** "8 products" on feature cards. */
         glass: "bg-white/10 font-medium text-text-inverse",
+        /** "Sold out": body-text pill with inverse text. */
+        inverse: "bg-text font-semibold text-text-inverse dark:text-bg",
         /** "Only 3 left": amber text straight on the tile. */
         warning: "font-semibold text-warning-text",
         /** "Less stress" on feature cards. */

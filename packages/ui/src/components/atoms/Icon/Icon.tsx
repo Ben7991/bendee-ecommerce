@@ -272,6 +272,91 @@ const ICONS = {
     strokeWidth: 2.2,
     body: <path d="M6 9l6 6 6-6" />,
   },
+  chevronUp: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M6 15l6-6 6 6" />,
+  },
+  /** Gallery zoom button. */
+  zoomIn: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <circle cx="11" cy="11" r="7" />
+        <path d="M20 20l-3.5-3.5M11 8v6M8 11h6" />
+      </>
+    ),
+  },
+  /** Video thumbnails. */
+  play: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 0,
+    body: <path d="M7 4l13 8-13 8z" />,
+  },
+  /** "How to use" tile: a scoop tub. */
+  scoop: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M6 8h12l-1.5 12h-9zM9 4h6v4H9z" />,
+  },
+  link: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />,
+  },
+  whatsapp: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 0,
+    body: (
+      <path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.4.6c-.2.2-.3.4-.1.6.2.3.8 1.3 1.6 2 1.1 1 2 1.3 2.3 1.4.3.1.4.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.8-.1 1.5z" />
+    ),
+  },
+  /** Benefit cards (PDP). */
+  sprout: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M12 3c-4 4-6 7-6 10a6 6 0 0 0 12 0c0-3-2-6-6-10zM12 21v-8" />,
+  },
+  gut: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <circle cx="12" cy="12" r="8" />
+        <path d="M8 12c1.5-2 2.5-2 4 0s2.5 2 4 0" />
+      </>
+    ),
+  },
+  bolt: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M13 3L5 14h6l-1 7 8-11h-6z" />,
+  },
+  shieldTick: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6zM9 12l2 2 4-4" />,
+  },
+  /** "Featured ⇅" sort button on mobile. */
+  sort: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.4,
+    body: <path d="M7 10l5-5 5 5M7 14l5 5 5-5" />,
+  },
+  /** Filters buttons and the filter panel heading. */
+  sliders: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12" />
+        <circle cx="16" cy="6" r="2" />
+        <circle cx="10" cy="12" r="2" />
+        <circle cx="18" cy="18" r="2" />
+      </>
+    ),
+  },
   locate: {
     viewBox: "0 0 24 24",
     strokeWidth: 2,

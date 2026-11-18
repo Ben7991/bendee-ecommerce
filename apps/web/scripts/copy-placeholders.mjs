@@ -18,6 +18,9 @@ const target = path.join(appRoot, "public/placeholders");
 const files = {
   "hero.jpg": "hero/option-d-sunny-gummies.jpg",
   "greens.png": "products/greens.png",
+  "greens-back.png": "products/greens-back.png",
+  "lifestyle.jpg": "hero/option-c-calm-moment.jpg",
+  "ritual.jpg": "hero/option-a-morning-ritual.jpg",
   "ashwagandha.png": "products/ashwagandha.png",
   "energy.png": "products/energy.png",
   "nmnh.png": "products/nmnh.png",

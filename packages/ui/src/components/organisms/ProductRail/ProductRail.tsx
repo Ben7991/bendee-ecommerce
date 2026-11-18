@@ -17,13 +17,31 @@ export interface ProductRailProps extends Omit<ComponentProps<"section">, "title
   title: ReactNode;
   /** Accessible name for the section when `title` has markup. */
   label?: string;
+  /** Muted line under the title, e.g. "Based on your browsing on this device". */
+  description?: string;
+  /** Link before the arrows, e.g. "Clear history" (visible on mobile too). */
+  action?: ReactNode;
+  /** A rule above the heading (second rail in a row of sections). */
+  divided?: boolean;
   products: ProductCardData[];
   /** Packshots keyed by product id. */
   images?: Record<string, ReactNode>;
   linkAs?: LinkComponent;
 }
 
-export function ProductRail({ eyebrow, title, label, products, images = {}, linkAs, className, ...props }: ProductRailProps) {
+export function ProductRail({
+  eyebrow,
+  title,
+  label,
+  description,
+  action,
+  divided = false,
+  products,
+  images = {},
+  linkAs,
+  className,
+  ...props
+}: ProductRailProps) {
   const track = useRef<HTMLUListElement>(null);
   const [edges, setEdges] = useState({ start: true, end: false });
 
@@ -56,8 +74,8 @@ export function ProductRail({ eyebrow, title, label, products, images = {}, link
       className={cn("flex flex-col gap-5 px-5 pb-8 md:gap-8 md:px-8 md:pt-14 md:pb-12 xl:px-14 xl:pt-18 xl:pb-14", className)}
       {...props}
     >
-      <div className="flex items-end justify-between gap-4">
-        <div className="flex flex-col gap-3">
+      <div className={cn("flex items-end justify-between gap-4", divided && "border-t border-border-subtle pt-8 md:pt-12")}>
+        <div className="flex flex-col gap-1 md:gap-3">
           {eyebrow && (
             <Eyebrow size="md" className="hidden md:block">
               {eyebrow}
@@ -66,14 +84,18 @@ export function ProductRail({ eyebrow, title, label, products, images = {}, link
           <h2 className="font-sans text-3xl leading-3xl font-medium tracking-tight text-text md:text-5xl md:leading-5xl [&_em]:font-serif [&_em]:font-regular [&_em]:text-brand [&_em]:italic">
             {title}
           </h2>
+          {description && <p className="font-sans text-xs leading-xs text-text-muted md:text-sm">{description}</p>}
         </div>
-        <div className="hidden gap-2 md:flex">
-          <IconButton label="Previous products" disabled={edges.start} onClick={() => scrollByPage(-1)} className="size-11 disabled:opacity-50">
-            <Icon name="chevronLeft" size={16} />
-          </IconButton>
-          <IconButton label="Next products" variant="solid" disabled={edges.end} onClick={() => scrollByPage(1)} className="size-11 disabled:opacity-50">
-            <Icon name="chevronRight" size={16} />
-          </IconButton>
+        <div className="flex shrink-0 items-center gap-4">
+          {action}
+          <div className="hidden gap-2 md:flex">
+            <IconButton label="Previous products" disabled={edges.start} onClick={() => scrollByPage(-1)} className="size-11 disabled:opacity-50">
+              <Icon name="chevronLeft" size={16} />
+            </IconButton>
+            <IconButton label="Next products" variant="solid" disabled={edges.end} onClick={() => scrollByPage(1)} className="size-11 disabled:opacity-50">
+              <Icon name="chevronRight" size={16} />
+            </IconButton>
+          </div>
         </div>
       </div>
 

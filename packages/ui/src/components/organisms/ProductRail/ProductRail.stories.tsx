@@ -25,3 +25,17 @@ type Story = StoryObj<typeof meta>;
 export const Desktop: Story = {};
 export const Tablet: Story = { globals: { viewport: { value: "tablet", isRotated: false } } };
 export const Mobile: Story = { globals: { viewport: { value: "mobile", isRotated: false } } };
+
+/** "Viewed products" on the PDP: a rule above, a description and a Clear link. */
+export const Viewed: Story = {
+  args: {
+    eyebrow: "Just for you",
+    divided: true,
+    description: "Pick up where you left off — based on your browsing on this device.",
+    action: (
+      <a href="#" className="font-sans text-sm leading-xs font-semibold text-brand underline">
+        Clear history
+      </a>
+    ),
+  },
+};

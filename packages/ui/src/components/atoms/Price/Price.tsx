@@ -22,15 +22,18 @@ export interface PriceProps extends Omit<ComponentProps<"p">, "children"> {
   compareAt?: number;
   currency?: string;
   size?: "md" | "lg";
+  /** Greyed out, e.g. a sold-out product. */
+  muted?: boolean;
 }
 
-export function Price({ amount, compareAt, currency = "GHS", size = "lg", className, ...props }: PriceProps) {
+export function Price({ amount, compareAt, currency = "GHS", size = "lg", muted = false, className, ...props }: PriceProps) {
   const onSale = compareAt !== undefined && compareAt > amount;
   return (
     <p data-slot="price" className={cn("flex items-baseline gap-2 font-sans", className)} {...props}>
       <span
         className={cn(
-          "font-semibold text-text",
+          "font-semibold",
+          muted ? "text-text-muted" : "text-text",
           size === "lg" ? "text-xl leading-base" : "text-md leading-sm",
         )}
       >

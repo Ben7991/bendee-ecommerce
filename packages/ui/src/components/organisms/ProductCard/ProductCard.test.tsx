@@ -32,4 +32,13 @@ describe("ProductCard", () => {
     await userEvent.click(mobileAdd!);
     expect(onAdd).toHaveBeenCalledOnce();
   });
+
+  it("swaps Add for Notify me when sold out", () => {
+    render(<ProductCard product={{ ...product, soldOut: true, notifyHref: "/products/daily-greens#notify" }} />);
+    expect(screen.queryByRole("button", { name: /Add Daily Greens Powder/ })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Notify me when Daily Greens Powder is back" })).toHaveAttribute(
+      "href",
+      "/products/daily-greens#notify",
+    );
+  });
 });

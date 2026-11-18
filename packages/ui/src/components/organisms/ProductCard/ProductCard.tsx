@@ -26,8 +26,12 @@ export interface ProductCardData {
   compareAt?: number;
   rating: number;
   reviewCount: number;
-  badge?: { label: string; variant: "solid" | "light" | "warning" };
+  badge?: { label: string; variant: "solid" | "light" | "warning" | "inverse" };
   tint: ProductTint;
+  /** Greys the card out and swaps Add for "Notify me". */
+  soldOut?: boolean;
+  /** Where "Notify me" goes (back-in-stock sign-up); defaults to the product page. */
+  notifyHref?: string;
 }
 
 /**
@@ -54,10 +58,17 @@ export function ProductCard({ product, image, onAdd, linkAs: Link = "a", classNa
       <div
         className={cn(
           "relative flex h-50 shrink-0 items-center justify-center overflow-hidden rounded-18 md:h-90 md:rounded-xl",
-          TILE_TINTS[product.tint],
+          product.soldOut ? "bg-surface" : TILE_TINTS[product.tint],
         )}
       >
-        <div className="relative h-37.5 w-full transition-transform duration-300 group-hover:scale-103 md:h-72">{image}</div>
+        <div
+          className={cn(
+            "relative h-37.5 w-full transition-transform duration-300 group-hover:scale-103 md:h-72",
+            product.soldOut && "opacity-50",
+          )}
+        >
+          {image}
+        </div>
         {product.badge && (
           <>
             <Badge variant={product.badge.variant} size="sm" className="absolute top-2.5 left-2.5 md:hidden">
@@ -80,7 +91,12 @@ export function ProductCard({ product, image, onAdd, linkAs: Link = "a", classNa
 
       <div className="flex flex-col gap-0.75 md:gap-1.5 md:px-1">
         <Rating value={product.rating} count={product.reviewCount} className="hidden md:inline-flex" />
-        <h3 className="font-sans text-base leading-4.5 font-semibold text-text md:text-19 md:leading-base md:tracking-subtle">
+        <h3
+          className={cn(
+            "font-sans text-base leading-4.5 font-semibold md:text-19 md:leading-base md:tracking-subtle",
+            product.soldOut ? "text-text-muted" : "text-text",
+          )}
+        >
           <Link
             href={product.href}
             className="outline-none after:absolute after:inset-0 after:z-10 after:rounded-18 focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-brand md:after:rounded-xl"
@@ -97,15 +113,25 @@ export function ProductCard({ product, image, onAdd, linkAs: Link = "a", classNa
       </div>
 
       <div className="flex items-center justify-between md:px-1">
-        <Price amount={product.price} compareAt={product.compareAt} size="md" className="md:hidden" />
-        <Price amount={product.price} compareAt={product.compareAt} className="hidden md:flex" />
-        <IconButton variant="solid" size="sm" label={`Add ${product.name} to bag`} onClick={onAdd} className="z-20 md:hidden">
-          <Icon name="plus" size={14} strokeWidth={2.6} />
-        </IconButton>
-        <Button size="xs" onClick={onAdd} aria-label={`Add ${product.name} to bag`} className="relative z-20 hidden md:inline-flex">
-          <Icon name="plus" size={14} />
-          Add
-        </Button>
+        <Price amount={product.price} compareAt={product.compareAt} muted={product.soldOut} size="md" className="md:hidden" />
+        <Price amount={product.price} compareAt={product.compareAt} muted={product.soldOut} className="hidden md:flex" />
+        {product.soldOut ? (
+          <Button asChild variant="outline" size="xs" className="relative z-20 px-3 py-2 text-xs md:px-4 md:py-2.5 md:text-sm">
+            <Link href={product.notifyHref ?? product.href} aria-label={`Notify me when ${product.name} is back`}>
+              Notify me
+            </Link>
+          </Button>
+        ) : (
+          <>
+            <IconButton variant="solid" size="sm" label={`Add ${product.name} to bag`} onClick={onAdd} className="z-20 md:hidden">
+              <Icon name="plus" size={14} strokeWidth={2.6} />
+            </IconButton>
+            <Button size="xs" onClick={onAdd} aria-label={`Add ${product.name} to bag`} className="relative z-20 hidden md:inline-flex">
+              <Icon name="plus" size={14} />
+              Add
+            </Button>
+          </>
+        )}
       </div>
     </article>
   );
