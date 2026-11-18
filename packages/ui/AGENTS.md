@@ -15,14 +15,17 @@ Full guide: [README.md](./README.md). These rules are not optional.
    "Jofak - Admin"). Read exact values with `get_jsx` / `get_computed_styles`; never guess from
    screenshots. Check the dark copy ("02 — Components (dark)") too.
 5. **Tokens only:** Tailwind classes from `src/styles/theme.css`. No hex colours, no arbitrary values
-   (`p-[13px]`), no inline style colours, no `--color-dark-*`. Missing token → stop and ask; it is a
-   design-system change.
+   (`p-[13px]`), no inline style colours, no `--color-dark-*`. Spacing is a 4px grid (`size-11.5` =
+   46px); in-between type/radius steps are px-named (`text-14`, `rounded-22`). Missing token → stop
+   and ask; it is a design-system change. Text on lime is `text-on-accent`; one-off dark tweaks use
+   `dark:`. Icons come from the `Icon` atom (Paper's icon set), not an icon library.
 6. **Variants with cva** in `<Name>.variants.ts`, prop names `variant` / `size` / `tone` / `asChild`
    / `disabled` / `loading`. Always accept `className` and merge it last with `cn()`.
 7. **Interactive behaviour on Radix UI** (Dialog for modals/sheets/drawers, Popover, Select, Tabs,
    Toast, Tooltip, Checkbox, RadioGroup, Switch…). Add the `@radix-ui/react-*` package to
    `packages/ui` with an exact version.
-8. **No `next/*` imports.** Use `asChild` so apps pass `next/link` / `next/image`.
+8. **No `next/*` imports.** Atoms/molecules take links via `asChild`; organisms take a `linkAs`
+   component; images are ReactNode slots. Theme mode comes from `ThemeProvider` / `useTheme` in `lib`.
 9. **Every breakpoint and theme:** mobile 390, tablet 768, desktop 1440; light, dark and System.
 10. **Apps use the Rollup build** in `dist/` via the package exports. Never import
     `@repo/ui/src/...` or add `transpilePackages`; new public entry points need both a Rollup

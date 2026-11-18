@@ -1,0 +1,35 @@
+import { cva } from "class-variance-authority";
+
+import type { VariantProps } from "../../../lib";
+
+/** Logo lockups from Paper: header (26 → 28 → 34px mark), footer (30px), compact (22px). */
+export const logoVariants = cva("inline-flex items-center font-sans font-bold tracking-snug", {
+  variants: {
+    tone: {
+      default: "text-primary dark:text-text",
+      inverse: "text-text-inverse",
+    },
+    size: {
+      header: "gap-2 text-22 leading-lg md:text-xl md:leading-base xl:gap-2.5 xl:text-22 xl:leading-lg",
+      footer: "gap-2.5 text-22 leading-lg",
+      compact: "gap-2 text-17 leading-5.5",
+      /** Menu drawer top bar: 26px mark at every breakpoint. */
+      menu: "gap-2 text-22 leading-lg",
+    },
+  },
+  defaultVariants: { tone: "default", size: "header" },
+});
+
+export const logoMarkVariants = cva("shrink-0", {
+  variants: {
+    size: {
+      header: "size-6.5 md:size-7 xl:size-8.5",
+      footer: "size-7.5",
+      compact: "size-5.5",
+      menu: "size-6.5",
+    },
+  },
+  defaultVariants: { size: "header" },
+});
+
+export type LogoVariantProps = VariantProps<typeof logoVariants>;

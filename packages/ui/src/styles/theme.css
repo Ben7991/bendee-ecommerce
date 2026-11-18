@@ -31,7 +31,10 @@
   --radius-*: initial;
   --breakpoint-*: initial;
   --container-*: initial;
-  --spacing: initial;
+  --shadow-*: initial;
+
+  /* 4px grid: p-6 = 24px, size-11.5 = 46px, leading-4.5 = 18px. Named steps below match it. */
+  --spacing: 4px;
 
   /* Palette */
   --color-evergreen-950: #0a2c1e;
@@ -49,6 +52,24 @@
   --color-tint-sun: #fff1d6;
   --color-tint-citrus: #ffe3d3;
   --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Illustration palette (goal cards, avatars). Decorative only — never for text on bg. */
+  --color-sun-100: #fff6d9;
+  --color-sun-200: #ffe7a6;
+  --color-sun-400: #f2b632;
+  --color-citrus-100: #ffe3d3;
+  --color-citrus-200: #ffc7a8;
+  --color-citrus-300: #ffb27a;
+  --color-citrus-500: #f07f3c;
+  --color-citrus-800: #9a3f12;
+  --color-citrus-900: #6b3415;
+  --color-citrus-950: #3a1a08;
+  --color-skin-100: #f2d3b3;
+  --color-skin-300: #e8b48a;
+  --color-skin-500: #c47e52;
+  --color-skin-700: #8c5a3c;
+  --color-skin-900: #5a3622;
   --color-transparent: transparent;
   --color-current: currentColor;
 
@@ -73,6 +94,9 @@
   --color-warning: #c98a12;
   --color-error: #c2410c;
   --color-info: #3b6e8f;
+  /* Deep "feature" surfaces (footer, quiz banner): evergreen in light, dark sage in dark. */
+  --color-feature: var(--color-evergreen-900);
+  --color-on-feature-muted: var(--color-evergreen-300);
 
   /* Typography */
   --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
@@ -110,6 +134,19 @@
   --text-6xl: 80px;
   --text-6xl--line-height: var(--leading-6xl);
 
+  /* Component steps from Paper between the core sizes, named by pixel value. Set leading explicitly. */
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-14: 14px;
+  --text-17: 17px;
+  --text-19: 19px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-28: 28px;
+  --text-40: 40px;
+  --text-56: 56px;
+  --text-64: 64px;
+
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -120,6 +157,10 @@
   --tracking-snug: -0.03em;
   --tracking-normal: 0em;
   --tracking-wide: 0.12em;
+  --tracking-heading: -0.035em;
+  --tracking-compact: -0.02em;
+  --tracking-subtle: -0.01em;
+  --tracking-caps: 0.1em;
 
   /* Opacity */
   --opacity-faint: 8%;
@@ -151,12 +192,111 @@
 
   --radius-none: 0px;
   --radius-sm: 12px;
+  --radius-14: 14px;
   --radius-md: 16px;
+  --radius-18: 18px;
   --radius-lg: 20px;
+  --radius-22: 22px;
   --radius-xl: 24px;
+  --radius-26: 26px;
   --radius-2xl: 28px;
   --radius-3xl: 32px;
   --radius-full: 999px;
+
+  /* Elevation, tinted with the surface they sit on (Paper: "no shadows on plain white" for cards). */
+  --shadow-xs: 0 1px 2px color-mix(in oklab, var(--color-evergreen-900) 12%, transparent);
+  --shadow-chip: 0 12px 30px -10px color-mix(in oklab, var(--color-text) 20%, transparent);
+  --shadow-card: 0 16px 40px -12px color-mix(in oklab, var(--color-text) 20%, transparent);
+  --shadow-brand: 0 24px 48px -16px color-mix(in oklab, var(--color-evergreen-900) 45%, transparent);
+  --shadow-overlay: 0 30px 60px -20px color-mix(in oklab, var(--color-black) 40%, transparent);
+  /* Side drawers (menu): cast to the right. The colour re-themes via --shadow-drawer-color. */
+  --shadow-drawer: 12px 0 48px var(--shadow-drawer-color);
+
+  /* Drawer motion. base.css cuts these to ~0 for prefers-reduced-motion. */
+  --animate-drawer-in: drawer-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-drawer-out: drawer-out 200ms cubic-bezier(0.4, 0, 1, 1);
+  --animate-fade-in: fade-in 280ms ease-out;
+  --animate-fade-out: fade-out 200ms ease-in;
+
+  @keyframes drawer-in {
+    from {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes drawer-out {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+/*
+ * `dark:` variant that follows the same rules as the token mapping below: explicit
+ * data-theme="dark", or System (no data-theme="light") on a dark OS.
+ * Prefer semantic tokens; use dark: only for one-off illustration tweaks.
+ */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/* Gradients as tokens so they re-theme with everything else. Use the bg-gradient-* utilities. */
+:root {
+  --gradient-hero: linear-gradient(180deg, var(--color-bg) 0%, var(--color-sage-50) 45%, var(--color-sage-200) 100%);
+  --gradient-feature-from: var(--color-evergreen-800);
+  --gradient-feature-via: var(--color-evergreen-900);
+  --gradient-feature-to: var(--color-evergreen-950);
+  --gradient-sun-from: var(--color-sun-100);
+  --gradient-sun-to: var(--color-sun-200);
+  --gradient-citrus-from: var(--color-tint-citrus);
+  --gradient-citrus-to: var(--color-citrus-200);
+  --shadow-drawer-color: color-mix(in oklab, var(--color-evergreen-950) 22%, transparent);
+}
+
+/* Horizontal carousels scroll by touch/trackpad without a visible bar. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility bg-gradient-hero {
+  background-image: var(--gradient-hero);
+}
+@utility bg-gradient-feature {
+  background-image: radial-gradient(circle farthest-corner at 80% 20%, var(--gradient-feature-from) 0%, var(--gradient-feature-via) 55%, var(--gradient-feature-to) 100%);
+}
+@utility bg-gradient-feature-wide {
+  background-image: radial-gradient(circle farthest-corner at 85% 30%, var(--gradient-feature-from) 0%, var(--gradient-feature-via) 50%, var(--gradient-feature-to) 100%);
+}
+@utility bg-gradient-sun {
+  background-image: linear-gradient(160deg, var(--gradient-sun-from) 0%, var(--gradient-sun-to) 100%);
+}
+@utility bg-gradient-citrus {
+  background-image: linear-gradient(180deg, var(--gradient-citrus-from) 0%, var(--gradient-citrus-to) 100%);
+}
+@utility bg-gradient-skin-light {
+  background-image: linear-gradient(135deg, var(--color-skin-300) 0%, var(--color-skin-500) 100%);
+}
+@utility bg-gradient-skin-deep {
+  background-image: linear-gradient(135deg, var(--color-skin-700) 0%, var(--color-skin-900) 100%);
 }
 
 /* Dark palette: twins of the semantic tokens. Plain vars (no utilities) — use the semantic names. */
@@ -216,6 +356,16 @@
   --color-tint-lavender: var(--color-dark-tint-lavender);
   --color-tint-sun: var(--color-dark-tint-sun);
   --color-tint-citrus: var(--color-dark-tint-citrus);
+  --color-feature: var(--color-dark-sage-100);
+  --color-on-feature-muted: var(--color-dark-text-muted);
+  --gradient-feature-from: var(--color-dark-sage-200);
+  --gradient-feature-via: var(--color-dark-sage-100);
+  --gradient-feature-to: var(--color-dark-surface-subtle);
+  --gradient-sun-from: var(--color-dark-tint-sun);
+  --gradient-sun-to: var(--color-dark-tint-amber);
+  --gradient-citrus-from: var(--color-dark-tint-citrus);
+  --gradient-citrus-to: var(--color-dark-tint-amber);
+  --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
   color-scheme: dark;
 }
 
@@ -244,6 +394,16 @@
     --color-tint-lavender: var(--color-dark-tint-lavender);
     --color-tint-sun: var(--color-dark-tint-sun);
     --color-tint-citrus: var(--color-dark-tint-citrus);
+    --color-feature: var(--color-dark-sage-100);
+    --color-on-feature-muted: var(--color-dark-text-muted);
+    --gradient-feature-from: var(--color-dark-sage-200);
+    --gradient-feature-via: var(--color-dark-sage-100);
+    --gradient-feature-to: var(--color-dark-surface-subtle);
+    --gradient-sun-from: var(--color-dark-tint-sun);
+    --gradient-sun-to: var(--color-dark-tint-amber);
+    --gradient-citrus-from: var(--color-dark-tint-citrus);
+    --gradient-citrus-to: var(--color-dark-tint-amber);
+    --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     color-scheme: dark;
   }
 }

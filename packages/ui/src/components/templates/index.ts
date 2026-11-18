@@ -3,4 +3,4 @@
  *   export * from "./<Name>";
  * Keep it sorted; do not hand-write component code here.
  */
-export {};
+export * from "./StorefrontShell";

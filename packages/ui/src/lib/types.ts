@@ -1,3 +1,4 @@
+import type { ElementType, ReactNode } from "react";
 import type { VariantProps as CvaVariantProps } from "class-variance-authority";
 
 /** Variant props of a cva() definition, with every key optional and `null` removed. */
@@ -19,3 +20,15 @@ export const DESIGN_VIEWPORTS = {
 } as const;
 
 export type DesignViewport = keyof typeof DESIGN_VIEWPORTS;
+
+/**
+ * A link component an app passes to organisms (`linkAs`), e.g. next/link. @repo/ui never imports
+ * a router; organisms default to a plain <a>.
+ */
+export type LinkComponent = ElementType<{
+  href: string;
+  className?: string;
+  children?: ReactNode;
+  "aria-label"?: string;
+  "aria-current"?: "page";
+}>;

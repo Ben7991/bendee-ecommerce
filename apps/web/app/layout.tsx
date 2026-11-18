@@ -1,5 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+
+import { ThemeProvider, themeScript } from "@repo/ui/lib";
+
 import "./globals.css";
 
 // Fonts are self-hosted from app/fonts (Latin subsets from Fontsource, SIL OFL — licences
@@ -29,7 +32,14 @@ const instrumentSerif = localFont({
 
 export const metadata: Metadata = {
   title: "Jofak Wellness",
-  description: "Wellness and supplements, delivered across Ghana.",
+  description: "Clean, clinically-dosed supplements made from whole-plant ingredients, delivered across Ghana.",
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d1411" },
+  ],
 };
 
 export default function RootLayout({
@@ -38,8 +48,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${interTight.variable} ${instrumentSerif.variable}`}>
-      <body>{children}</body>
+    // The theme script sets data-theme on <html> before React hydrates.
+    <html lang="en" className={`${interTight.variable} ${instrumentSerif.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

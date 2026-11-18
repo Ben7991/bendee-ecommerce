@@ -4,6 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "placeholders": "node scripts/copy-placeholders.mjs",
+    "predev": "npm run placeholders",
+    "prebuild": "npm run placeholders",
     "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start",

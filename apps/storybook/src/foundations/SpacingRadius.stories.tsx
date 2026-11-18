@@ -18,9 +18,13 @@ const spacing = [
 
 const radii = [
   ["sm", "rounded-sm"],
+  ["14", "rounded-14"],
   ["md", "rounded-md"],
+  ["18", "rounded-18"],
   ["lg", "rounded-lg"],
+  ["22", "rounded-22"],
   ["xl", "rounded-xl"],
+  ["26", "rounded-26"],
   ["2xl", "rounded-2xl"],
   ["3xl", "rounded-3xl"],
   ["full", "rounded-full"],
@@ -53,7 +57,10 @@ function SpacingAndRadius() {
   );
 }
 
-/** Jofak spacing and radius scales. Tailwind's defaults are reset: only these steps exist. */
+/**
+ * Jofak spacing and radius. Spacing is a 4px grid (`p-6` = 24px, `size-11.5` = 46px); these are the
+ * named steps from Paper. Radius has core t-shirt steps plus px-named in-between steps.
+ */
 const meta = {
   title: "Foundations/Spacing & Radius",
   component: SpacingAndRadius,

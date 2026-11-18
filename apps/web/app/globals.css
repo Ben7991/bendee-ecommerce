@@ -1,6 +1,10 @@
 /*
  * Tailwind + the Jofak theme from @repo/ui. Do not define colours, spacing or type here:
  * tokens live in packages/ui/src/styles/theme.css and components in packages/ui.
+ *
+ * @repo/ui/styles.css resolves to packages/ui/dist/styles/index.css, so @repo/ui must be built
+ * (turbo does this before `dev`/`build`). If it was missing when the dev server compiled this
+ * file, Turbopack caches the failure: restart dev, and delete apps/web/.next/dev if it persists.
  */
 @import "tailwindcss";
 @import "@repo/ui/styles.css";
