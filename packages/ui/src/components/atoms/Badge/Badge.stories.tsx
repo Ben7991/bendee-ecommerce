@@ -23,6 +23,7 @@ export const OnSurfaces: Story = {
         <Badge>−18%</Badge>
         <Badge variant="light">Staff pick</Badge>
         <Badge variant="neutral">6 products</Badge>
+        <Badge variant="warning">Only 3 left</Badge>
         <Badge size="sm">Bestseller</Badge>
       </div>
       <div className="flex gap-2 rounded-xl bg-gradient-feature p-4">

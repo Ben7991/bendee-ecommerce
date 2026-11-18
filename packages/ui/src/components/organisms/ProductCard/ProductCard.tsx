@@ -26,7 +26,7 @@ export interface ProductCardData {
   compareAt?: number;
   rating: number;
   reviewCount: number;
-  badge?: { label: string; variant: "solid" | "light" };
+  badge?: { label: string; variant: "solid" | "light" | "warning" };
   tint: ProductTint;
 }
 

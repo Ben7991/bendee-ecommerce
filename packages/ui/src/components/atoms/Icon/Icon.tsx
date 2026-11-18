@@ -145,6 +145,56 @@ const ICONS = {
     strokeWidth: 1.8,
     body: <path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z" />,
   },
+  refresh: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M20 12a8 8 0 1 1-2.34-5.66M20 4v4h-4" />,
+  },
+  wrench: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.7,
+    body: <path d="M14.7 6.3a4 4 0 0 0-5.2 5.2l-5.6 5.6a1.6 1.6 0 0 0 2.3 2.3l5.6-5.6a4 4 0 0 0 5.2-5.2l-2.4 2.4-2.2-.6-.6-2.2z" />,
+  },
+  chat: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M5 18l1.2-3.6A7.5 7.5 0 1 1 9.6 18z" />,
+  },
+  receipt: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <rect x="5" y="3" width="14" height="18" rx="2.5" />
+        <path d="M9 8h6M9 12h6M9 16h3" />
+      </>
+    ),
+  },
+  shieldCheck: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: (
+      <>
+        <path d="M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z" />
+        <path d="M9 12l2 2 4-4" />
+      </>
+    ),
+  },
+  /** Refresh arrow around a leaf: the 500 page emblem. */
+  refreshLeaf: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.6,
+    body: (
+      <>
+        <path d="M20 12a8 8 0 1 1-2.34-5.66" />
+        <path d="M20 4v4h-4" />
+        <path
+          d="M12 16.5c-1.9-1-3-2.6-3-4.4 0-1.6.9-2.8.9-2.8s1.6.7 2.1 2.6c.5-1.9 2.1-2.6 2.1-2.6s.9 1.2.9 2.8c0 1.8-1.1 3.4-3 4.4z"
+          className="fill-brand stroke-none"
+        />
+      </>
+    ),
+  },
   close: {
     viewBox: "0 0 24 24",
     strokeWidth: 2,

@@ -21,6 +21,7 @@ const files = {
   "ashwagandha.png": "products/ashwagandha.png",
   "energy.png": "products/energy.png",
   "nmnh.png": "products/nmnh.png",
+  "probiotic.png": "products/probiotic.png",
 };
 
 if (!fs.existsSync(source)) {

@@ -92,6 +92,8 @@
   --color-on-accent: var(--color-evergreen-900);
   --color-success: var(--color-evergreen-600);
   --color-warning: #c98a12;
+  /* Warning copy on tint-sun (status pills). */
+  --color-warning-text: #8a5e0b;
   --color-error: #c2410c;
   --color-info: #3b6e8f;
   /* Deep "feature" surfaces (footer, quiz banner): evergreen in light, dark sage in dark. */
@@ -147,6 +149,10 @@
   --text-40: 40px;
   --text-56: 56px;
   --text-64: 64px;
+  /* Error numerals (404): mobile, tablet, desktop. */
+  --text-104: 104px;
+  --text-140: 140px;
+  --text-180: 180px;
 
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -162,6 +168,7 @@
   --tracking-compact: -0.02em;
   --tracking-subtle: -0.01em;
   --tracking-caps: 0.1em;
+  --tracking-numeral: -0.06em;
 
   /* Opacity */
   --opacity-faint: 8%;
@@ -378,6 +385,7 @@
   --color-brand: var(--color-dark-brand);
   --color-success: var(--color-dark-brand);
   --color-warning: var(--color-dark-warning);
+  --color-warning-text: var(--color-dark-warning-text);
   --color-error: var(--color-dark-error);
   --color-info: var(--color-dark-info);
   --color-sage-200: var(--color-dark-sage-200);
@@ -417,6 +425,7 @@
     --color-brand: var(--color-dark-brand);
     --color-success: var(--color-dark-brand);
     --color-warning: var(--color-dark-warning);
+    --color-warning-text: var(--color-dark-warning-text);
     --color-error: var(--color-dark-error);
     --color-info: var(--color-dark-info);
     --color-sage-200: var(--color-dark-sage-200);

@@ -2,70 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@repo/ui/atoms";
-import {
-  GoalGrid,
-  HeroShowcase,
-  HomeHero,
-  QuizBanner,
-  QuizCard,
-  ReviewsSection,
-  SiteFooter,
-  SiteHeader,
-} from "@repo/ui/organisms";
+import { GoalGrid, HeroShowcase, HomeHero, QuizBanner, QuizCard, ReviewsSection } from "@repo/ui/organisms";
 import { StorefrontShell } from "@repo/ui/templates";
 
-import { subscribeToNewsletter } from "./_actions/newsletter";
 import { Bestsellers } from "./_components/bestsellers";
-import { SiteMenu } from "./_components/site-menu";
-import { menu } from "./_content/menu";
-import { bestsellerFilters, bestsellers, footerColumns, navLinks, quizChoices, reviews } from "./_content/home";
+import { Packshot, StorefrontFooter, StorefrontHeader } from "./_components/storefront-chrome";
+import { bestsellerFilters, bestsellers, quizChoices, reviews } from "./_content/home";
 import { placeholderSrc } from "./_lib/placeholder";
-
-function Packshot({ id, alt, sizes }: { id: string; alt: string; sizes: string }) {
-  const src = placeholderSrc(`${id}.png`);
-  return src ? <Image src={src} alt={alt} fill sizes={sizes} className="object-contain" /> : null;
-}
 
 export default function Home() {
   const heroPhoto = placeholderSrc("hero.jpg");
 
   return (
-    <StorefrontShell
-      footer={
-        <SiteFooter
-          linkAs={Link}
-          newsletterTitle={
-            <>
-              Wellness notes, <em>once a week.</em>
-            </>
-          }
-          newsletterHint="Get 15% off your first order. Unsubscribe anytime."
-          newsletterAction={subscribeToNewsletter}
-          tagline="Clean, plant-powered supplements for everyday balance. Made in small batches, tested every time."
-          columns={footerColumns}
-          copyright="© 2026 Jofak. All rights reserved."
-          shortCopyright="© 2026 Jofak"
-          disclaimer="*These statements have not been evaluated by the FDA."
-        />
-      }
-    >
+    <StorefrontShell footer={<StorefrontFooter />}>
       <HomeHero
-        header={
-          <SiteHeader
-            linkAs={Link}
-            navLinks={navLinks}
-            activeHref="/"
-            favouritesCount={6}
-            bagCount={3}
-            menu={
-              <SiteMenu
-                {...menu}
-                activeHref="/"
-                promo={{ ...menu.promo, image: <Packshot id="greens" alt="" sizes="54px" /> }}
-              />
-            }
-          />
-        }
+        header={<StorefrontHeader activeHref="/" />}
         rating={{ value: "4.9", count: "12,480" }}
         title={
           <>

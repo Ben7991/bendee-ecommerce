@@ -17,6 +17,7 @@ export const Header: Story = { args: { size: "header" } };
 export const Compact: Story = { args: { size: "compact" } };
 export const Menu: Story = { args: { size: "menu" } };
 export const Auth: Story = { args: { size: "auth" } };
+export const Minimal: Story = { args: { size: "minimal" } };
 
 /** On feature surfaces such as the footer. */
 export const Inverse: Story = {
