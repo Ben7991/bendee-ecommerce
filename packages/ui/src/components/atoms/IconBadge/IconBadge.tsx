@@ -11,9 +11,9 @@ export interface IconBadgeProps extends Omit<ComponentProps<"span">, "children">
   iconSize?: number;
 }
 
-export function IconBadge({ icon, iconSize = 28, size, className, ...props }: IconBadgeProps) {
+export function IconBadge({ icon, iconSize = 28, size, tone, className, ...props }: IconBadgeProps) {
   return (
-    <span data-slot="icon-badge" aria-hidden className={cn(iconBadgeVariants({ size }), className)} {...props}>
+    <span data-slot="icon-badge" aria-hidden className={cn(iconBadgeVariants({ size, tone }), className)} {...props}>
       <Icon name={icon} size={iconSize} />
     </span>
   );

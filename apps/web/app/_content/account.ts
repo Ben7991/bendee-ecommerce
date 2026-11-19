@@ -155,7 +155,7 @@ export const orderDetail = {
   ],
   total: "GHS 1,254.60",
   // TODO: the courier's tracking page for this parcel.
-  trackingHref: "/orders/track?order=JFK-250184",
+  trackingHref: "/orders/track?token=sample",
 };
 
 export const cancelReasons = [

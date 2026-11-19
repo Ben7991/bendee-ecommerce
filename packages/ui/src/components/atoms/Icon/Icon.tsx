@@ -199,6 +199,12 @@ const ICONS = {
     strokeWidth: 2.2,
     body: <path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" />,
   },
+  /** "!" for error alerts (on a filled error disc). */
+  exclamation: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 3,
+    body: <path d="M12 7v6M12 17h.01" />,
+  },
   /** A handset (Contact us → Call us); `phone` is the mobile. */
   call: {
     viewBox: "0 0 24 24",

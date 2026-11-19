@@ -29,10 +29,14 @@ export interface BreakdownRow {
 
 export interface OrderBreakdownProps extends Omit<ComponentProps<"aside">, "title" | "children"> {
   title?: ReactNode;
+  /** Quiet text on the right of the title ("4 items"). */
+  titleAside?: ReactNode;
   items?: BreakdownItem[];
   rows?: BreakdownRow[];
   total?: { label: ReactNode; value: ReactNode };
   totalFirst?: boolean;
+  /** sm: a quiet label and an 18px total ("Paid with MTN MoMo · GHS 1,254.60"). */
+  totalSize?: "sm" | "md";
   /** Under the rows, before the actions. */
   note?: ReactNode;
   /** Full-width buttons. */
@@ -43,11 +47,11 @@ export interface OrderBreakdownProps extends Omit<ComponentProps<"aside">, "titl
   compact?: { items: BreakdownItem[]; title: ReactNode; detail: ReactNode; action?: ReactNode };
 }
 
-export function OrderBreakdown({ title, items, rows, total, totalFirst = false, note, actions, footer, compact, className, ...props }: OrderBreakdownProps) {
+export function OrderBreakdown({ title, titleAside, items, rows, total, totalFirst = false, totalSize = "md", note, actions, footer, compact, className, ...props }: OrderBreakdownProps) {
   const totalRow = total && (
-    <div className={cn("flex items-baseline justify-between gap-3", !totalFirst && "border-t border-border pt-3")}>
-      <p className="text-md leading-sm font-semibold text-text">{total.label}</p>
-      <p className="text-2xl leading-2xl font-medium tracking-snug text-text">{total.value}</p>
+    <div className={cn("flex items-baseline justify-between gap-3", !totalFirst && rows?.length && "border-t border-border pt-3")}>
+      <p className={totalSize === "sm" ? "text-sm leading-sm text-text-secondary" : "text-md leading-sm font-semibold text-text"}>{total.label}</p>
+      <p className={totalSize === "sm" ? "text-lg leading-base font-semibold text-text" : "text-2xl leading-2xl font-medium tracking-snug text-text"}>{total.value}</p>
     </div>
   );
   return (
@@ -71,7 +75,12 @@ export function OrderBreakdown({ title, items, rows, total, totalFirst = false, 
         className={cn("flex flex-col gap-4 rounded-lg bg-surface-subtle p-5 font-sans md:gap-5 md:p-6", compact && "hidden md:flex", className)}
         {...props}
       >
-        {title && <h2 className="text-lg leading-base font-semibold text-text">{title}</h2>}
+        {title && (
+          <div className="flex items-baseline justify-between gap-3">
+            <h2 className={titleAside ? "text-md leading-sm font-semibold text-text" : "text-lg leading-base font-semibold text-text"}>{title}</h2>
+            {titleAside && <p className="text-sm leading-xs text-text-muted">{titleAside}</p>}
+          </div>
+        )}
         {totalFirst && totalRow}
         {items && items.length > 0 && (
           <ul className="flex flex-col gap-4">
@@ -88,7 +97,7 @@ export function OrderBreakdown({ title, items, rows, total, totalFirst = false, 
           </ul>
         )}
         {(rows?.length || (!totalFirst && total)) && (
-          <div className={cn("flex flex-col gap-2", (items?.length || totalFirst) && "border-t border-border pt-4", !items?.length && !totalFirst && "gap-4")}>
+          <div className={cn("flex flex-col gap-2", (items?.length || totalFirst) && "border-t border-border", items?.length && !rows?.length ? "pt-3" : "pt-4", !items?.length && !totalFirst && "gap-4 pt-0")}>
             {rows?.map((row, index) => (
               <div key={index} className="flex justify-between gap-3 text-sm leading-sm">
                 <p className="text-text-secondary">{row.label}</p>

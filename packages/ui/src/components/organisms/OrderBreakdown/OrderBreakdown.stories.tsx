@@ -60,3 +60,8 @@ export const Refund: Story = {
 };
 
 export const Mobile: Story = { globals: { viewport: { value: "mobile", isRotated: false } } };
+
+/** Public tracking: a titled list with the paid total (Paper Track order → Result). */
+export const Tracking: Story = {
+  args: { title: "In this order", titleAside: "4 items", rows: [], totalSize: "sm", total: { label: "Paid with MTN MoMo", value: "GHS 1,254.60" }, actions: undefined, footer: undefined, compact: undefined },
+};

@@ -25,3 +25,6 @@ export const All: Story = {
     </div>
   ),
 };
+
+/** The lime 72px badge on Track an order. */
+export const Accent: Story = { args: { icon: "truck", tone: "accent", size: "lg", iconSize: 34 } };
