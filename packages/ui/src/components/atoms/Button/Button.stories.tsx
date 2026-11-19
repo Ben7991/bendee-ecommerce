@@ -51,3 +51,13 @@ export const ExtraLarge: Story = {
 };
 
 export const Disabled: Story = { args: { disabled: true } };
+
+/** Destructive actions (account): confirm with danger, enter with dangerOutline. */
+export const Danger: Story = {
+  render: (args) => (
+    <div className="flex flex-wrap items-center gap-3">
+      <Button {...args} size="md" variant="danger">Cancel order</Button>
+      <Button {...args} size="sm" variant="dangerOutline">Delete account</Button>
+    </div>
+  ),
+};

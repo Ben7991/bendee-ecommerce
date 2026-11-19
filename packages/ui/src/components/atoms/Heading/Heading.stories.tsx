@@ -74,3 +74,17 @@ export const Dialog: Story = {
     ),
   },
 };
+
+/** Account page titles ("Your orders") and detail titles ("Order JFK-250184"). */
+export const Account: Story = {
+  args: {
+    size: "account",
+    children: (
+      <>
+        Your <em>orders</em>
+      </>
+    ),
+  },
+};
+
+export const Detail: Story = { args: { size: "detail", children: "Order JFK-250184" } };

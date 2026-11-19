@@ -22,6 +22,8 @@ export const badgeVariants = cva(
         inverse: "bg-text font-semibold text-text-inverse dark:text-bg",
         /** "Only 3 left": amber text straight on the tile. */
         warning: "font-semibold text-warning-text",
+        /** "Phone", "Google": sign-in methods on the account overview. */
+        bordered: "border border-border bg-bg font-semibold text-text",
         /** "Less stress" on feature cards. */
         outline: "border border-white/25 font-medium text-text-inverse",
       },

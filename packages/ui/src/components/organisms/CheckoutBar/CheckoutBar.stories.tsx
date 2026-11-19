@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
+import { Button } from "../../atoms";
 import { CheckoutBar } from "./CheckoutBar";
 
 const meta = {
@@ -15,3 +16,8 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Mobile: Story = {};
+
+/** With its own action, e.g. a form's submit button (Return request). */
+export const WithAction: Story = {
+  args: { label: "Refund to MoMo", total: "GHS 405.00", action: <Button type="submit" size="md">Submit return</Button> },
+};

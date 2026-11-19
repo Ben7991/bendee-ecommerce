@@ -140,6 +140,65 @@ const ICONS = {
       </>
     ),
   },
+  /** Account → saved addresses and default address. */
+  home: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: <path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z" />,
+  },
+  briefcase: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <rect x="4" y="7" width="16" height="13" rx="2" />
+        <path d="M9 7V5h6v2" />
+      </>
+    ),
+  },
+  pencil: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: <path d="M4 20h4L19 9l-4-4L4 16v4z" />,
+  },
+  download: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M12 4v11M7 10l5 5 5-5M5 20h14" />,
+  },
+  calendar: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <rect x="4" y="5" width="16" height="15" rx="2.5" />
+        <path d="M4 10h16M9 3v4M15 3v4" />
+      </>
+    ),
+  },
+  /** A photo placeholder (return photos). */
+  image: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: (
+      <>
+        <path d="M3 17l5-5 4 4 3-3 6 6" />
+        <circle cx="16" cy="8" r="2" />
+      </>
+    ),
+  },
+  /** A document (privacy policy). */
+  fileText: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.8,
+    body: <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h6" />,
+  },
+  /** Two arrows round (Reorder). */
+  reorder: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2.2,
+    body: <path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4" />,
+  },
   /** A handset (Contact us → Call us); `phone` is the mobile. */
   call: {
     viewBox: "0 0 24 24",

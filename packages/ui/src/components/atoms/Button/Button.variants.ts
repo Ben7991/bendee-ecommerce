@@ -15,6 +15,10 @@ export const buttonVariants = cva(
         secondary: "border border-border bg-bg text-text font-medium hover:bg-surface-subtle",
         accent: "bg-accent text-on-accent font-semibold hover:bg-sage-200 dark:hover:bg-accent/85",
         outline: "border border-border text-text font-medium hover:bg-surface",
+        /** Destructive confirmations ("Cancel order"). */
+        danger: "bg-error text-text-inverse font-medium hover:bg-error/90",
+        /** Destructive entry points ("Delete account"). */
+        dangerOutline: "border-field border-error text-error font-medium hover:bg-error/4",
       },
       size: {
         xs: "gap-2 px-4 py-2.5 text-sm leading-xs font-semibold",
@@ -46,6 +50,8 @@ export const buttonArrowVariants = cva("flex shrink-0 items-center justify-cente
       secondary: "bg-surface text-text",
       accent: "bg-primary text-accent",
       outline: "bg-surface text-text",
+      danger: "bg-bg text-error",
+      dangerOutline: "bg-error/10 text-error",
     },
     size: {
       xs: "size-7",

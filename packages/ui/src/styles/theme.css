@@ -394,6 +394,50 @@
   color-scheme: light;
 }
 
+/*
+ * Light semantic mapping for a subtree: data-theme="light" on an element keeps it light inside a
+ * dark page (the Light preview in ThemePicker). The root light values live in @theme above.
+ */
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-surface: #f1f5ef;
+  --color-surface-subtle: #f6f8f4;
+  --color-border: #d5e6d0;
+  --color-border-subtle: #e1e9dd;
+  --color-text: #14201a;
+  --color-text-secondary: #3e4d45;
+  --color-text-muted: #5b6b62;
+  --color-primary: var(--color-evergreen-900);
+  --color-primary-hover: var(--color-evergreen-800);
+  --color-brand: var(--color-evergreen-600);
+  --color-success: var(--color-evergreen-600);
+  --color-warning: #c98a12;
+  --color-warning-text: #8a5e0b;
+  --color-error: #c2410c;
+  --color-info: #3b6e8f;
+  --color-sage-200: #cde9c6;
+  --color-sage-100: #eaf4e4;
+  --color-sage-50: #eef7ea;
+  --color-evergreen-300: #9fc2ae;
+  --color-tint-amber: #f3ece2;
+  --color-tint-lavender: #eee8f6;
+  --color-tint-sun: #fff1d6;
+  --color-tint-citrus: #ffe3d3;
+  --color-feature: var(--color-evergreen-900);
+  --color-on-feature-muted: var(--color-evergreen-300);
+  --gradient-feature-from: var(--color-evergreen-800);
+  --gradient-feature-via: var(--color-evergreen-900);
+  --gradient-feature-to: var(--color-evergreen-950);
+  --gradient-sun-from: var(--color-sun-100);
+  --gradient-sun-to: var(--color-sun-200);
+  --gradient-citrus-from: var(--color-tint-citrus);
+  --gradient-citrus-to: var(--color-citrus-200);
+  --shadow-drawer-color: color-mix(in oklab, var(--color-evergreen-950) 22%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-evergreen-950) 28%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-evergreen-950) 35%, transparent);
+  color-scheme: light;
+}
+
 /* Dark semantic mapping, shared by the explicit and the System cases. */
 [data-theme="dark"] {
   --color-bg: var(--color-dark-bg);

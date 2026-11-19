@@ -4,10 +4,12 @@
  * Keep it sorted; do not hand-write component code here.
  */
 export * from "./AccountPrompt";
+export * from "./ActiveOrderCard";
 export * from "./AnnouncementBar";
 export * from "./AuthIntro";
 export * from "./BenefitCards";
 export * from "./BestsellerShowcase";
+export * from "./CancelOrderDialog";
 export * from "./CartLine";
 export * from "./CartLines";
 export * from "./CategoryHero";
@@ -33,7 +35,9 @@ export * from "./ListingToolbar";
 export * from "./MenuDrawer";
 export * from "./MiniCart";
 export * from "./NotFoundHero";
+export * from "./OrderBreakdown";
 export * from "./OrderConfirmationHero";
+export * from "./OrderHistory";
 export * from "./OrderReceipt";
 export * from "./OrderSummary";
 export * from "./OrderTimeline";
@@ -52,6 +56,7 @@ export * from "./ProductReviews";
 export * from "./PromoStrip";
 export * from "./QuizBanner";
 export * from "./QuizCard";
+export * from "./ReturnItems";
 export * from "./ReviewCard";
 export * from "./ReviewForm";
 export * from "./ReviewsSection";
@@ -64,5 +69,7 @@ export * from "./SiteHeader";
 export * from "./StatusHero";
 export * from "./StickyActionBar";
 export * from "./StickyBuyBar";
+export * from "./SubscriptionCard";
 export * from "./SuccessDialog";
 export * from "./SupplementFacts";
+export * from "./ThemePicker";

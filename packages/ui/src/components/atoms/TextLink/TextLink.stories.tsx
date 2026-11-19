@@ -29,3 +29,19 @@ export const Muted: Story = {
     </p>
   ),
 };
+
+/** The account tones: subtle ("Remove"), danger ("Cancel subscription"), inverse (on evergreen). */
+export const AccountTones: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3 font-sans text-sm">
+      <p className="flex gap-5">
+        <TextLink href="#">Edit</TextLink>
+        <TextLink href="#" tone="subtle">Remove</TextLink>
+        <TextLink href="#" tone="danger">Cancel subscription</TextLink>
+      </p>
+      <p className="w-fit rounded-lg bg-feature p-4">
+        <TextLink href="#" tone="inverse">Manage</TextLink>
+      </p>
+    </div>
+  ),
+};
