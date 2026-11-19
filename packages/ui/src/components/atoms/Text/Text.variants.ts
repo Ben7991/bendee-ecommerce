@@ -15,10 +15,13 @@ export const textVariants = cva("font-sans [&_strong]:font-semibold [&_strong]:t
       sm: "text-sm leading-xs",
       /** 13/20: sentences with a link ("Already have an account?"). */
       body: "text-sm leading-sm",
+      /** 22/30 → 26/36: the opening paragraph of a content page; the <em> word is serif. */
+      lead: "text-22 leading-2xl tracking-compact md:text-2xl md:leading-9 [&_em]:font-serif [&_em]:text-brand",
     },
     tone: {
       muted: "text-text-muted",
       secondary: "text-text-secondary",
+      default: "text-text",
     },
     align: {
       start: "",

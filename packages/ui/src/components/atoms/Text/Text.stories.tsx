@@ -36,3 +36,16 @@ export const Timer: Story = {
     ),
   },
 };
+/** The opening paragraph of a content page (About Jofak). */
+export const Lead: Story = {
+  args: {
+    size: "lead",
+    tone: "default",
+    className: "max-w-170",
+    children: (
+      <>
+        We wanted a shop that answers those questions <em>before</em> you pay.
+      </>
+    ),
+  },
+};

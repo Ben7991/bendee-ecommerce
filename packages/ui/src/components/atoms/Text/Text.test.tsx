@@ -13,4 +13,13 @@ describe("Text", () => {
     expect(text.tagName).toBe("P");
     expect(text).toHaveClass("text-xs", "text-text-muted", "text-center", "mt-4");
   });
+
+  it("has a lead size for opening paragraphs", () => {
+    render(
+      <Text size="lead" tone="default">
+        Opening
+      </Text>,
+    );
+    expect(screen.getByText("Opening")).toHaveClass("text-22", "text-text");
+  });
 });
