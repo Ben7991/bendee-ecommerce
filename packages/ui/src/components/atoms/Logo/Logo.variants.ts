@@ -19,6 +19,10 @@ export const logoVariants = cva("inline-flex items-center font-sans font-bold tr
       auth: "gap-2 text-19 leading-base md:text-22 md:leading-lg",
       /** Minimal header (error pages): 24px mark / 20px type on mobile, 28 / 24 from 768px. */
       minimal: "gap-2 text-xl leading-base md:text-24 md:leading-lg",
+      /** Admin sidebar: 30px mark, 20px type. */
+      admin: "gap-2.5 text-xl leading-lg",
+      /** Admin mobile top bar: 26px mark, 18px type. */
+      adminCompact: "gap-2 text-lg leading-base",
     },
   },
   defaultVariants: { tone: "default", size: "header" },
@@ -33,6 +37,8 @@ export const logoMarkVariants = cva("shrink-0", {
       menu: "size-6.5",
       auth: "size-5.5 md:size-6.5 xl:size-7",
       minimal: "size-6 md:size-7",
+      admin: "size-7.5",
+      adminCompact: "size-6.5",
     },
   },
   defaultVariants: { size: "header" },

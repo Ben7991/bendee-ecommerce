@@ -20,6 +20,7 @@ export const Sizes: Story = {
     <div className="flex items-center gap-4">
       <Initials {...args} size="md" />
       <Initials {...args} size="lg" />
+      <Initials {...args} size="staff" />
     </div>
   ),
 };

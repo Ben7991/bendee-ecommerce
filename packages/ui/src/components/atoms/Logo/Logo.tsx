@@ -8,9 +8,12 @@ import { logoMarkVariants, logoVariants, type LogoVariantProps } from "./Logo.va
  * Use `tone="inverse"` on feature surfaces (footer). To make it a link, pass an empty link
  * element with `asChild`: <Logo asChild><a href="/" aria-label="Jofak home" /></Logo>.
  */
-export interface LogoProps extends ComponentProps<"span">, LogoVariantProps, AsChildProps {}
+export interface LogoProps extends ComponentProps<"span">, LogoVariantProps, AsChildProps {
+  /** Classes for the "Jofak" wordmark, e.g. `sr-only xl:not-sr-only` for the admin rail. */
+  wordmarkClassName?: string;
+}
 
-export function Logo({ className, tone, size, asChild = false, children, ...props }: LogoProps) {
+export function Logo({ className, tone, size, asChild = false, wordmarkClassName, children, ...props }: LogoProps) {
   const Comp = asChild ? Slot : "span";
   const inverse = tone === "inverse";
   const detailed = size !== "compact";
@@ -40,7 +43,7 @@ export function Logo({ className, tone, size, asChild = false, children, ...prop
         {detailed && !inverse && <circle cx="17" cy="7" r="3" className="fill-accent" />}
       </svg>
       <Slottable>{children}</Slottable>
-      <span>Jofak</span>
+      <span className={wordmarkClassName}>Jofak</span>
     </Comp>
   );
 }

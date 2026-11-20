@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
 import { CookieBanner, CookieSettings } from "@repo/ui/organisms";
@@ -18,11 +19,13 @@ const getServerSnapshot = () => undefined;
 /**
  * The cookie banner (first visit) and the Cookie settings dialog (Paper: Cookie consent).
  * Mounted once in the root layout. Links to #cookie-settings (footer) open the settings.
+ * Not shown in the admin: staff aren't storefront visitors.
  */
 export function CookieConsent() {
   const cookie = useSyncExternalStore(subscribe, () => document.cookie, getServerSnapshot);
   const consent = cookie === undefined ? undefined : parseConsent(cookie);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const inAdmin = usePathname().startsWith("/admin");
 
   useEffect(() => {
     const openFromLink = (event: MouseEvent) => {
@@ -42,6 +45,8 @@ export function CookieConsent() {
     setSettingsOpen(false);
   };
   const privacy = <Link href="/pages/privacy">Privacy policy</Link>;
+
+  if (inAdmin) return null;
 
   return (
     <>

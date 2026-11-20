@@ -17,6 +17,8 @@ export const iconButtonVariants = cva(
         sm: "size-8.5",
         md: "size-9",
         lg: "size-12",
+        /** Admin top bar: 40px. */
+        admin: "size-10",
         header: "size-10.5 md:size-11 xl:size-11.5",
       },
     },

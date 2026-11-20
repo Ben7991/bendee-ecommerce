@@ -145,6 +145,8 @@
   --text-22: 22px;
   --text-24: 24px;
   --text-28: 28px;
+  /* Admin KPI figures (Paper Jofak - Admin → Dashboard). */
+  --text-34: 34px;
   --text-36: 36px;
   --text-38: 38px;
   --text-40: 40px;
@@ -170,6 +172,8 @@
   --tracking-subtle: -0.01em;
   --tracking-caps: 0.1em;
   --tracking-numeral: -0.06em;
+  /* Admin table column headers. */
+  --tracking-label: 0.04em;
 
   /* Opacity */
   --opacity-faint: 8%;
@@ -201,8 +205,12 @@
 
   --radius-none: 0px;
   --radius-2: 2px;
+  /* Admin chart legend swatches (3), chart bars and value flags (8), icon tiles (10). */
+  --radius-3: 3px;
   --radius-5: 5px;
   --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-10: 10px;
   --radius-sm: 12px;
   --radius-14: 14px;
   --radius-md: 16px;
