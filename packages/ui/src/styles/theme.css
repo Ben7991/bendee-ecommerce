@@ -106,6 +106,8 @@
   /* Typography */
   --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  /* Discount codes (Paper Jofak - Admin → Discounts). The app self-hosts JetBrains Mono via next/font. */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --leading-xs: 16px;
   --leading-sm: 20px;
@@ -183,6 +185,8 @@
   --tracking-eyebrow: 0.08em;
   /* Codes set in caps (GhanaPost GPS "GM-071-4472"). */
   --tracking-code: 0.02em;
+  /* Discount table heads and side-card overlines ("IN PLAIN WORDS", Paper Jofak - Admin → Discounts). */
+  --tracking-overline: 0.06em;
 
   /* Opacity */
   --opacity-faint: 8%;
@@ -220,6 +224,8 @@
   --radius-3: 3px;
   --radius-5: 5px;
   --radius-6: 6px;
+  /* Small discount code chips (Paper Jofak - Admin → Discounts, tablet and mobile). */
+  --radius-7: 7px;
   --radius-8: 8px;
   --radius-10: 10px;
   --radius-sm: 12px;

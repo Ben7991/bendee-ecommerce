@@ -642,3 +642,8 @@ export function createCollection(): string {
   });
   return slug;
 }
+
+/** Collection names, for the discount editor's "Applies to → Collections". */
+export function collectionNames(): string[] {
+  return store().collections.map((entry) => entry.name);
+}

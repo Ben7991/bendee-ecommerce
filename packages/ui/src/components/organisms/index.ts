@@ -51,6 +51,8 @@ export * from "./CustomerProfileHeader";
 export * from "./CustomerReview";
 export * from "./CustomerTable";
 export * from "./DeliveryForm";
+export * from "./DiscountEditor";
+export * from "./DiscountTable";
 export * from "./EmptyState";
 export * from "./FaqList";
 export * from "./FilterBar";

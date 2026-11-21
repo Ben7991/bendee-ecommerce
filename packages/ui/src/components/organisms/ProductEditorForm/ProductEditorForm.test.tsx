@@ -21,4 +21,14 @@ describe("ProductEditorForm", () => {
     expect(screen.getByRole("textbox", { name: "Name" })).toHaveValue("Energy");
     vi.useRealTimers();
   });
+
+  it("shows a secondary action instead of Discard in the light bar", () => {
+    render(
+      <ProductEditorForm variant="light" aria-label="Edit discount" secondaryAction={<button type="submit" name="intent" value="pause">Pause</button>}>
+        <input name="code" defaultValue="GREENS20" aria-label="Code" />
+      </ProductEditorForm>,
+    );
+    expect(screen.getByRole("button", { name: "Pause" })).toHaveAttribute("value", "pause");
+    expect(screen.queryByRole("button", { name: "Discard" })).not.toBeInTheDocument();
+  });
 });

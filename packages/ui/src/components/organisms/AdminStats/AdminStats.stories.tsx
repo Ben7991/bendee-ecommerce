@@ -38,5 +38,21 @@ export const Profile: Story = {
   },
 };
 
+/** The discounts headline cards: lime "Live now", grey "Cost"; compact on tablet, hidden on mobile. */
+export const Cards: Story = {
+  args: {
+    variant: "cards",
+    "aria-label": "Discounts at a glance",
+    stats: [
+      { label: "Live now", value: "6", note: "4 codes · 2 automatic", tone: "accent" },
+      { label: "Redemptions · 30 days", compactLabel: "Redeemed · 30d", value: "412", note: "31% of orders used one" },
+      { label: "Discounted revenue", compactLabel: "Revenue", value: "GHS 96,240", compactValue: "GHS 96.2k", note: "Avg order GHS 234 vs 198 without", noteTone: "muted" },
+      { label: "Cost of discounts", compactLabel: "Cost", value: "GHS 9,870", compactValue: "GHS 9.9k", note: "10.3% of discounted revenue", noteTone: "muted", tone: "muted" },
+    ],
+  },
+  globals: { viewport: { value: "desktop", isRotated: false } },
+};
+export const CardsTablet: Story = { ...Cards, globals: { viewport: { value: "tablet", isRotated: false } } };
+
 export const Tablet: Story = { globals: { viewport: { value: "tablet", isRotated: false } } };
 export const ProfileMobile: Story = { ...Profile, globals: { viewport: { value: "mobile", isRotated: false } } };

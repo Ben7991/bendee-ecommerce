@@ -23,3 +23,6 @@ export const Large: Story = { args: { size: "lg", defaultChecked: true } };
 export const Small: Story = { args: { size: "sm", defaultChecked: true } };
 /** Admin customer marketing consent. */
 export const Admin: Story = { args: { size: "admin", defaultChecked: true } };
+
+/** 44×26: the discount editor's "Combine with other discounts". */
+export const Field: Story = { args: { size: "field", defaultChecked: true } };

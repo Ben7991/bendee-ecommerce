@@ -4,18 +4,18 @@ import { cn } from "../../../lib";
 
 /**
  * ProgressBar (atom): a thin brand-green track, e.g. quiz progress. `size="xs"` is the 4px admin
- * stock level bar; `tone` colours it amber (low) or red (sold out).
+ * stock level bar; `tone` colours it amber (low) or red (sold out), or lime on dark cards (`accent`).
  */
 export interface ProgressBarProps extends Omit<ComponentProps<"div">, "children"> {
   /** 0–100. */
   value: number;
   /** Accessible name, e.g. "Quiz progress". */
   label: string;
-  tone?: "brand" | "warning" | "error";
+  tone?: "brand" | "warning" | "error" | "accent";
   size?: "sm" | "xs";
 }
 
-const FILL = { brand: "bg-brand", warning: "bg-warning", error: "bg-error" } as const;
+const FILL = { brand: "bg-brand", warning: "bg-warning", error: "bg-error", accent: "bg-accent" } as const;
 
 export function ProgressBar({ value, label, tone = "brand", size = "sm", className, ...props }: ProgressBarProps) {
   const clamped = Math.max(0, Math.min(100, value));
