@@ -11,3 +11,5 @@ export { collectionMatches } from "./collection-rules";
 export type { CollectionMode, CollectionRule, RuleField, RuleProduct } from "./collection-rules";
 export { checkoutPreview, describeDiscount, discountDay, discountTarget, discountValueLabel, ELIGIBILITY_LABELS } from "./discounts";
 export type { CheckoutLine, DiscountEligibility, DiscountMethod, DiscountRules, DiscountScope, DiscountSummary, DiscountType } from "./discounts";
+export { useDragSort } from "./drag-sort";
+export { useAutosave } from "./autosave";

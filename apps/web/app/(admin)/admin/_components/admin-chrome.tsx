@@ -35,7 +35,7 @@ export function AdminChrome({ children, returnsToReview }: { children: ReactNode
   // Detail pages (an order, the product editor) bring their own mobile back bar and action bar.
   const detail = /^\/admin\/orders\/[^/]+$/.test(pathname) || /^\/admin\/products\/(?!categories$|brands$)[^/]+$/.test(pathname);
   // A return and the collection editor keep the top bar but pin their own actions where the tab bar would be.
-  const ownActionBar = /^\/admin\/(returns|collections|discounts|marketing)\/[^/]+$/.test(pathname);
+  const ownActionBar = /^\/admin\/(returns|collections|discounts|marketing)\/[^/]+$/.test(pathname) || /^\/admin\/content(\/|$)/.test(pathname);
   return (
     <AdminShell
       sidebar={

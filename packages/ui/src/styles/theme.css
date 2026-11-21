@@ -142,6 +142,10 @@
   --text-6xl--line-height: var(--leading-6xl);
 
   /* Component steps from Paper between the core sizes, named by pixel value. Set leading explicitly. */
+  /* Miniature storefront previews (Paper Jofak - Admin → Content): payment chips, footer and header text. */
+  --text-7: 7px;
+  --text-8: 8px;
+  --text-9: 9px;
   --text-10: 10px;
   --text-11: 11px;
   --text-14: 14px;
@@ -222,6 +226,8 @@
   --radius-2: 2px;
   /* Admin chart legend swatches (3), chart bars and value flags (8), icon tiles (10). */
   --radius-3: 3px;
+  /* Miniature preview chips (Content → footer preview). */
+  --radius-4: 4px;
   --radius-5: 5px;
   --radius-6: 6px;
   /* Small discount code chips (Paper Jofak - Admin → Discounts, tablet and mobile). */
@@ -352,6 +358,90 @@
 /* Paper's 1.5px field and checkbox borders (OTP cells, checkboxes). */
 @utility border-field {
   border-width: 1.5px;
+}
+
+/* Admin page editor body (Paper Jofak - Admin → Page editor): headings, text, lists, tables, Q&A. */
+@utility rich-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: var(--text-14);
+  line-height: 22px;
+  color: var(--color-text-secondary);
+  outline: none;
+
+  & h2 {
+    font-size: var(--text-xl);
+    line-height: 26px;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-compact);
+    color: var(--color-text);
+  }
+  & h3 {
+    font-size: var(--text-md);
+    line-height: 22px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+  & ul {
+    list-style: disc;
+    padding-left: 20px;
+  }
+  & ol {
+    list-style: decimal;
+    padding-left: 20px;
+  }
+  & a {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+  & b,
+  & strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+  & table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-10);
+    font-size: var(--text-sm);
+    line-height: 18px;
+    color: var(--color-text);
+  }
+  & th {
+    padding: 8px 12px;
+    background: var(--color-surface-subtle);
+    text-align: left;
+    font-size: var(--text-xs);
+    line-height: 16px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+  }
+  & td {
+    padding: 8px 12px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  & th:last-child,
+  & td:last-child {
+    text-align: right;
+  }
+  & th:not(:first-child),
+  & td:not(:first-child) {
+    white-space: nowrap;
+  }
+  & details {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-10);
+  }
+  & summary {
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
 }
 
 /* Rails that show four columns on desktop (ProductRail): grid-auto-columns for 4-up with 16px gaps. */
