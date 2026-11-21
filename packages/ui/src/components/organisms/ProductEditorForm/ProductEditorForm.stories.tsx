@@ -17,3 +17,6 @@ export const Default: Story = {};
 /** Type in the field to see the unsaved changes bar; Discard puts it back. */
 export const Tablet: Story = { globals: { viewport: { value: "tablet", isRotated: false } } };
 export const Mobile: Story = { globals: { viewport: { value: "mobile", isRotated: false } } };
+
+/** Collection editor: a light bar kept at the bottom below 1440px. */
+export const Light: Story = { args: { variant: "light" } };

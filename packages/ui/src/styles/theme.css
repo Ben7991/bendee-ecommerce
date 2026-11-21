@@ -188,6 +188,8 @@
   --opacity-faint: 8%;
   --opacity-subtle: 16%;
   --opacity-muted: 60%;
+  /* Admin: an ended collection card (Paper Jofak - Admin → Collections). */
+  --opacity-72: 72%;
 
   /* Layout */
   --breakpoint-sm: 390px;

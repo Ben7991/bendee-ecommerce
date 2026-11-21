@@ -25,15 +25,18 @@ function changed(before: Snapshot, after: Snapshot): number {
  * ProductEditorForm (organism): one form around a whole admin editor (Paper Jofak - Admin →
  * Product editor). It counts changed fields; while there are any, the dark "Unsaved changes" bar
  * shows under the top bar (from 768px) or at the bottom (mobile) with Discard and Save. Discard
- * puts every field back by remounting the children.
+ * puts every field back by remounting the children. `variant="light"` (collection editor) keeps a
+ * light bar at the bottom below 1440px at all times ("Unsaved: …" on tablet); from 1440px the
+ * page header's Save button submits the form instead.
  */
 export interface ProductEditorFormProps extends Omit<ComponentProps<"form">, "children"> {
   children: ReactNode;
   /** What changed, from the app, e.g. "Citrus price and 1 new image". Defaults to a field count. */
   summary?: string;
+  variant?: "dark" | "light";
 }
 
-export function ProductEditorForm({ children, summary, className, onInput, ...props }: ProductEditorFormProps) {
+export function ProductEditorForm({ children, summary, variant = "dark", className, onInput, ...props }: ProductEditorFormProps) {
   const form = useRef<HTMLFormElement>(null);
   const initial = useRef<Snapshot>(new Map());
   const [version, setVersion] = useState(0);
@@ -49,6 +52,10 @@ export function ProductEditorForm({ children, summary, className, onInput, ...pr
   }, []);
 
   const label = `${count} unsaved ${count === 1 ? "change" : "changes"}`;
+  const discard = () => {
+    setCount(0);
+    setVersion(version + 1);
+  };
 
   return (
     <form
@@ -60,10 +67,10 @@ export function ProductEditorForm({ children, summary, className, onInput, ...pr
       }}
       onChange={recount}
       onClick={recount}
-      className={cn("flex flex-col gap-5 md:gap-6", className)}
+      className={cn("flex flex-col gap-5 md:gap-6", variant === "light" && "pb-24 md:pb-0", className)}
       {...props}
     >
-      {count > 0 && (
+      {variant === "dark" && count > 0 && (
         <div
           role="status"
           className={cn(
@@ -84,10 +91,7 @@ export function ProductEditorForm({ children, summary, className, onInput, ...pr
           </p>
           <button
             type="button"
-            onClick={() => {
-              setCount(0);
-              setVersion(version + 1);
-            }}
+            onClick={discard}
             className="flex h-10 shrink-0 items-center rounded-full bg-white/12 px-4 text-sm leading-xs font-semibold text-text-inverse hover:bg-white/20 md:h-9"
           >
             Discard
@@ -101,6 +105,34 @@ export function ProductEditorForm({ children, summary, className, onInput, ...pr
       <div key={version} className="contents">
         {children}
       </div>
+      {variant === "light" && (
+        <div
+          role="status"
+          className={cn(
+            "z-30 flex items-center gap-2.5 border-t border-border-subtle bg-bg font-sans xl:hidden dark:bg-surface",
+            "fixed inset-x-0 bottom-0 px-4 pt-3 pb-6",
+            "md:sticky md:-mx-6 md:-mb-7 md:gap-3 md:px-6 md:py-3.5",
+          )}
+        >
+          <p className="hidden flex-1 truncate text-sm leading-4.5 text-text-muted md:block">
+            {count > 0 ? `Unsaved: ${summary ?? `${count} ${count === 1 ? "field" : "fields"} changed`}` : "All changes saved"}
+          </p>
+          <button
+            type="button"
+            onClick={discard}
+            disabled={count === 0}
+            className="flex h-12 shrink-0 items-center rounded-full border border-border bg-bg px-5 text-base leading-5 font-semibold text-text hover:bg-surface-subtle disabled:opacity-muted md:h-11 md:text-14 dark:bg-surface"
+          >
+            Discard
+          </button>
+          <button
+            type="submit"
+            className="flex h-12 flex-1 items-center justify-center rounded-full bg-primary px-5 text-base leading-5 font-semibold text-on-primary hover:bg-primary-hover md:h-11 md:flex-none md:text-14"
+          >
+            Save changes
+          </button>
+        </div>
+      )}
     </form>
   );
 }
