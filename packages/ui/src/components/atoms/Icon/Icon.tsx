@@ -792,6 +792,49 @@ const ICONS = {
       </>
     ),
   },
+  /** A filled leaf with a stem (brand marks). The stem takes the tile colour via `stroke-*`. */
+  leaf: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.6,
+    body: (
+      <>
+        <path d="M12 3c4 3 6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 2-7 6-10z" fill="currentColor" stroke="none" />
+        <path d="M12 9v11" className="stroke-primary" />
+      </>
+    ),
+  },
+  /** A circled !: something blocks an action. */
+  alertCircle: {
+    viewBox: "0 0 18 18",
+    strokeWidth: 1.5,
+    body: (
+      <>
+        <circle cx="9" cy="9" r="7" />
+        <path d="M9 5.5v4.2M9 12.3v.2" strokeWidth="1.7" />
+      </>
+    ),
+  },
+  /** Six dots: drag to reorder. */
+  grip: {
+    viewBox: "0 0 12 16",
+    strokeWidth: 0,
+    body: (
+      <>
+        <circle cx="4" cy="4" r="1.2" />
+        <circle cx="8" cy="4" r="1.2" />
+        <circle cx="4" cy="8" r="1.2" />
+        <circle cx="8" cy="8" r="1.2" />
+        <circle cx="4" cy="12" r="1.2" />
+        <circle cx="8" cy="12" r="1.2" />
+      </>
+    ),
+  },
+  /** Three lines: the mobile drag handle. */
+  dragLines: {
+    viewBox: "0 0 12 16",
+    strokeWidth: 1.5,
+    body: <path d="M2 5h8M2 8h8M2 11h8" />,
+  },
   printer: {
     viewBox: "0 0 16 16",
     strokeWidth: 1.4,
@@ -800,6 +843,18 @@ const ICONS = {
     ),
   },
   /** Three narrowing lines: open filters. */
+  /** Admin: add a note (Paper Customers). */
+  note: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.4,
+    body: <path d="M3 12.5V3.5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H6l-3 2z" />,
+  },
+  /** Admin: an automatic tag in a customer's activity. */
+  starOutline: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.3,
+    body: <path d="M8 2l1.8 3.7 4 .6-2.9 2.8.7 4L8 11.2 4.4 13.1l.7-4L2.2 6.3l4-.6z" />,
+  },
   filter: {
     viewBox: "0 0 18 18",
     strokeWidth: 1.6,

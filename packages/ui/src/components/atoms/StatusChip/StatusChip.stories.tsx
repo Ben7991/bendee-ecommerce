@@ -33,7 +33,7 @@ export const Variants: Story = {
 export const Sizes: Story = {
   render: (args) => (
     <div className="flex flex-wrap items-center gap-4">
-      {(["sm", "md", "count", "lg"] as const).map((size) => (
+      {(["sm", "md", "count", "lg", "tag"] as const).map((size) => (
         <StatusChip key={size} {...args} size={size}>
           {size}
         </StatusChip>

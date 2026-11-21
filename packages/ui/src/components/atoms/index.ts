@@ -6,6 +6,7 @@
 export * from "./Avatar";
 export * from "./Badge";
 export * from "./BrandLogo";
+export * from "./BrandMark";
 export * from "./Button";
 export * from "./Checkbox";
 export * from "./CountBadge";

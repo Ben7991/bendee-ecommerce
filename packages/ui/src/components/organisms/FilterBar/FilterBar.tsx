@@ -30,6 +30,8 @@ export interface FilterBarProps extends Omit<ComponentProps<"form">, "children">
   sort?: { name?: string; options: SortOption[]; defaultValue?: string };
   /** Hidden inputs to keep (the saved view). */
   keep?: Record<string, string>;
+  /** Classes for the search row (its width from 1440px is `xl:w-85`). */
+  searchClassName?: string;
 }
 
 export function FilterBar({
@@ -42,6 +44,7 @@ export function FilterBar({
   appliedCount = 0,
   sort,
   keep = {},
+  searchClassName,
   method = "get",
   className,
   ...props
@@ -63,7 +66,7 @@ export function FilterBar({
       {Object.entries(keep).map(([name, value]) => (
         <input key={name} type="hidden" name={name} value={value} />
       ))}
-      <div className="flex gap-2 xl:w-85 xl:shrink-0">
+      <div className={cn("flex gap-2 xl:w-85 xl:shrink-0", searchClassName)}>
         <label className="relative flex h-11 min-w-0 flex-1 items-center gap-2.5 rounded-full border border-border px-3.5 focus-within:border-brand md:h-10">
           <Icon name="search" size={16} strokeWidth={1.5} className="text-text-muted" />
           {/* One input; the placeholder is drawn below so it can be shorter on mobile. */}

@@ -22,8 +22,8 @@ function sectionOf(pathname: string) {
 export function AdminChrome({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const active = sectionOf(pathname);
-  // Detail pages (an order) bring their own mobile back bar and action bar.
-  const detail = /^\/admin\/orders\/[^/]+$/.test(pathname);
+  // Detail pages (an order, the product editor) bring their own mobile back bar and action bar.
+  const detail = /^\/admin\/orders\/[^/]+$/.test(pathname) || /^\/admin\/products\/(?!categories$|brands$)[^/]+$/.test(pathname);
   return (
     <AdminShell
       sidebar={

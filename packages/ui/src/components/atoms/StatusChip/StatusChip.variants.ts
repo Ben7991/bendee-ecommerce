@@ -25,6 +25,8 @@ export const statusChipVariants = cva("inline-flex w-fit items-center rounded-fu
       md: "px-2 py-0.75 text-xs leading-xs",
       count: "px-2 py-0.5 text-xs leading-xs",
       lg: "px-2.5 py-1 text-xs leading-xs",
+      /** Customer tags in the admin customer table ("VIP", "Wholesale"). */
+      tag: "px-2 py-0.5 text-11 leading-4",
     },
   },
   defaultVariants: { tone: "success", size: "md" },

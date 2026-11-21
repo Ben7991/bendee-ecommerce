@@ -4,6 +4,7 @@ import { useId, useState, type ComponentProps } from "react";
 
 import { cn, type LinkComponent } from "../../../lib";
 import { Checkbox, Icon, StatusChip, type StatusChipProps } from "../../atoms";
+import { TablePagination, type TablePaginationProps } from "../../molecules";
 
 export interface AdminOrder {
   id: string;
@@ -45,14 +46,6 @@ const PAYMENT = {
   pending: { dot: "bg-evergreen-300", text: "text-text-muted", strong: "text-text-secondary" },
 } as const;
 
-/** 1 2 3 … 129: the first pages near the start, then the current page with neighbours. */
-function pageItems(page: number, pageCount: number): Array<number | "gap"> {
-  if (pageCount <= 7) return Array.from({ length: pageCount }, (_, index) => index + 1);
-  const pages = new Set([1, pageCount, page - 1, page, page + 1, ...(page <= 2 ? [2, 3] : [])]);
-  const sorted = [...pages].filter((n) => n >= 1 && n <= pageCount).sort((a, b) => a - b);
-  return sorted.flatMap((n, index) => (index > 0 && n - sorted[index - 1]! > 1 ? (["gap", n] as const) : [n]));
-}
-
 const money = (amount: number, currency: string) =>
   `${currency} ${amount.toLocaleString("en-GH", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
@@ -69,16 +62,7 @@ export interface OrderTableProps extends Omit<ComponentProps<"section">, "childr
   bulkActions?: BulkAction[];
   /** Server action (or URL) the bulk buttons submit to. */
   bulkAction?: string | ((formData: FormData) => void | Promise<void>);
-  pagination?: {
-    page: number;
-    pageCount: number;
-    /** "1–10". */
-    range: string;
-    /** "1,284". */
-    total: string;
-    hrefFor: (page: number) => string;
-    perPage?: { value: number; options: number[]; name?: string };
-  };
+  pagination?: Omit<TablePaginationProps, "linkAs">;
   loadMoreHref?: string;
   /** Cards shown on mobile. */
   compactLimit?: number;
@@ -271,74 +255,7 @@ export function OrderTable({
           </tbody>
         </table>
 
-        {pagination && (
-          <nav
-            aria-label="Pagination"
-            className="flex items-center justify-between gap-4 border-t border-border-subtle bg-surface-subtle px-6 py-3.5"
-          >
-            <p className="text-sm leading-sm text-text-muted">
-              Showing <strong className="font-semibold text-text">{pagination.range}</strong> of {pagination.total}
-            </p>
-            <ul className="flex items-center gap-1">
-              <li>
-                <PageArrow direction="previous" pagination={pagination} LinkAs={LinkAs} />
-              </li>
-              {pageItems(pagination.page, pagination.pageCount).map((item, index) =>
-                item === "gap" ? (
-                  <li key={`gap-${index}`} aria-hidden className="flex size-8 items-center justify-center text-sm text-text-muted">
-                    …
-                  </li>
-                ) : (
-                  <li key={item}>
-                    {item === pagination.page ? (
-                      <span
-                        aria-current="page"
-                        className="flex size-8 items-center justify-center rounded-full bg-primary text-sm leading-xs font-semibold text-text-inverse"
-                      >
-                        <span className="sr-only">Page </span>
-                        {item}
-                      </span>
-                    ) : (
-                      <LinkAs
-                        href={pagination.hrefFor(item)}
-                        aria-label={`Page ${item}`}
-                        className="flex size-8 items-center justify-center rounded-full text-sm leading-xs font-medium text-text-secondary transition-colors hover:bg-surface"
-                      >
-                        {item}
-                      </LinkAs>
-                    )}
-                  </li>
-                ),
-              )}
-              <li>
-                <PageArrow direction="next" pagination={pagination} LinkAs={LinkAs} />
-              </li>
-            </ul>
-            {pagination.perPage ? (
-              <form method="get" className="relative hidden items-center gap-1.5 text-sm leading-sm xl:flex">
-                <label htmlFor={`${bulkId}-per-page`} className="text-text-muted">
-                  Rows per page
-                </label>
-                <select
-                  id={`${bulkId}-per-page`}
-                  name={pagination.perPage.name ?? "limit"}
-                  defaultValue={pagination.perPage.value}
-                  onChange={(event) => event.currentTarget.form?.requestSubmit()}
-                  className="cursor-pointer appearance-none bg-transparent pr-4.5 font-semibold text-text outline-none field-sizing-content"
-                >
-                  {pagination.perPage.options.map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                <Icon name="chevronDown" size={12} strokeWidth={2.2} className="pointer-events-none absolute right-0 text-text-muted" />
-              </form>
-            ) : (
-              <span className="hidden xl:block" />
-            )}
-          </nav>
-        )}
+        {pagination && <TablePagination linkAs={LinkAs} {...pagination} />}
       </div>
 
       {/* Mobile: cards. */}
@@ -403,32 +320,3 @@ export function OrderTable({
   );
 }
 
-function PageArrow({
-  direction,
-  pagination,
-  LinkAs,
-}: {
-  direction: "previous" | "next";
-  pagination: NonNullable<OrderTableProps["pagination"]>;
-  LinkAs: LinkComponent;
-}) {
-  const target = direction === "previous" ? pagination.page - 1 : pagination.page + 1;
-  const icon = <Icon name={direction === "previous" ? "chevronLeft" : "chevronRight"} size={14} strokeWidth={2} />;
-  const box = "flex size-8 items-center justify-center rounded-full";
-  if (target < 1 || target > pagination.pageCount) {
-    return (
-      <span aria-hidden className={cn(box, "text-evergreen-300")}>
-        {icon}
-      </span>
-    );
-  }
-  return (
-    <LinkAs
-      href={pagination.hrefFor(target)}
-      aria-label={direction === "previous" ? "Previous page" : "Next page"}
-      className={cn(box, "text-text transition-colors hover:bg-surface")}
-    >
-      {icon}
-    </LinkAs>
-  );
-}

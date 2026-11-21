@@ -10,24 +10,31 @@ export interface MoreMenuItem {
   label: string;
   href: string;
   icon: IconName;
+  /** Destructive (Disable account): red. */
+  tone?: "danger";
 }
 
 /**
  * OrderMoreMenu (organism): the ⋯ button on an admin order with less-used actions (customer
- * profile, invoice, order history) in a small popover. 44px from 768px, 40px on mobile.
+ * profile, invoice, order history) in a small popover. 44px from 768px, 40px on mobile
+ * (`triggerClassName` resizes it, e.g. on a customer). Danger items are red.
  */
 export interface OrderMoreMenuProps extends Omit<ComponentProps<"div">, "children"> {
   linkAs?: LinkComponent;
   items: MoreMenuItem[];
   label?: string;
+  triggerClassName?: string;
 }
 
-export function OrderMoreMenu({ linkAs: LinkAs = "a", items, label = "More actions", className, ...props }: OrderMoreMenuProps) {
+export function OrderMoreMenu({ linkAs: LinkAs = "a", items, label = "More actions", triggerClassName, className, ...props }: OrderMoreMenuProps) {
   return (
     <Popover.Root>
       <Popover.Trigger
         aria-label={label}
-        className="flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-bg text-text transition-colors hover:bg-surface-subtle data-[state=open]:bg-surface md:size-11"
+        className={cn(
+          "flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-bg text-text transition-colors hover:bg-surface-subtle data-[state=open]:bg-surface md:size-11",
+          triggerClassName,
+        )}
       >
         <Icon name="more" size={18} />
       </Popover.Trigger>
@@ -46,8 +53,14 @@ export function OrderMoreMenu({ linkAs: LinkAs = "a", items, label = "More actio
           <ul aria-label={label}>
             {items.map((item) => (
               <li key={item.href}>
-                <LinkAs href={item.href} className="flex items-center gap-2.5 rounded-10 px-2.5 py-2.25 text-14 leading-sm text-text transition-colors hover:bg-surface-subtle">
-                  <Icon name={item.icon} size={16} className="text-text-muted" />
+                <LinkAs
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-2.5 rounded-10 px-2.5 py-2.25 text-14 leading-sm transition-colors hover:bg-surface-subtle",
+                    item.tone === "danger" ? "text-error" : "text-text",
+                  )}
+                >
+                  <Icon name={item.icon} size={16} className={item.tone === "danger" ? "text-error" : "text-text-muted"} />
                   {item.label}
                 </LinkAs>
               </li>

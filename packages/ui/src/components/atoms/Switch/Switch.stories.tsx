@@ -21,3 +21,5 @@ export const Disabled: Story = { args: { disabled: true } };
 export const Large: Story = { args: { size: "lg", defaultChecked: true } };
 /** Admin note composer ("Show to customer"). */
 export const Small: Story = { args: { size: "sm", defaultChecked: true } };
+/** Admin customer marketing consent. */
+export const Admin: Story = { args: { size: "admin", defaultChecked: true } };

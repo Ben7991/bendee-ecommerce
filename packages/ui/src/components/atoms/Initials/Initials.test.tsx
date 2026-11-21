@@ -10,4 +10,9 @@ describe("Initials", () => {
     expect(disc).toHaveClass("size-15", "mt-4");
     expect(initialsOf("ama mensah")).toBe("AM");
   });
+
+  it("takes a tone", () => {
+    render(<Initials name="Yaw Darko" size="row" tone="info" />);
+    expect(screen.getByText("YD")).toHaveClass("bg-tint-info", "text-info");
+  });
 });

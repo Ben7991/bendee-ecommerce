@@ -23,6 +23,19 @@ export const Sizes: Story = {
       <Initials {...args} size="staff" />
       <Initials {...args} size="customer" />
       <Initials {...args} size="activity" />
+      <Initials {...args} size="row" />
+      <Initials {...args} size="profile" />
+      <Initials {...args} size="note" />
+    </div>
+  ),
+};
+
+export const Tones: Story = {
+  render: (args) => (
+    <div className="flex items-center gap-3">
+      {(["sage", "lavender", "amber", "info", "citrus", "neutral"] as const).map((tone) => (
+        <Initials key={tone} {...args} size="row" tone={tone} />
+      ))}
     </div>
   ),
 };

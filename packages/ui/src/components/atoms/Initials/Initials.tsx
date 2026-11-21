@@ -19,9 +19,9 @@ export const initialsOf = (name: string) =>
     .map((part) => part[0]!.toUpperCase())
     .join("");
 
-export function Initials({ name, size, className, ...props }: InitialsProps) {
+export function Initials({ name, size, tone, className, ...props }: InitialsProps) {
   return (
-    <span data-slot="initials" aria-hidden className={cn(initialsVariants({ size }), className)} {...props}>
+    <span data-slot="initials" aria-hidden className={cn(initialsVariants({ size, tone }), className)} {...props}>
       {initialsOf(name)}
     </span>
   );
