@@ -25,4 +25,6 @@ export const Default: Story = {};
 export const WithIcon: Story = {
   args: { label: "Period", name: "period", icon: "calendar", options: [{ value: "7d", label: "Last 7 days" }, { value: "30d", label: "Last 30 days" }] },
 };
+/** 44px page-header button (marketing period). */
+export const Large: Story = { args: { ...WithIcon.args, size: "lg" } };
 export const Mobile: Story = { globals: { viewport: { value: "mobile", isRotated: false } } };

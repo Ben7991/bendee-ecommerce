@@ -30,10 +30,12 @@ export function AdminChrome({ children, returnsToReview }: { children: ReactNode
             : link,
         );
   const active = sectionOf(pathname);
+  // Sections without a tab of their own (customers, marketing…) light up More.
+  const activeTab = adminTabs.some((tab) => tab.href === active) ? active : "/admin/more";
   // Detail pages (an order, the product editor) bring their own mobile back bar and action bar.
   const detail = /^\/admin\/orders\/[^/]+$/.test(pathname) || /^\/admin\/products\/(?!categories$|brands$)[^/]+$/.test(pathname);
   // A return and the collection editor keep the top bar but pin their own actions where the tab bar would be.
-  const ownActionBar = /^\/admin\/(returns|collections|discounts)\/[^/]+$/.test(pathname);
+  const ownActionBar = /^\/admin\/(returns|collections|discounts|marketing)\/[^/]+$/.test(pathname);
   return (
     <AdminShell
       sidebar={
@@ -56,7 +58,7 @@ export function AdminChrome({ children, returnsToReview }: { children: ReactNode
           className={detail ? "hidden md:flex" : undefined}
         />
       }
-      tabBar={detail || ownActionBar ? undefined : <AdminTabBar linkAs={Link} tabs={adminTabs} activeHref={active} />}
+      tabBar={detail || ownActionBar ? undefined : <AdminTabBar linkAs={Link} tabs={adminTabs} activeHref={activeTab} />}
     >
       {children}
     </AdminShell>

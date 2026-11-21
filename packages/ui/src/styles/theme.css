@@ -227,6 +227,8 @@
   /* Small discount code chips (Paper Jofak - Admin → Discounts, tablet and mobile). */
   --radius-7: 7px;
   --radius-8: 8px;
+  /* Admin tracker letter tiles (Paper Jofak - Admin → Marketing → Ad tracking). */
+  --radius-9: 9px;
   --radius-10: 10px;
   --radius-sm: 12px;
   --radius-14: 14px;

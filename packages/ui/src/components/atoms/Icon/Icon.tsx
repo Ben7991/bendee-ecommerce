@@ -906,6 +906,28 @@ const ICONS = {
     strokeWidth: 1.5,
     body: <path d="M3 14V2.5M3 3H12L10 6L12 9H3" />,
   },
+  /* Marketing automations: abandoned cart, MoMo payment retry. */
+  cart: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.7,
+    body: (
+      <>
+        <path d="M3 4h2.5l2.2 10.5h10.6L20.5 7H7" />
+        <circle cx="9.5" cy="19" r="1.5" fill="currentColor" stroke="none" />
+        <circle cx="17" cy="19" r="1.5" fill="currentColor" stroke="none" />
+      </>
+    ),
+  },
+  phoneAlert: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.7,
+    body: (
+      <>
+        <rect x="6" y="2.5" width="12" height="19" rx="2.5" />
+        <path d="M12 8.5v4M12 15.5v.2" strokeWidth={1.9} />
+      </>
+    ),
+  },
 } satisfies Record<string, IconDefinition>;
 
 export type IconName = keyof typeof ICONS;
