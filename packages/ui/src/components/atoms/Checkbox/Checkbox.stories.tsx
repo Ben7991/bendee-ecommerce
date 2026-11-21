@@ -24,3 +24,5 @@ type Story = StoryObj<typeof meta>;
 export const Unchecked: Story = {};
 export const Checked: Story = { args: { defaultChecked: true } };
 export const Disabled: Story = { args: { disabled: true } };
+/** Some rows selected (table header). */
+export const Indeterminate: Story = { args: { checked: "indeterminate" } };

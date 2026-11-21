@@ -18,4 +18,11 @@ describe("Checkbox", () => {
     await user.click(screen.getByText("Keep me signed in"));
     expect(box).toBeChecked();
   });
+
+  it("shows a partial selection", () => {
+    render(<Checkbox checked="indeterminate" aria-label="Select all orders" />);
+    const box = screen.getByRole("checkbox", { name: "Select all orders" });
+    expect(box).toHaveAttribute("aria-checked", "mixed");
+    expect(box).toHaveAttribute("data-state", "indeterminate");
+  });
 });

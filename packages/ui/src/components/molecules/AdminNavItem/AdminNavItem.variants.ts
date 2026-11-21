@@ -47,8 +47,13 @@ export const adminNavCountVariants = cva(
           "xl:static xl:min-w-6 xl:bg-surface xl:px-1.75 xl:py-0.5 xl:text-xs xl:leading-xs xl:font-semibold xl:text-text",
         rail: "",
       },
+      active: { true: "", false: "" },
     },
-    defaultVariants: { layout: "responsive" },
+    compoundVariants: [
+      // On the lime pill the full-row count turns evergreen (Paper Orders → Sidebar).
+      { layout: "responsive", active: true, class: "xl:bg-primary xl:text-text-inverse" },
+    ],
+    defaultVariants: { layout: "responsive", active: false },
   },
 );
 

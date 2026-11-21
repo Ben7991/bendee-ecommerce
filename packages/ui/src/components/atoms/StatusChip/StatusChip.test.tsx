@@ -17,4 +17,13 @@ describe("StatusChip", () => {
     render(<StatusChip>Paid · Card</StatusChip>);
     expect(screen.getByText("Paid · Card")).toHaveClass("bg-sage-100", "text-xs");
   });
+
+  it("has the order status tones", () => {
+    render(
+      <StatusChip tone="lavender" size="lg">
+        Out for delivery
+      </StatusChip>,
+    );
+    expect(screen.getByText("Out for delivery")).toHaveClass("bg-tint-lavender", "text-lavender-text", "px-2.5");
+  });
 });

@@ -19,4 +19,10 @@ describe("AdminPageHeader", () => {
     expect(screen.getByText("Sunday, 15 November · Accra")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Add product" })).toBeInTheDocument();
   });
+
+  it("puts a description under the title", () => {
+    render(<AdminPageHeader layout="inline" title="Orders" description="1,284 orders" />);
+    expect(screen.getByRole("heading", { level: 1, name: "Orders" })).toBeInTheDocument();
+    expect(screen.getByText("1,284 orders")).toBeInTheDocument();
+  });
 });

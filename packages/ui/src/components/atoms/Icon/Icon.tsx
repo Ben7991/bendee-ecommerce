@@ -770,6 +770,25 @@ const ICONS = {
     strokeWidth: 1.5,
     body: <path d="M8 2L14.5 13.5H1.5L8 2ZM8 6.5V9M8 11.2V11.3" />,
   },
+  printer: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.4,
+    body: (
+      <path d="M4.5 6V2.5H11.5V6M4.5 11.5H3C2.45 11.5 2 11.05 2 10.5V7C2 6.45 2.45 6 3 6H13C13.55 6 14 6.45 14 7V10.5C14 11.05 13.55 11.5 13 11.5H11.5M4.5 9.5H11.5V13.5H4.5V9.5Z" />
+    ),
+  },
+  /** Three narrowing lines: open filters. */
+  filter: {
+    viewBox: "0 0 18 18",
+    strokeWidth: 1.6,
+    body: <path d="M3 5H15M5.5 9H12.5M8 13H10" />,
+  },
+  /** Down arrow onto a line: export / download (admin, 16px grid). */
+  export: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.5,
+    body: <path d="M8 2.5V10M8 10L5 7M8 10L11 7M3 12.5H13" />,
+  },
   flag: {
     viewBox: "0 0 16 16",
     strokeWidth: 1.5,

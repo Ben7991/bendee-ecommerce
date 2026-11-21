@@ -51,6 +51,9 @@
   --color-tint-lavender: #eee8f6;
   --color-tint-sun: #fff1d6;
   --color-tint-citrus: #ffe3d3;
+  /* Admin order status chips: "To pack" (blue) and lavender chip text. */
+  --color-tint-info: #e4eef4;
+  --color-lavender-text: #5b4a8a;
   --color-white: #ffffff;
   --color-black: #000000;
 
@@ -431,6 +434,8 @@
   --color-tint-lavender: #eee8f6;
   --color-tint-sun: #fff1d6;
   --color-tint-citrus: #ffe3d3;
+  --color-tint-info: #e4eef4;
+  --color-lavender-text: #5b4a8a;
   --color-feature: var(--color-evergreen-900);
   --color-on-feature-muted: var(--color-evergreen-300);
   --gradient-feature-from: var(--color-evergreen-800);
@@ -472,6 +477,8 @@
   --color-tint-lavender: var(--color-dark-tint-lavender);
   --color-tint-sun: var(--color-dark-tint-sun);
   --color-tint-citrus: var(--color-dark-tint-citrus);
+  --color-tint-info: var(--color-dark-tint-info);
+  --color-lavender-text: var(--color-dark-lavender-text);
   --color-feature: var(--color-dark-sage-100);
   --color-on-feature-muted: var(--color-dark-text-muted);
   --gradient-feature-from: var(--color-dark-sage-200);
@@ -513,6 +520,8 @@
     --color-tint-lavender: var(--color-dark-tint-lavender);
     --color-tint-sun: var(--color-dark-tint-sun);
     --color-tint-citrus: var(--color-dark-tint-citrus);
+    --color-tint-info: var(--color-dark-tint-info);
+    --color-lavender-text: var(--color-dark-lavender-text);
     --color-feature: var(--color-dark-sage-100);
     --color-on-feature-muted: var(--color-dark-text-muted);
     --gradient-feature-from: var(--color-dark-sage-200);

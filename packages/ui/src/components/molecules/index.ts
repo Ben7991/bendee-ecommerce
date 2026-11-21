@@ -33,6 +33,7 @@ export * from "./DeliveryBanner";
 export * from "./DeliveryCard";
 export * from "./DeliveryEstimator";
 export * from "./DetailRows";
+export * from "./FilterButton";
 export * from "./FilterChip";
 export * from "./FilterPills";
 export * from "./FilterTabs";

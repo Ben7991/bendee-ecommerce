@@ -21,6 +21,7 @@ export const Variants: Story = {
     <div className="flex w-54 flex-col gap-0.5">
       <AdminNavItem {...args} icon="dashboard" label="Dashboard" count={undefined} active />
       <AdminNavItem {...args} />
+      <AdminNavItem {...args} active />
       <AdminNavItem {...args} icon="warehouse" label="Inventory" count={undefined} dot />
       <AdminNavItem {...args} icon="users" label="Customers" count={undefined} />
     </div>

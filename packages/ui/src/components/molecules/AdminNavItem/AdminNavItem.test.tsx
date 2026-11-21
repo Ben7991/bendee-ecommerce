@@ -8,6 +8,7 @@ describe("AdminNavItem", () => {
     const link = screen.getByRole("link", { name: "Orders, 14" });
     expect(link).toHaveAttribute("aria-current", "page");
     expect(link).toHaveClass("bg-accent", "mt-4");
+    expect(screen.getByText("14")).toHaveClass("xl:bg-primary");
   });
 
   it("renders the router link passed with asChild and flags attention", () => {

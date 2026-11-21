@@ -64,7 +64,7 @@ export function AdminNavItem({
               {label}
             </span>
             {count ? (
-              <span aria-hidden className={adminNavCountVariants({ layout })}>
+              <span aria-hidden className={cn(adminNavCountVariants({ layout, active }))}>
                 {count}
               </span>
             ) : null}
