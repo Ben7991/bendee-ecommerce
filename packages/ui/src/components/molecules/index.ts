@@ -78,6 +78,7 @@ export * from "./SectionCard";
 export * from "./SectionHeader";
 export * from "./SegmentedControl";
 export * from "./SelectField";
+export * from "./SelectPill";
 export * from "./SettingCard";
 export * from "./ShareLinks";
 export * from "./StaffMenu";

@@ -24,7 +24,7 @@ export interface SavedView {
  * a link, so views are shareable URLs. `variant="pills"` (products' status filter) shows pills
  * with count bubbles from 768px instead of tabs; `variant="segmented"` (customers' segments)
  * shows a segmented track, full width on tablet and fitted from 1440px. A `warning` view
- * (Inactive) is amber there.
+ * (Inactive, Low) is amber there and an `alert` view (Out) red.
  */
 export interface SavedViewsProps extends Omit<ComponentProps<"nav">, "children"> {
   linkAs?: LinkComponent;
@@ -32,6 +32,8 @@ export interface SavedViewsProps extends Omit<ComponentProps<"nav">, "children">
   activeHref: string;
   saveView?: { href: string; label?: string };
   variant?: "tabs" | "pills" | "segmented";
+  /** Segmented: stretch the track across the row on tablet (customers) or fit its labels (inventory). */
+  fill?: boolean;
   "aria-label"?: string;
 }
 
@@ -41,6 +43,7 @@ export function SavedViews({
   activeHref,
   saveView,
   variant = "tabs",
+  fill = true,
   "aria-label": ariaLabel = "Saved views",
   className,
   ...props
@@ -87,11 +90,11 @@ export function SavedViews({
 
       {/* Tablet and desktop: a segmented track. */}
       {variant === "segmented" && (
-        <ul className="hidden gap-0.5 rounded-full bg-surface-subtle p-0.75 md:flex xl:w-fit">
+        <ul className={cn("hidden gap-0.5 rounded-full bg-surface-subtle p-0.75 md:flex xl:w-fit", !fill && "w-fit shrink-0")}>
           {wide.map((view) => {
             const active = view.href === activeHref;
             return (
-              <li key={view.href} className="flex-1 basis-0 xl:flex-none xl:basis-auto">
+              <li key={view.href} className={fill ? "flex-1 basis-0 xl:flex-none xl:basis-auto" : undefined}>
                 <LinkAs
                   href={view.href}
                   aria-label={name(view)}
@@ -99,12 +102,12 @@ export function SavedViews({
                   className={cn(
                     "flex justify-center gap-1 rounded-full px-3.5 py-1.75 text-sm leading-4 whitespace-nowrap",
                     active ? "bg-bg font-semibold text-text shadow-xs dark:bg-surface" : "font-medium hover:text-text",
-                    !active && (view.warning ? "text-warning-text" : "text-text-secondary"),
+                    !active && (view.alert ? "text-error" : view.warning ? "text-warning-text" : "text-text-secondary"),
                   )}
                 >
                   {view.label}
                   {view.count !== undefined && (
-                    <span aria-hidden className={cn("font-medium", !view.warning && "text-text-muted")}>
+                    <span aria-hidden className={cn("font-medium", !view.warning && !view.alert && "text-text-muted")}>
                       {view.count}
                     </span>
                   )}

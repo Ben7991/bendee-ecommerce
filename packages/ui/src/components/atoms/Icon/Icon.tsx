@@ -843,6 +843,41 @@ const ICONS = {
     ),
   },
   /** Three narrowing lines: open filters. */
+  /** Admin: customer photos on a return. */
+  camera: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.3,
+    body: (
+      <>
+        <rect x="2" y="3.5" width="12" height="9.5" rx="2" />
+        <circle cx="8" cy="8.2" r="2.2" />
+      </>
+    ),
+  },
+  /** Admin: scan a barcode (Paper Inventory). */
+  scan: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.6,
+    body: <path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 9v6M10 9v6M13 9v6M17 9v6" />,
+  },
+  /** Admin: adjust stock (lines with a plus). */
+  stockAdjust: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.5,
+    body: <path d="M3 5h10M3 8h10M3 11h6M12 10v4M10 12h4" />,
+  },
+  /** Admin: receive stock (a parcel with a down arrow). */
+  stockReceive: {
+    viewBox: "0 0 18 18",
+    strokeWidth: 1.5,
+    body: <path d="M3 5.5L9 2.5L15 5.5V12.5L9 15.5L3 12.5V5.5ZM9 6v6M6.5 9.5L9 12l2.5-2.5" />,
+  },
+  /** Admin: an item whose stock isn't tracked. */
+  hexagon: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 1.6,
+    body: <path d="M4 8l8-4 8 4v8l-8 4-8-4V8z" />,
+  },
   /** Admin: add a note (Paper Customers). */
   note: {
     viewBox: "0 0 16 16",

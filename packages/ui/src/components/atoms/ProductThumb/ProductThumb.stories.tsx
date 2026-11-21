@@ -20,12 +20,12 @@ export const Variants: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
       <div className="flex items-end gap-3">
-        {(["xs", "sm", "md", "lg", "xl", "square", "photo"] as const).map((size) => (
+        {(["xs", "sm", "md", "lg", "xl", "square", "photo", "stock", "line", "mini"] as const).map((size) => (
           <ProductThumb key={size} size={size} />
         ))}
       </div>
       <div className="flex items-end gap-3">
-        {(["sage", "amber", "lavender", "sun", "surface"] as const).map((tint) => (
+        {(["sage", "amber", "lavender", "sun", "surface", "citrus"] as const).map((tint) => (
           <ProductThumb key={tint} tint={tint} />
         ))}
         <ProductThumb size="lg" quantity={2} />

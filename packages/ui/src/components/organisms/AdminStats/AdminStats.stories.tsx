@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
-import { CustomerStats } from "./CustomerStats";
+import { AdminStats } from "./AdminStats";
 
 const meta = {
-  title: "Organisms/CustomerStats",
-  component: CustomerStats,
+  title: "Organisms/AdminStats",
+  component: AdminStats,
   tags: ["autodocs"],
   parameters: { layout: "padded" },
   args: {
@@ -16,7 +16,7 @@ const meta = {
       { label: "No order in 90+ days", value: "211", tone: "warning" },
     ],
   },
-} satisfies Meta<typeof CustomerStats>;
+} satisfies Meta<typeof AdminStats>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

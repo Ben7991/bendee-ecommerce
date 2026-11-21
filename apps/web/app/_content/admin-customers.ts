@@ -6,7 +6,7 @@ import type {
   CustomerActivityEvent,
   CustomerAddress,
   CustomerOrder,
-  CustomerStat,
+  AdminStat,
   CustomerTag,
   MoreMenuItem,
   SavedView,
@@ -29,7 +29,7 @@ export const customersSummary = {
   pages: 161,
 };
 
-export const customerStats: CustomerStat[] = [
+export const customerStats: AdminStat[] = [
   { label: "Total customers", value: customersSummary.total, note: "+86 this month", compactNote: "+86" },
   { label: "Repeat customers", value: customersSummary.repeatShare, note: "+3 pts" },
   { label: "Avg. lifetime value", value: customersSummary.averageValue, currency: "GHS" },
@@ -227,7 +227,7 @@ export interface CustomerDetail {
   meta: string;
   compactMeta: string;
   mobileMeta: string;
-  stats: CustomerStat[];
+  stats: AdminStat[];
   orders: CustomerOrder[];
   orderCount: number;
   buysMost: (Omit<BoughtProduct, "image"> & { image?: string })[];

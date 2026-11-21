@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { QuantityStepper } from "./QuantityStepper";
@@ -26,5 +26,15 @@ describe("QuantityStepper", () => {
     expect(screen.getByRole("status")).toHaveTextContent("0 / 2");
     expect(screen.getByRole("button", { name: "Decrease Energy B-Complex" })).toBeDisabled();
     expect(screen.getByRole("group", { name: "Quantity of Energy B-Complex" })).toHaveClass("w-27");
+  });
+
+  it("takes a typed number, clamped, when editable", () => {
+    const onValueChange = vi.fn();
+    render(<QuantityStepper variant="outline" size="lg" value={3} min={1} max={10} label="Greens" name="quantity" onValueChange={onValueChange} />);
+    const input = screen.getByRole("textbox", { name: "Greens" });
+    expect(input).toHaveAttribute("name", "quantity");
+    fireEvent.change(input, { target: { value: "42" } });
+    expect(onValueChange).toHaveBeenCalledWith(10);
+    expect(screen.getByRole("group", { name: "Quantity of Greens" })).toHaveClass("w-37.5");
   });
 });

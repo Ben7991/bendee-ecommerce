@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { CustomerBuysMost, CustomerNotesCard, CustomerOrdersCard, CustomerProfileHeader, CustomerStats } from "@repo/ui/organisms";
+import { CustomerBuysMost, CustomerNotesCard, CustomerOrdersCard, CustomerProfileHeader, AdminStats } from "@repo/ui/organisms";
 
 import { addCustomerNote, logCustomerContactReveal, removeCustomerTag, updateCustomerConsent } from "../../../../_actions/admin-customers";
 import { findCustomerDetail } from "../../../../_content/admin-customers";
@@ -55,7 +55,7 @@ export default async function AdminCustomerPage({ params }: { params: Params }) 
         more={<MoreMenu items={customer.more} label="Customer actions" triggerClassName="size-9 md:size-10.5 xl:size-11" />}
       />
 
-      <CustomerStats variant="profile" aria-label="Customer figures" stats={customer.stats} />
+      <AdminStats variant="profile" aria-label="Customer figures" stats={customer.stats} />
 
       {/*
        * One grid, reordered per breakpoint: mobile stacks contact, orders, the latest note and

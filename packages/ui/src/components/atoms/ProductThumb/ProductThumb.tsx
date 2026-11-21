@@ -15,9 +15,11 @@ export interface ProductThumbProps extends Omit<ComponentProps<"span">, "childre
   dimmed?: boolean;
   /** A 2px page-coloured edge, for thumbs that overlap. */
   ring?: boolean;
+  /** The image fills the tile edge to edge (admin packshots). */
+  bleed?: boolean;
 }
 
-export function ProductThumb({ image, quantity, dimmed = false, ring = false, tint, size, className, ...props }: ProductThumbProps) {
+export function ProductThumb({ image, quantity, dimmed = false, ring = false, bleed = false, tint, size, className, ...props }: ProductThumbProps) {
   return (
     <span
       data-slot="product-thumb"
@@ -25,7 +27,7 @@ export function ProductThumb({ image, quantity, dimmed = false, ring = false, ti
       className={cn(productThumbVariants({ tint, size }), dimmed && "opacity-muted", ring && "border-2 border-bg", className)}
       {...props}
     >
-      {image && <span className="absolute inset-1.5 overflow-hidden">{image}</span>}
+      {image && <span className={cn("absolute overflow-hidden", bleed ? "inset-0" : "inset-1.5")}>{image}</span>}
       {quantity !== undefined && (
         <span className="absolute -top-1.5 -right-1.5 flex size-5.5 items-center justify-center rounded-full bg-primary font-sans text-11 leading-3 font-bold text-text-inverse">
           {quantity}

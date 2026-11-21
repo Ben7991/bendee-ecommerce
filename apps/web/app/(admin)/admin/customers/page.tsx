@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Button, Icon } from "@repo/ui/atoms";
 import { ListSearch } from "@repo/ui/molecules";
-import { AdminPageHeader, CustomerStats, CustomerTable, SavedViews } from "@repo/ui/organisms";
+import { AdminPageHeader, AdminStats, CustomerTable, SavedViews } from "@repo/ui/organisms";
 
 import { customerStats, customerViews, customersSummary, findCustomers } from "../../../_content/admin-customers";
 
@@ -45,7 +45,7 @@ export default async function AdminCustomersPage({ searchParams }: { searchParam
         }
       />
 
-      <CustomerStats aria-label="Customers at a glance" stats={customerStats} />
+      <AdminStats aria-label="Customers at a glance" stats={customerStats} />
 
       {/* Desktop: segments left, search right; tablet: search, then segments; mobile: search, then chips. */}
       <div className="flex flex-col gap-4 md:gap-2.5 xl:flex-row xl:items-center xl:justify-between">

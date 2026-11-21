@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn, type LinkComponent } from "../../../lib";
 import { Icon } from "../../atoms";
@@ -7,10 +7,12 @@ import { Icon } from "../../atoms";
  * ListSearch (molecule): the search above a simple admin list ("Name, phone or email", Paper
  * Jofak - Admin → Customers) with a Filters link. A GET form, so the query lands in the URL.
  * From 768px Filters is its own pill beside the field; on mobile it is an icon inside the field.
- * For lists with filter pills and sort, use FilterBar. Takes the router link as `linkAs` (two
+ * Extra fields (SelectPills) go in as children. For lists with filter pills and sort, use FilterBar. Takes the router link as `linkAs` (two
  * links, like TablePagination).
  */
 export interface ListSearchProps extends Omit<ComponentProps<"form">, "children"> {
+  /** More fields in the same form, after Filters (SelectPills: type, period). */
+  children?: ReactNode;
   linkAs?: LinkComponent;
   /** Accessible name of the input. */
   label?: string;
@@ -34,6 +36,7 @@ export function ListSearch({
   filtersHref,
   keep = {},
   fieldClassName,
+  children,
   method = "get",
   className,
   ...props
@@ -73,6 +76,7 @@ export function ListSearch({
           Filters
         </LinkAs>
       )}
+      {children}
     </form>
   );
 }

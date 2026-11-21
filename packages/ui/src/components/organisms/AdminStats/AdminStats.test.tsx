@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 
-import { CustomerStats } from "./CustomerStats";
+import { AdminStats } from "./AdminStats";
 
-describe("CustomerStats", () => {
+describe("AdminStats", () => {
   it("shows each figure with its currency and note", () => {
     render(
-      <CustomerStats
+      <AdminStats
         aria-label="Customers at a glance"
         className="mt-4"
         stats={[
@@ -22,7 +22,7 @@ describe("CustomerStats", () => {
   });
 
   it("shows profile notes from 1440px", () => {
-    render(<CustomerStats variant="profile" aria-label="Figures" stats={[{ label: "Orders", value: "14", note: "1 partly refunded", noteTone: "muted" }]} />);
+    render(<AdminStats variant="profile" aria-label="Figures" stats={[{ label: "Orders", value: "14", note: "1 partly refunded", noteTone: "muted" }]} />);
     expect(screen.getByText("1 partly refunded").parentElement).toHaveClass("hidden", "xl:block");
   });
 });
