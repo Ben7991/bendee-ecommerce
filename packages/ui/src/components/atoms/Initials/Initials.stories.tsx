@@ -21,6 +21,8 @@ export const Sizes: Story = {
       <Initials {...args} size="md" />
       <Initials {...args} size="lg" />
       <Initials {...args} size="staff" />
+      <Initials {...args} size="customer" />
+      <Initials {...args} size="activity" />
     </div>
   ),
 };

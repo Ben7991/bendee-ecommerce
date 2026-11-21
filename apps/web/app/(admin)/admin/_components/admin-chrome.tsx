@@ -20,7 +20,10 @@ function sectionOf(pathname: string) {
  * bar and tab bar here, because a server component can't hand a component reference to them.
  */
 export function AdminChrome({ children }: { children: ReactNode }) {
-  const active = sectionOf(usePathname());
+  const pathname = usePathname();
+  const active = sectionOf(pathname);
+  // Detail pages (an order) bring their own mobile back bar and action bar.
+  const detail = /^\/admin\/orders\/[^/]+$/.test(pathname);
   return (
     <AdminShell
       sidebar={
@@ -34,8 +37,16 @@ export function AdminChrome({ children }: { children: ReactNode }) {
           staffMenuItems={staffMenuItems}
         />
       }
-      topBar={<AdminTopBar linkAs={Link} unreadNotifications staff={staff} staffMenuItems={staffSheetItems} />}
-      tabBar={<AdminTabBar linkAs={Link} tabs={adminTabs} activeHref={active} />}
+      topBar={
+        <AdminTopBar
+          linkAs={Link}
+          unreadNotifications
+          staff={staff}
+          staffMenuItems={staffSheetItems}
+          className={detail ? "hidden md:flex" : undefined}
+        />
+      }
+      tabBar={detail ? undefined : <AdminTabBar linkAs={Link} tabs={adminTabs} activeHref={active} />}
     >
       {children}
     </AdminShell>

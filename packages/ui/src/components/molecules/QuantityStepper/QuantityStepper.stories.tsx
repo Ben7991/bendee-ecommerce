@@ -17,3 +17,5 @@ export const Medium: Story = {};
 export const Small: Story = { args: { size: "sm" } };
 export const AtMinimum: Story = { args: { value: 1 } };
 export const Disabled: Story = { args: { value: 1, disabled: true } };
+/** Admin refund: how many of the bought units to refund. */
+export const Outline: Story = { args: { variant: "outline", showMax: true, value: 1, min: 0, max: 2 } };

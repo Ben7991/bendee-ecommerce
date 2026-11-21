@@ -770,6 +770,28 @@ const ICONS = {
     strokeWidth: 1.5,
     body: <path d="M8 2L14.5 13.5H1.5L8 2ZM8 6.5V9M8 11.2V11.3" />,
   },
+  /** A circled ×: cancel an order. */
+  closeCircle: {
+    viewBox: "0 0 24 24",
+    strokeWidth: 2,
+    body: (
+      <>
+        <circle cx="12" cy="12" r="9" />
+        <path d="M8.5 8.5l7 7M15.5 8.5l-7 7" />
+      </>
+    ),
+  },
+  /** A parcel with a lime tick: mark packed. The tick keeps lime on dark buttons. */
+  packCheck: {
+    viewBox: "0 0 18 18",
+    strokeWidth: 1.5,
+    body: (
+      <>
+        <path d="M3 5.5L9 2.5L15 5.5V12.5L9 15.5L3 12.5V5.5Z" />
+        <path d="M6.5 9L8.5 11L12 7.5" strokeWidth="1.6" className="stroke-accent" />
+      </>
+    ),
+  },
   printer: {
     viewBox: "0 0 16 16",
     strokeWidth: 1.4,

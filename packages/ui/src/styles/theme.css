@@ -177,6 +177,10 @@
   --tracking-numeral: -0.06em;
   /* Admin table column headers. */
   --tracking-label: 0.04em;
+  /* Admin card eyebrows ("CUSTOMER", "DELIVERY"). */
+  --tracking-eyebrow: 0.08em;
+  /* Codes set in caps (GhanaPost GPS "GM-071-4472"). */
+  --tracking-code: 0.02em;
 
   /* Opacity */
   --opacity-faint: 8%;

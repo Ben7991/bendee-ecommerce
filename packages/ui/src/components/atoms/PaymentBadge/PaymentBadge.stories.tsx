@@ -31,6 +31,7 @@ export const Sizes: Story = {
     <div className="flex flex-col gap-3">
       <div className="flex gap-1.5"><PaymentBadge brand="mtn" size="sm" /><PaymentBadge brand="telecel" size="sm" /><PaymentBadge brand="airteltigo" size="sm" /><PaymentBadge brand="visa" size="sm" /></div>
       <div className="flex gap-1.5"><PaymentBadge brand="mtn" size="xs" /></div>
+      <div className="flex gap-1.5"><PaymentBadge brand="mtn" size="tile" /><PaymentBadge brand="telecel" size="tile" /><PaymentBadge brand="airteltigo" size="tile" /></div>
     </div>
   ),
 };

@@ -20,4 +20,11 @@ describe("QuantityStepper", () => {
     rerender(<QuantityStepper value={3} label="Greens" disabled />);
     expect(screen.getByRole("button", { name: "Increase Greens" })).toBeDisabled();
   });
+
+  it("shows the maximum in the outline variant", () => {
+    render(<QuantityStepper variant="outline" showMax value={0} min={0} max={2} label="Energy B-Complex" />);
+    expect(screen.getByRole("status")).toHaveTextContent("0 / 2");
+    expect(screen.getByRole("button", { name: "Decrease Energy B-Complex" })).toBeDisabled();
+    expect(screen.getByRole("group", { name: "Quantity of Energy B-Complex" })).toHaveClass("w-27");
+  });
 });

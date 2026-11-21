@@ -21,8 +21,11 @@ export type PaymentBrand = keyof typeof BRANDS;
 /** PaymentBadge (atom): a small wordmark chip for an accepted payment method. */
 export interface PaymentBadgeProps extends Omit<ComponentProps<"span">, "children"> {
   brand: PaymentBrand;
-  /** md: full name (cart). sm: short name in a choice card. xs: inline tag in a summary line. */
-  size?: "xs" | "sm" | "md";
+  /**
+   * md: full name (cart). sm: short name in a choice card. xs: inline tag in a summary line.
+   * tile: a 28px square logo tile (admin refund "Refund to").
+   */
+  size?: "xs" | "sm" | "md" | "tile";
 }
 
 /** The brand's colour as a small dot, e.g. in a network picker. Decorative. */
@@ -49,6 +52,7 @@ export function PaymentBadge({ brand, size = "md", className, ...props }: Paymen
         size === "md" && "rounded-6 px-2.5 py-1.25 text-11 leading-3.5",
         size === "sm" && "rounded-6 px-2 py-1 text-11 leading-3.5",
         size === "xs" && "rounded-5 px-1.5 py-0.5 text-10 leading-3.25",
+        size === "tile" && "size-7 shrink-0 items-center justify-center rounded-8 text-10 leading-3 font-bold",
         brand === "visa" && size !== "md" && "italic",
         // Card brands sit on white in both themes, as in Paper.
         card && "border border-border bg-white",

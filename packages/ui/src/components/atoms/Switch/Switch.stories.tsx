@@ -19,3 +19,5 @@ export const Disabled: Story = { args: { disabled: true } };
 
 /** Cookie settings. */
 export const Large: Story = { args: { size: "lg", defaultChecked: true } };
+/** Admin note composer ("Show to customer"). */
+export const Small: Story = { args: { size: "sm", defaultChecked: true } };
