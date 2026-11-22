@@ -8,7 +8,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
     "storybook": "turbo run storybook",
-    "build-storybook": "turbo run build-storybook"
+    "build-storybook": "turbo run build-storybook",
+    "test": "turbo run test",
+    "generate:component": "turbo gen component"
   },
   "devDependencies": {
     "prettier": "3.9.6",

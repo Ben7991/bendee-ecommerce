@@ -34,3 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Third-party design placeholders, copied by scripts/copy-placeholders.mjs (never commit)
+/public/placeholders/

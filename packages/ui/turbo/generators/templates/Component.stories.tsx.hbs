@@ -1,0 +1,50 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+
+import { {{name}} } from "./{{name}}";
+
+const meta = {
+  title: "{{titleCase layer}}/{{name}}",
+  component: {{name}},
+  tags: ["autodocs"],
+  parameters: { layout: "padded" },
+  args: {
+    children: "{{name}}",
+  },
+} satisfies Meta<typeof {{name}}>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};
+{{#if variants}}
+
+/** Every variant side by side. Check it in Light, Dark and System from the toolbar. */
+export const Variants: Story = {
+  render: (args) => (
+    <div className="flex flex-wrap items-center gap-4">
+      {(["primary", "secondary"] as const).map((variant) => (
+        <{{name}} key={variant} {...args} variant={variant}>
+          {variant}
+        </{{name}}>
+      ))}
+    </div>
+  ),
+};
+
+export const Sizes: Story = {
+  render: (args) => (
+    <div className="flex flex-wrap items-center gap-4">
+      {(["sm", "md", "lg"] as const).map((size) => (
+        <{{name}} key={size} {...args} size={size}>
+          {size}
+        </{{name}}>
+      ))}
+    </div>
+  ),
+};
+{{/if}}
+
+/** Paper mobile artboard width (390). Tablet (768) and desktop (1440) are in the viewport toolbar. */
+export const Mobile: Story = {
+  globals: { viewport: { value: "mobile", isRotated: false } },
+};

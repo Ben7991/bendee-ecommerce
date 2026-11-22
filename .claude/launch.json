@@ -1,0 +1,46 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "-w",
+        "web"
+      ],
+      "port": 3000
+    },
+    {
+      "name": "web-3001",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "exec",
+        "-w",
+        "web",
+        "--",
+        "next",
+        "dev",
+        "--port",
+        "3001"
+      ],
+      "port": 3001
+    },
+    {
+      "name": "web-3002",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "exec",
+        "-w",
+        "web",
+        "--",
+        "next",
+        "dev",
+        "--port",
+        "3002"
+      ],
+      "port": 3002
+    }
+  ]
+}

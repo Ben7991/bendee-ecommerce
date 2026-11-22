@@ -1,8 +1,7 @@
 import type { Decorator, Preview } from "@storybook/react-vite";
 import { useEffect } from "react";
 
-import "@repo/ui/styles.css";
-import "../src/stories/jofak-examples.css";
+import "../src/storybook.css";
 
 type Theme = "light" | "dark" | "system";
 
@@ -57,6 +56,31 @@ const preview: Preview = {
   decorators: [withTheme],
   parameters: {
     layout: "fullscreen",
+    options: {
+      storySort: {
+        order: ["Foundations", "Atoms", "Molecules", "Organisms", "Templates"],
+      },
+    },
+    // The three Paper artboard widths every component and screen is designed at.
+    viewport: {
+      options: {
+        mobile: {
+          name: "Mobile · 390",
+          styles: { width: "390px", height: "844px" },
+          type: "mobile",
+        },
+        tablet: {
+          name: "Tablet · 768",
+          styles: { width: "768px", height: "1024px" },
+          type: "tablet",
+        },
+        desktop: {
+          name: "Desktop · 1440",
+          styles: { width: "1440px", height: "900px" },
+          type: "desktop",
+        },
+      },
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,

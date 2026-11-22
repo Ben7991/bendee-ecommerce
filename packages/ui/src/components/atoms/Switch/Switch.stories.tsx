@@ -1,0 +1,28 @@
+import type { Meta, StoryObj } from "@storybook/react-vite";
+
+import { Switch } from "./Switch";
+
+const meta = {
+  title: "Atoms/Switch",
+  component: Switch,
+  tags: ["autodocs"],
+  parameters: { layout: "padded" },
+  args: { "aria-label": "Delivering to someone else?" },
+} satisfies Meta<typeof Switch>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Off: Story = {};
+export const On: Story = { args: { defaultChecked: true } };
+export const Disabled: Story = { args: { disabled: true } };
+
+/** Cookie settings. */
+export const Large: Story = { args: { size: "lg", defaultChecked: true } };
+/** Admin note composer ("Show to customer"). */
+export const Small: Story = { args: { size: "sm", defaultChecked: true } };
+/** Admin customer marketing consent. */
+export const Admin: Story = { args: { size: "admin", defaultChecked: true } };
+
+/** 44×26: the discount editor's "Combine with other discounts". */
+export const Field: Story = { args: { size: "field", defaultChecked: true } };

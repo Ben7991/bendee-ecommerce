@@ -4,6 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "placeholders": "node scripts/copy-placeholders.mjs",
+    "predev": "npm run placeholders",
+    "prebuild": "npm run placeholders",
     "dev": "next dev --port 3000",
     "build": "next build",
     "start": "next start",
@@ -12,9 +15,12 @@
   },
   "dependencies": {
     "@repo/ui": "*",
+    "@tailwindcss/postcss": "4.3.5",
     "next": "16.3.8",
+    "postcss": "8.5.23",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "tailwindcss": "4.3.5"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

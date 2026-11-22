@@ -1,0 +1,645 @@
+/*
+ * Jofak design tokens as a Tailwind v4 theme.
+ * Source of truth: Paper file "Jofak" → Design System page.
+ *
+ * - Tailwind's default scales are reset (`initial`) for every namespace Jofak defines, so only
+ *   Jofak classes exist: `bg-primary`, `text-text-muted`, `p-6`, `rounded-full`… while
+ *   `bg-red-500` or `p-7` produce no CSS. Change values here, never in components.
+ * - `@theme` (not `@theme inline`) keeps utilities pointing at `var(--token)`, which is what
+ *   lets the dark mapping below re-theme every component at runtime. `static` emits every
+ *   token even when unused, so `var(--token)` always resolves (stories, inline styles).
+ *
+ * Theming: semantic tokens resolve to the light palette by default and to their
+ * --color-dark-* twins when
+ *   - an ancestor has data-theme="dark", or
+ *   - the OS prefers dark and no ancestor forces data-theme="light" ("System").
+ */
+
+/*
+ * Scan @repo/ui for class names wherever this stylesheet is imported. It ships as
+ * dist/styles/theme.css, so this points at the built (unminified) dist/ JS.
+ */
+@source "../";
+
+@theme static {
+  --color-*: initial;
+  --font-*: initial;
+  --text-*: initial;
+  --font-weight-*: initial;
+  --tracking-*: initial;
+  --leading-*: initial;
+  --radius-*: initial;
+  --breakpoint-*: initial;
+  --container-*: initial;
+  --shadow-*: initial;
+
+  /* 4px grid: p-6 = 24px, size-11.5 = 46px, leading-4.5 = 18px. Named steps below match it. */
+  --spacing: 4px;
+
+  /* Palette */
+  --color-evergreen-950: #0a2c1e;
+  --color-evergreen-900: #0f3d2a;
+  --color-evergreen-800: #1f5a40;
+  --color-evergreen-600: #1f7a4d;
+  --color-evergreen-500: #2e9a63;
+  --color-evergreen-300: #9fc2ae;
+  --color-sage-200: #cde9c6;
+  --color-sage-100: #eaf4e4;
+  --color-sage-50: #eef7ea;
+  --color-sprout-400: #c7f27a;
+  --color-tint-amber: #f3ece2;
+  --color-tint-lavender: #eee8f6;
+  --color-tint-sun: #fff1d6;
+  --color-tint-citrus: #ffe3d3;
+  /* Admin order status chips: "To pack" (blue) and lavender chip text. */
+  --color-tint-info: #e4eef4;
+  --color-lavender-text: #5b4a8a;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Illustration palette (goal cards, avatars). Decorative only — never for text on bg. */
+  --color-sun-100: #fff6d9;
+  --color-sun-200: #ffe7a6;
+  --color-sun-400: #f2b632;
+  --color-citrus-100: #ffe3d3;
+  --color-citrus-200: #ffc7a8;
+  --color-citrus-300: #ffb27a;
+  --color-citrus-500: #f07f3c;
+  --color-citrus-800: #9a3f12;
+  --color-citrus-900: #6b3415;
+  --color-citrus-950: #3a1a08;
+  --color-skin-100: #f2d3b3;
+  --color-skin-300: #e8b48a;
+  --color-skin-500: #c47e52;
+  --color-skin-700: #8c5a3c;
+  --color-skin-900: #5a3622;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Semantic colours (light) */
+  --color-bg: #ffffff;
+  --color-surface: #f1f5ef;
+  --color-surface-subtle: #f6f8f4;
+  --color-border: #d5e6d0;
+  --color-border-subtle: #e1e9dd;
+  --color-text: #14201a;
+  --color-text-secondary: #3e4d45;
+  --color-text-muted: #5b6b62;
+  --color-text-inverse: #ffffff;
+  --color-text-inverse-muted: #b9d3c4;
+  --color-primary: var(--color-evergreen-900);
+  --color-primary-hover: var(--color-evergreen-800);
+  --color-on-primary: #ffffff;
+  --color-brand: var(--color-evergreen-600);
+  --color-accent: var(--color-sprout-400);
+  --color-on-accent: var(--color-evergreen-900);
+  --color-success: var(--color-evergreen-600);
+  --color-warning: #c98a12;
+  /* Warning copy on tint-sun (status pills). */
+  --color-warning-text: #8a5e0b;
+  --color-error: #c2410c;
+  --color-info: #3b6e8f;
+  /* Deep "feature" surfaces (footer, quiz banner): evergreen in light, dark sage in dark. */
+  --color-feature: var(--color-evergreen-900);
+  --color-on-feature-muted: var(--color-evergreen-300);
+
+  /* Typography */
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  /* Discount codes (Paper Jofak - Admin → Discounts). The app self-hosts JetBrains Mono via next/font. */
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --leading-xs: 16px;
+  --leading-sm: 20px;
+  --leading-base: 24px;
+  --leading-lg: 28px;
+  --leading-2xl: 30px;
+  --leading-3xl: 34px;
+  --leading-4xl: 46px;
+  --leading-5xl: 56px;
+  --leading-6xl: 80px;
+
+  /* `text-*` sets the size and, where a same-named leading token exists, its line height. */
+  --text-xs: 12px;
+  --text-xs--line-height: var(--leading-xs);
+  --text-sm: 13px;
+  --text-sm--line-height: var(--leading-sm);
+  --text-base: 15px;
+  --text-base--line-height: var(--leading-base);
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-lg--line-height: var(--leading-lg);
+  --text-xl: 20px;
+  --text-2xl: 26px;
+  --text-2xl--line-height: var(--leading-2xl);
+  --text-3xl: 32px;
+  --text-3xl--line-height: var(--leading-3xl);
+  --text-4xl: 44px;
+  --text-4xl--line-height: var(--leading-4xl);
+  --text-5xl: 52px;
+  --text-5xl--line-height: var(--leading-5xl);
+  --text-6xl: 80px;
+  --text-6xl--line-height: var(--leading-6xl);
+
+  /* Component steps from Paper between the core sizes, named by pixel value. Set leading explicitly. */
+  /* Miniature storefront previews (Paper Jofak - Admin → Content): payment chips, footer and header text. */
+  --text-7: 7px;
+  --text-8: 8px;
+  --text-9: 9px;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-14: 14px;
+  --text-17: 17px;
+  --text-19: 19px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-28: 28px;
+  /* Admin KPI figures (Paper Jofak - Admin → Dashboard). */
+  /* Admin product editor title. */
+  --text-30: 30px;
+  --text-34: 34px;
+  --text-36: 36px;
+  --text-38: 38px;
+  --text-40: 40px;
+  --text-56: 56px;
+  --text-64: 64px;
+  /* Error numerals (404): mobile, tablet, desktop. */
+  --text-104: 104px;
+  --text-140: 140px;
+  --text-180: 180px;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --tracking-display: -0.045em;
+  --tracking-tight: -0.04em;
+  --tracking-snug: -0.03em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.12em;
+  --tracking-heading: -0.035em;
+  --tracking-compact: -0.02em;
+  --tracking-subtle: -0.01em;
+  --tracking-caps: 0.1em;
+  --tracking-numeral: -0.06em;
+  /* Admin table column headers. */
+  --tracking-label: 0.04em;
+  /* Admin card eyebrows ("CUSTOMER", "DELIVERY"). */
+  --tracking-eyebrow: 0.08em;
+  /* Codes set in caps (GhanaPost GPS "GM-071-4472"). */
+  --tracking-code: 0.02em;
+  /* Discount table heads and side-card overlines ("IN PLAIN WORDS", Paper Jofak - Admin → Discounts). */
+  --tracking-overline: 0.06em;
+
+  /* Opacity */
+  --opacity-faint: 8%;
+  --opacity-subtle: 16%;
+  --opacity-muted: 60%;
+  /* Admin: an ended collection card (Paper Jofak - Admin → Collections). */
+  --opacity-72: 72%;
+
+  /* Layout */
+  --breakpoint-sm: 390px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1440px;
+  --container-prose: 620px;
+  --container-content: 1296px;
+
+  --spacing-0: 0px;
+  --spacing-px: 1px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-14: 56px;
+  --spacing-18: 72px;
+  --spacing-24: 96px;
+
+  --radius-none: 0px;
+  --radius-2: 2px;
+  /* Admin chart legend swatches (3), chart bars and value flags (8), icon tiles (10). */
+  --radius-3: 3px;
+  /* Miniature preview chips (Content → footer preview). */
+  --radius-4: 4px;
+  --radius-5: 5px;
+  --radius-6: 6px;
+  /* Small discount code chips (Paper Jofak - Admin → Discounts, tablet and mobile). */
+  --radius-7: 7px;
+  --radius-8: 8px;
+  /* Admin tracker letter tiles (Paper Jofak - Admin → Marketing → Ad tracking). */
+  --radius-9: 9px;
+  --radius-10: 10px;
+  --radius-sm: 12px;
+  --radius-14: 14px;
+  --radius-md: 16px;
+  --radius-18: 18px;
+  --radius-lg: 20px;
+  --radius-22: 22px;
+  --radius-xl: 24px;
+  --radius-26: 26px;
+  --radius-2xl: 28px;
+  --radius-3xl: 32px;
+  --radius-full: 999px;
+
+  /* Elevation, tinted with the surface they sit on (Paper: "no shadows on plain white" for cards). */
+  --shadow-xs: 0 1px 2px color-mix(in oklab, var(--color-evergreen-900) 12%, transparent);
+  --shadow-chip: 0 12px 30px -10px color-mix(in oklab, var(--color-text) 20%, transparent);
+  --shadow-card: 0 16px 40px -12px color-mix(in oklab, var(--color-text) 20%, transparent);
+  --shadow-brand: 0 24px 48px -16px color-mix(in oklab, var(--color-evergreen-900) 45%, transparent);
+  --shadow-overlay: 0 30px 60px -20px color-mix(in oklab, var(--color-black) 40%, transparent);
+  /* Side drawers (menu): cast to the right. The colour re-themes via --shadow-drawer-color. */
+  --shadow-drawer: 12px 0 48px var(--shadow-drawer-color);
+  /* Centred dialogs (auth success). Re-themes via --shadow-modal-color. */
+  --shadow-modal: 0 24px 64px var(--shadow-modal-color);
+  /* Cart panels: the mini-cart drawer (from the right) and sheet (from the bottom). */
+  --shadow-panel-left: -24px 0 60px -20px var(--shadow-panel-color);
+  --shadow-panel-up: 0 -24px 60px -20px var(--shadow-panel-color);
+  /* Sticky bottom bars (mobile checkout). */
+  --shadow-bar: 0 -12px 30px -14px color-mix(in oklab, var(--color-text) 25%, transparent);
+
+  /* Drawer motion. base.css cuts these to ~0 for prefers-reduced-motion. */
+  --animate-drawer-in: drawer-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-drawer-out: drawer-out 200ms cubic-bezier(0.4, 0, 1, 1);
+  --animate-fade-in: fade-in 280ms ease-out;
+  --animate-fade-out: fade-out 200ms ease-in;
+  --animate-sheet-in: sheet-in 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-sheet-out: sheet-out 200ms cubic-bezier(0.4, 0, 1, 1);
+  --animate-dialog-in: dialog-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-dialog-out: fade-out 150ms ease-in;
+  --animate-panel-in: panel-in 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-panel-out: panel-out 200ms cubic-bezier(0.4, 0, 1, 1);
+
+  @keyframes drawer-in {
+    from {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes drawer-out {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  @keyframes panel-in {
+    from {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes panel-out {
+    to {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes sheet-out {
+    to {
+      transform: translateY(100%);
+    }
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+/*
+ * `dark:` variant that follows the same rules as the token mapping below: explicit
+ * data-theme="dark", or System (no data-theme="light") on a dark OS.
+ * Prefer semantic tokens; use dark: only for one-off illustration tweaks.
+ */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/* Gradients as tokens so they re-theme with everything else. Use the bg-gradient-* utilities. */
+:root {
+  --gradient-hero: linear-gradient(180deg, var(--color-bg) 0%, var(--color-sage-50) 45%, var(--color-sage-200) 100%);
+  --gradient-feature-from: var(--color-evergreen-800);
+  --gradient-feature-via: var(--color-evergreen-900);
+  --gradient-feature-to: var(--color-evergreen-950);
+  --gradient-sun-from: var(--color-sun-100);
+  --gradient-sun-to: var(--color-sun-200);
+  --gradient-citrus-from: var(--color-tint-citrus);
+  --gradient-citrus-to: var(--color-citrus-200);
+  --shadow-drawer-color: color-mix(in oklab, var(--color-evergreen-950) 22%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-evergreen-950) 28%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-evergreen-950) 35%, transparent);
+}
+
+/* Paper's 1.5px field and checkbox borders (OTP cells, checkboxes). */
+@utility border-field {
+  border-width: 1.5px;
+}
+
+/* Admin page editor body (Paper Jofak - Admin → Page editor): headings, text, lists, tables, Q&A. */
+@utility rich-text {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: var(--text-14);
+  line-height: 22px;
+  color: var(--color-text-secondary);
+  outline: none;
+
+  & h2 {
+    font-size: var(--text-xl);
+    line-height: 26px;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-compact);
+    color: var(--color-text);
+  }
+  & h3 {
+    font-size: var(--text-md);
+    line-height: 22px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+  & ul {
+    list-style: disc;
+    padding-left: 20px;
+  }
+  & ol {
+    list-style: decimal;
+    padding-left: 20px;
+  }
+  & a {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+  & b,
+  & strong {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+  & table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-10);
+    font-size: var(--text-sm);
+    line-height: 18px;
+    color: var(--color-text);
+  }
+  & th {
+    padding: 8px 12px;
+    background: var(--color-surface-subtle);
+    text-align: left;
+    font-size: var(--text-xs);
+    line-height: 16px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+  }
+  & td {
+    padding: 8px 12px;
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  & th:last-child,
+  & td:last-child {
+    text-align: right;
+  }
+  & th:not(:first-child),
+  & td:not(:first-child) {
+    white-space: nowrap;
+  }
+  & details {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-10);
+  }
+  & summary {
+    cursor: pointer;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+  }
+}
+
+/* Rails that show four columns on desktop (ProductRail): grid-auto-columns for 4-up with 16px gaps. */
+@utility auto-cols-quarter {
+  grid-auto-columns: calc((100% - 3 * var(--spacing-4)) / 4);
+}
+
+/* Horizontal carousels scroll by touch/trackpad without a visible bar. */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility bg-gradient-hero {
+  background-image: var(--gradient-hero);
+}
+@utility bg-gradient-feature {
+  background-image: radial-gradient(circle farthest-corner at 80% 20%, var(--gradient-feature-from) 0%, var(--gradient-feature-via) 55%, var(--gradient-feature-to) 100%);
+}
+@utility bg-gradient-feature-wide {
+  background-image: radial-gradient(circle farthest-corner at 85% 30%, var(--gradient-feature-from) 0%, var(--gradient-feature-via) 50%, var(--gradient-feature-to) 100%);
+}
+@utility bg-gradient-sun {
+  background-image: linear-gradient(160deg, var(--gradient-sun-from) 0%, var(--gradient-sun-to) 100%);
+}
+@utility bg-gradient-citrus {
+  background-image: linear-gradient(180deg, var(--gradient-citrus-from) 0%, var(--gradient-citrus-to) 100%);
+}
+@utility bg-gradient-skin-light {
+  background-image: linear-gradient(135deg, var(--color-skin-300) 0%, var(--color-skin-500) 100%);
+}
+@utility bg-gradient-skin-deep {
+  background-image: linear-gradient(135deg, var(--color-skin-700) 0%, var(--color-skin-900) 100%);
+}
+
+/* Dark palette: twins of the semantic tokens. Plain vars (no utilities) — use the semantic names. */
+:root {
+  --color-dark-bg: #0d1411;
+  --color-dark-surface: #1a2520;
+  --color-dark-surface-subtle: #141d18;
+  --color-dark-border: #2c3b33;
+  --color-dark-border-subtle: #222e28;
+  --color-dark-text: #e8efea;
+  --color-dark-text-secondary: #bac8c0;
+  --color-dark-text-muted: #8fa197;
+  --color-dark-primary: #237a50;
+  --color-dark-primary-hover: #2a8c5d;
+  --color-dark-brand: #5ccb8f;
+  --color-dark-warning: #e3ae45;
+  --color-dark-warning-text: #ebc077;
+  --color-dark-error: #f2825a;
+  --color-dark-info: #7db3d6;
+  --color-dark-sage-200: #22382c;
+  --color-dark-sage-100: #1c3127;
+  --color-dark-sage-50: #172821;
+  --color-dark-evergreen-300: #3e6b54;
+  --color-dark-tint-amber: #2b261e;
+  --color-dark-tint-lavender: #26223a;
+  --color-dark-tint-sun: #35290f;
+  --color-dark-tint-citrus: #3a2017;
+  --color-dark-tint-info: #1a2a35;
+  --color-dark-lavender-text: #b8a9e3;
+  --color-dark-icon: #9aaba1;
+
+  color-scheme: light;
+}
+
+/*
+ * Light semantic mapping for a subtree: data-theme="light" on an element keeps it light inside a
+ * dark page (the Light preview in ThemePicker). The root light values live in @theme above.
+ */
+[data-theme="light"] {
+  --color-bg: #ffffff;
+  --color-surface: #f1f5ef;
+  --color-surface-subtle: #f6f8f4;
+  --color-border: #d5e6d0;
+  --color-border-subtle: #e1e9dd;
+  --color-text: #14201a;
+  --color-text-secondary: #3e4d45;
+  --color-text-muted: #5b6b62;
+  --color-primary: var(--color-evergreen-900);
+  --color-primary-hover: var(--color-evergreen-800);
+  --color-brand: var(--color-evergreen-600);
+  --color-success: var(--color-evergreen-600);
+  --color-warning: #c98a12;
+  --color-warning-text: #8a5e0b;
+  --color-error: #c2410c;
+  --color-info: #3b6e8f;
+  --color-sage-200: #cde9c6;
+  --color-sage-100: #eaf4e4;
+  --color-sage-50: #eef7ea;
+  --color-evergreen-300: #9fc2ae;
+  --color-tint-amber: #f3ece2;
+  --color-tint-lavender: #eee8f6;
+  --color-tint-sun: #fff1d6;
+  --color-tint-citrus: #ffe3d3;
+  --color-tint-info: #e4eef4;
+  --color-lavender-text: #5b4a8a;
+  --color-feature: var(--color-evergreen-900);
+  --color-on-feature-muted: var(--color-evergreen-300);
+  --gradient-feature-from: var(--color-evergreen-800);
+  --gradient-feature-via: var(--color-evergreen-900);
+  --gradient-feature-to: var(--color-evergreen-950);
+  --gradient-sun-from: var(--color-sun-100);
+  --gradient-sun-to: var(--color-sun-200);
+  --gradient-citrus-from: var(--color-tint-citrus);
+  --gradient-citrus-to: var(--color-citrus-200);
+  --shadow-drawer-color: color-mix(in oklab, var(--color-evergreen-950) 22%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-evergreen-950) 28%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-evergreen-950) 35%, transparent);
+  color-scheme: light;
+}
+
+/* Dark semantic mapping, shared by the explicit and the System cases. */
+[data-theme="dark"] {
+  --color-bg: var(--color-dark-bg);
+  --color-surface: var(--color-dark-surface);
+  --color-surface-subtle: var(--color-dark-surface-subtle);
+  --color-border: var(--color-dark-border);
+  --color-border-subtle: var(--color-dark-border-subtle);
+  --color-text: var(--color-dark-text);
+  --color-text-secondary: var(--color-dark-text-secondary);
+  --color-text-muted: var(--color-dark-text-muted);
+  --color-primary: var(--color-dark-primary);
+  --color-primary-hover: var(--color-dark-primary-hover);
+  --color-brand: var(--color-dark-brand);
+  --color-success: var(--color-dark-brand);
+  --color-warning: var(--color-dark-warning);
+  --color-warning-text: var(--color-dark-warning-text);
+  --color-error: var(--color-dark-error);
+  --color-info: var(--color-dark-info);
+  --color-sage-200: var(--color-dark-sage-200);
+  --color-sage-100: var(--color-dark-sage-100);
+  --color-sage-50: var(--color-dark-sage-50);
+  --color-evergreen-300: var(--color-dark-evergreen-300);
+  --color-tint-amber: var(--color-dark-tint-amber);
+  --color-tint-lavender: var(--color-dark-tint-lavender);
+  --color-tint-sun: var(--color-dark-tint-sun);
+  --color-tint-citrus: var(--color-dark-tint-citrus);
+  --color-tint-info: var(--color-dark-tint-info);
+  --color-lavender-text: var(--color-dark-lavender-text);
+  --color-feature: var(--color-dark-sage-100);
+  --color-on-feature-muted: var(--color-dark-text-muted);
+  --gradient-feature-from: var(--color-dark-sage-200);
+  --gradient-feature-via: var(--color-dark-sage-100);
+  --gradient-feature-to: var(--color-dark-surface-subtle);
+  --gradient-sun-from: var(--color-dark-tint-sun);
+  --gradient-sun-to: var(--color-dark-tint-amber);
+  --gradient-citrus-from: var(--color-dark-tint-citrus);
+  --gradient-citrus-to: var(--color-dark-tint-amber);
+  --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: var(--color-dark-bg);
+    --color-surface: var(--color-dark-surface);
+    --color-surface-subtle: var(--color-dark-surface-subtle);
+    --color-border: var(--color-dark-border);
+    --color-border-subtle: var(--color-dark-border-subtle);
+    --color-text: var(--color-dark-text);
+    --color-text-secondary: var(--color-dark-text-secondary);
+    --color-text-muted: var(--color-dark-text-muted);
+    --color-primary: var(--color-dark-primary);
+    --color-primary-hover: var(--color-dark-primary-hover);
+    --color-brand: var(--color-dark-brand);
+    --color-success: var(--color-dark-brand);
+    --color-warning: var(--color-dark-warning);
+    --color-warning-text: var(--color-dark-warning-text);
+    --color-error: var(--color-dark-error);
+    --color-info: var(--color-dark-info);
+    --color-sage-200: var(--color-dark-sage-200);
+    --color-sage-100: var(--color-dark-sage-100);
+    --color-sage-50: var(--color-dark-sage-50);
+    --color-evergreen-300: var(--color-dark-evergreen-300);
+    --color-tint-amber: var(--color-dark-tint-amber);
+    --color-tint-lavender: var(--color-dark-tint-lavender);
+    --color-tint-sun: var(--color-dark-tint-sun);
+    --color-tint-citrus: var(--color-dark-tint-citrus);
+    --color-tint-info: var(--color-dark-tint-info);
+    --color-lavender-text: var(--color-dark-lavender-text);
+    --color-feature: var(--color-dark-sage-100);
+    --color-on-feature-muted: var(--color-dark-text-muted);
+    --gradient-feature-from: var(--color-dark-sage-200);
+    --gradient-feature-via: var(--color-dark-sage-100);
+    --gradient-feature-to: var(--color-dark-surface-subtle);
+    --gradient-sun-from: var(--color-dark-tint-sun);
+    --gradient-sun-to: var(--color-dark-tint-amber);
+    --gradient-citrus-from: var(--color-dark-tint-citrus);
+    --gradient-citrus-to: var(--color-dark-tint-amber);
+    --shadow-drawer-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-modal-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+  --shadow-panel-color: color-mix(in oklab, var(--color-black) 50%, transparent);
+    color-scheme: dark;
+  }
+}

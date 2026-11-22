@@ -1,50 +1,10 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.imgDark {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-
-  .imgLight {
-    display: none;
-  }
-  .imgDark {
-    display: unset;
-  }
-}
+/*
+ * Tailwind + the Jofak theme from @repo/ui. Do not define colours, spacing or type here:
+ * tokens live in packages/ui/src/styles/theme.css and components in packages/ui.
+ *
+ * @repo/ui/styles.css resolves to packages/ui/dist/styles/index.css, so @repo/ui must be built
+ * (turbo does this before `dev`/`build`). If it was missing when the dev server compiled this
+ * file, Turbopack caches the failure: restart dev, and delete apps/web/.next/dev if it persists.
+ */
+@import "tailwindcss";
+@import "@repo/ui/styles.css";

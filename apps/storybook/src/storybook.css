@@ -1,0 +1,6 @@
+/* Same stylesheet chain the apps use: Tailwind, then the Jofak theme from @repo/ui (dist). */
+@import "tailwindcss";
+@import "@repo/ui/styles.css";
+
+/* Component stories render @repo/ui from source, so scan it for their class names too. */
+@source "../../../packages/ui/src";
