@@ -11,6 +11,8 @@ export const themeSwitchGroupVariants = cva("flex gap-0.5 rounded-full p-0.75", 
     tone: {
       default: "bg-surface",
       feature: "border border-white/14 bg-white/8 dark:border-white/12 dark:bg-white/5",
+      /** Settings field: full width, equal labelled segments (My profile → Appearance). */
+      field: "w-full bg-surface-subtle",
     },
   },
   defaultVariants: { tone: "default" },
@@ -23,6 +25,8 @@ export const themeSwitchItemVariants = cva(
       tone: {
         default:
           "h-8 w-10 text-text-muted hover:text-text data-[state=on]:w-auto data-[state=on]:bg-bg data-[state=on]:px-3 data-[state=on]:text-sm data-[state=on]:leading-xs data-[state=on]:font-semibold data-[state=on]:text-text data-[state=on]:shadow-xs",
+        field:
+          "h-8.5 flex-1 text-sm leading-4.5 font-medium text-text-secondary hover:text-text data-[state=on]:bg-bg data-[state=on]:font-semibold data-[state=on]:text-text data-[state=on]:shadow-xs dark:data-[state=on]:bg-surface",
         feature:
           "h-6.5 w-7.5 text-text-inverse-muted hover:text-text-inverse data-[state=on]:w-auto data-[state=on]:bg-white/16 data-[state=on]:px-2.5 data-[state=on]:text-xs data-[state=on]:leading-xs data-[state=on]:font-medium data-[state=on]:text-text-inverse dark:data-[state=on]:bg-white/12",
       },
@@ -36,6 +40,7 @@ export const themeSwitchLabelVariants = cva("font-sans", {
     tone: {
       default: "text-sm leading-sm text-text-muted",
       feature: "text-xs leading-xs text-text-inverse-muted dark:text-on-feature-muted",
+      field: "text-sm leading-4.5 font-semibold text-text-secondary",
     },
   },
   defaultVariants: { tone: "default" },

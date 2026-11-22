@@ -23,12 +23,16 @@ export interface SegmentedControlProps extends Omit<ComponentProps<"div">, "defa
   defaultValue?: string;
   onValueChange?: (value: string) => void;
   "aria-label": string;
+  /** Submit the choice in a form under this name. */
+  name?: string;
+  /** `primary`: the chosen option is dark evergreen (Paystack Test mode / Live). */
+  tone?: "default" | "primary";
 }
 
-export function SegmentedControl({ options, value: valueProp, defaultValue, onValueChange, className, ...props }: SegmentedControlProps) {
+export function SegmentedControl({ options, value: valueProp, defaultValue, onValueChange, name, tone = "default", className, ...props }: SegmentedControlProps) {
   const [inner, setInner] = useState(defaultValue ?? options[0]?.value ?? "");
   const value = valueProp ?? inner;
-  return (
+  const group = (
     <ToggleGroup.Root
       data-slot="segmented-control"
       type="single"
@@ -48,7 +52,9 @@ export function SegmentedControl({ options, value: valueProp, defaultValue, onVa
           value={option.value}
           className={cn(
             "shrink-0 rounded-full px-3.5 py-1.5 font-sans text-sm leading-sm font-medium text-text-secondary transition-colors hover:text-text",
-            "data-[state=on]:bg-bg data-[state=on]:font-semibold data-[state=on]:text-text data-[state=on]:shadow-xs",
+            tone === "primary"
+              ? "data-[state=on]:bg-primary data-[state=on]:font-semibold data-[state=on]:text-on-primary"
+              : "data-[state=on]:bg-bg data-[state=on]:font-semibold data-[state=on]:text-text data-[state=on]:shadow-xs",
             option.hideOnMobile && "hidden md:block",
           )}
         >
@@ -56,5 +62,12 @@ export function SegmentedControl({ options, value: valueProp, defaultValue, onVa
         </ToggleGroup.Item>
       ))}
     </ToggleGroup.Root>
+  );
+  if (!name) return group;
+  return (
+    <>
+      {group}
+      <input type="hidden" name={name} value={value} />
+    </>
   );
 }

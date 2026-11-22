@@ -24,4 +24,10 @@ describe("SegmentedControl", () => {
     fireEvent.click(screen.getByRole("radio", { name: "7 days" }));
     expect(screen.getByRole("radio", { name: "7 days" })).toHaveAttribute("aria-checked", "true");
   });
+
+  it("submits the choice under a name", () => {
+    const { container } = render(<SegmentedControl aria-label="Mode" name="mode" defaultValue="live" tone="primary" options={[{ value: "test", label: "Test mode" }, { value: "live", label: "Live" }]} />);
+    expect(container.querySelector('input[name="mode"]')).toHaveValue("live");
+    expect(screen.getByRole("radio", { name: "Live" })).toHaveClass("data-[state=on]:bg-primary");
+  });
 });

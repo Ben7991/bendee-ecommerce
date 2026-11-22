@@ -40,6 +40,8 @@ export interface AdminSidebarProps extends Omit<ComponentProps<"aside">, "childr
   activeHref?: string;
   staff: AdminStaff;
   staffMenuItems: StaffMenuItem[];
+  /** The staff member's own page (My profile) is open: the card is highlighted. */
+  staffActive?: boolean;
   defaultCollapsed?: boolean;
   onCollapsedChange?: (collapsed: boolean) => void;
 }
@@ -54,6 +56,7 @@ export function AdminSidebar({
   activeHref,
   staff,
   staffMenuItems,
+  staffActive = false,
   defaultCollapsed = false,
   onCollapsedChange,
   className,
@@ -141,6 +144,8 @@ export function AdminSidebar({
               className={cn(
                 "flex items-center gap-2.5 rounded-full text-left transition-colors",
                 !collapsed && "xl:rounded-md xl:bg-surface-subtle xl:p-3 xl:hover:bg-surface",
+                staffActive && "ring-2 ring-brand ring-offset-3 ring-offset-bg",
+                staffActive && !collapsed && "xl:bg-sage-100 xl:ring-1 xl:ring-sage-200 xl:ring-offset-0 xl:hover:bg-sage-100",
               )}
             >
               <Initials name={staff.name} size="staff" />

@@ -30,4 +30,15 @@ describe("ThemeSwitch", () => {
     expect(document.documentElement).toHaveAttribute("data-theme", "dark");
     expect(screen.getByRole("radio", { name: "Dark" })).toHaveAttribute("data-state", "on");
   });
+
+  it("shows every label in the field tone", () => {
+    render(
+      <ThemeProvider>
+        <ThemeSwitch tone="field" label="Appearance" />
+      </ThemeProvider>,
+    );
+    expect(screen.getByRole("radiogroup", { name: "Appearance" })).toBeInTheDocument();
+    expect(screen.getByText("Light")).toBeInTheDocument();
+    expect(screen.getByText("Dark")).toBeInTheDocument();
+  });
 });

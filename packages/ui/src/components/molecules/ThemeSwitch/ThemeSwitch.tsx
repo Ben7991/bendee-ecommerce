@@ -20,7 +20,8 @@ const OPTIONS: { value: ThemeMode; label: string; icon: IconName }[] = [
 
 /**
  * ThemeSwitch (molecule): Light / Dark / System, wired to ThemeProvider.
- * Needs <ThemeProvider> from @repo/ui/lib above it.
+ * Needs <ThemeProvider> from @repo/ui/lib above it. `tone="field"` is the full-width labelled
+ * version for settings forms, with the label above.
  */
 export interface ThemeSwitchProps extends ComponentProps<"div">, ThemeSwitchVariantProps {
   /** Visible label before the control. */
@@ -33,7 +34,7 @@ export function ThemeSwitch({ className, tone, label = "Theme", ...props }: Them
   const iconSize = tone === "feature" ? 14 : 15;
 
   return (
-    <div data-slot="theme-switch" className={cn("flex items-center gap-2.5", className)} {...props}>
+    <div data-slot="theme-switch" className={cn("flex items-center gap-2.5", tone === "field" && "flex-col items-stretch gap-2", className)} {...props}>
       <span id={labelId} className={themeSwitchLabelVariants({ tone })}>
         {label}
       </span>
@@ -53,8 +54,8 @@ export function ThemeSwitch({ className, tone, label = "Theme", ...props }: Them
               aria-label={option.label}
               className={themeSwitchItemVariants({ tone })}
             >
-              <Icon name={option.icon} size={iconSize} />
-              {selected && <span aria-hidden>{option.label}</span>}
+              {tone !== "field" && <Icon name={option.icon} size={iconSize} />}
+              {(selected || tone === "field") && <span aria-hidden>{option.label}</span>}
             </ToggleGroup.Item>
           );
         })}

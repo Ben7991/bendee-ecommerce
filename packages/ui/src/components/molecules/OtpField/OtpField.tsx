@@ -28,6 +28,8 @@ export interface OtpFieldProps extends Omit<ComponentProps<"div">, "onChange" | 
   onComplete?: (value: string) => void;
   disabled?: boolean;
   autoFocus?: boolean;
+  /** `sm`: 48px mono boxes for admin dialogs (authenticator codes). */
+  size?: "lg" | "sm";
 }
 
 const onlyDigits = (text: string) => text.replace(/\D/g, "");
@@ -42,6 +44,7 @@ export function OtpField({
   onComplete,
   disabled,
   autoFocus,
+  size = "lg",
   className,
   ...props
 }: OtpFieldProps) {
@@ -110,7 +113,7 @@ export function OtpField({
       data-slot="otp-field"
       role="group"
       aria-label={label}
-      className={cn("flex gap-2 md:gap-2.5", className)}
+      className={cn("flex", size === "sm" ? "gap-1.5 md:gap-2" : "gap-2 md:gap-2.5", className)}
       {...props}
     >
       {Array.from({ length }, (_, index) => {
@@ -142,7 +145,8 @@ export function OtpField({
             onKeyDown={handleKeyDown(index)}
             onPaste={handlePaste(index)}
             className={cn(
-              "h-16 w-0 min-w-0 flex-1 rounded-sm border-field border-border bg-bg text-center font-sans text-3xl leading-3xl font-medium text-text caret-brand outline-none transition-colors",
+              "w-0 min-w-0 flex-1 rounded-sm border-field border-border bg-bg text-center text-text caret-brand outline-none transition-colors dark:bg-bg",
+              size === "sm" ? "h-12 font-mono text-xl leading-6" : "h-16 font-sans text-3xl leading-3xl font-medium",
               "data-filled:bg-surface-subtle",
               "focus:border-2 focus:border-brand focus:bg-bg",
               "disabled:opacity-muted",

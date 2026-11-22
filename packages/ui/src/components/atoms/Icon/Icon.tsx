@@ -906,6 +906,45 @@ const ICONS = {
     strokeWidth: 1.5,
     body: <path d="M3 14V2.5M3 3H12L10 6L12 9H3" />,
   },
+  /* Settings → Payments: bank transfer. */
+  bank: {
+    viewBox: "0 0 18 18",
+    strokeWidth: 1.5,
+    body: <path d="M2.5 7L9 3L15.5 7M4 7.5V13M7.3 7.5V13M10.7 7.5V13M14 7.5V13M2.5 15H15.5" />,
+  },
+  /* My profile → backup codes: copy all. */
+  copy: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.4,
+    body: (
+      <>
+        <rect x="5" y="5" width="8.5" height="8.5" rx="1.6" />
+        <path d="M11 3H4a1.5 1.5 0 0 0-1.5 1.5V11" />
+      </>
+    ),
+  },
+  /* Settings → Staff member: signed in on a tablet. */
+  tablet: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.4,
+    body: (
+      <>
+        <rect x="2.5" y="2" width="11" height="12" rx="1.8" />
+        <path d="M7 11.5h2" />
+      </>
+    ),
+  },
+  /* Settings → Payments: webhooks healthy. */
+  checkCircle: {
+    viewBox: "0 0 16 16",
+    strokeWidth: 1.4,
+    body: (
+      <>
+        <circle cx="8" cy="8" r="6.5" />
+        <path d="M5.3 8.2L7.1 10L10.8 6.2" strokeWidth={1.5} />
+      </>
+    ),
+  },
   /* Marketing automations: abandoned cart, MoMo payment retry. */
   cart: {
     viewBox: "0 0 24 24",

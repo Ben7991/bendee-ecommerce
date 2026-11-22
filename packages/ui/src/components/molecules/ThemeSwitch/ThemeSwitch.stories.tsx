@@ -28,3 +28,6 @@ export const OnFeature: Story = {
     </div>
   ),
 };
+
+/** Settings field: full width with every label (My profile → Appearance). */
+export const Field: Story = { args: { tone: "field", label: "Appearance" } };
